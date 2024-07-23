@@ -12,7 +12,12 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'images.pexels.com',
-      }
+      },
+      {
+        protocol: 'http',
+        hostname: 'admin.samsoec.my.id',
+        pathname: '/uploads/**',
+      },
     ],
   },
 }
