@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_sections_marquees",
+  "info": {
+    "displayName": "Marquee"
+  },
+  "options": {},
+  "attributes": {
+    "separator": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "items": {
+      "displayName": "Marquee Item",
+      "type": "component",
+      "repeatable": true,
+      "component": "elements.marquee-item"
+    }
+  }
+}

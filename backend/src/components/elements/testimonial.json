@@ -23,6 +23,12 @@
     "authorName": {
       "type": "string",
       "required": true
+    },
+    "authorTitle": {
+      "type": "string"
+    },
+    "rating": {
+      "type": "decimal"
     }
   }
 }

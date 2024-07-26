@@ -1,5 +1,39 @@
 import type { Schema, Attribute } from '@strapi/strapi';
 
+export interface ElementsAdvantageItem extends Schema.Component {
+  collectionName: 'components_elements_advantage_items';
+  info: {
+    displayName: 'Advantage Item';
+  };
+  attributes: {
+    text: Attribute.String;
+  };
+}
+
+export interface ElementsBenefitItem extends Schema.Component {
+  collectionName: 'components_elements_benefit_items';
+  info: {
+    displayName: 'Benefit Item';
+  };
+  attributes: {
+    image: Attribute.Media;
+    title: Attribute.String;
+    description: Attribute.String;
+  };
+}
+
+export interface ElementsDisclaimer extends Schema.Component {
+  collectionName: 'components_elements_disclaimers';
+  info: {
+    displayName: 'Disclaimer';
+    description: '';
+  };
+  attributes: {
+    text: Attribute.String;
+    title: Attribute.String;
+  };
+}
+
 export interface ElementsFeatureColumn extends Schema.Component {
   collectionName: 'components_slices_feature_columns';
   info: {
@@ -12,6 +46,19 @@ export interface ElementsFeatureColumn extends Schema.Component {
     title: Attribute.String & Attribute.Required;
     description: Attribute.Text;
     icon: Attribute.Media & Attribute.Required;
+  };
+}
+
+export interface ElementsFeatureHeading extends Schema.Component {
+  collectionName: 'components_elements_feature_headings';
+  info: {
+    displayName: 'Feature Heading';
+  };
+  attributes: {
+    heading: Attribute.String;
+    newTab: Attribute.Boolean;
+    url: Attribute.String;
+    icon: Attribute.Media;
   };
 }
 
@@ -47,6 +94,19 @@ export interface ElementsFeature extends Schema.Component {
   };
 }
 
+export interface ElementsFooterHeading extends Schema.Component {
+  collectionName: 'components_elements_footer_headings';
+  info: {
+    displayName: 'Footer Heading';
+  };
+  attributes: {
+    heading: Attribute.String;
+    url: Attribute.String;
+    newTab: Attribute.Boolean;
+    icon: Attribute.Media;
+  };
+}
+
 export interface ElementsFooterSection extends Schema.Component {
   collectionName: 'components_links_footer_sections';
   info: {
@@ -60,6 +120,18 @@ export interface ElementsFooterSection extends Schema.Component {
   };
 }
 
+export interface ElementsHeroHighlight extends Schema.Component {
+  collectionName: 'components_elements_hero_highlights';
+  info: {
+    displayName: 'Hero Highlight';
+  };
+  attributes: {
+    caption: Attribute.String;
+    value: Attribute.String;
+    avatars: Attribute.Media;
+  };
+}
+
 export interface ElementsLogos extends Schema.Component {
   collectionName: 'components_elements_logos';
   info: {
@@ -70,6 +142,16 @@ export interface ElementsLogos extends Schema.Component {
   attributes: {
     title: Attribute.String;
     logo: Attribute.Media;
+  };
+}
+
+export interface ElementsMarqueeItem extends Schema.Component {
+  collectionName: 'components_elements_marquee_items';
+  info: {
+    displayName: 'Marquee Item';
+  };
+  attributes: {
+    text: Attribute.String;
   };
 }
 
@@ -105,11 +187,6 @@ export interface ElementsPlan extends Schema.Component {
     isRecommended: Attribute.Boolean;
     price: Attribute.Decimal;
     pricePeriod: Attribute.String;
-    product_features: Attribute.Relation<
-      'elements.plan',
-      'oneToMany',
-      'api::product-feature.product-feature'
-    >;
   };
 }
 
@@ -125,6 +202,8 @@ export interface ElementsTestimonial extends Schema.Component {
     picture: Attribute.Media & Attribute.Required;
     text: Attribute.Text & Attribute.Required;
     authorName: Attribute.String & Attribute.Required;
+    authorTitle: Attribute.String;
+    rating: Attribute.Decimal;
   };
 }
 
@@ -135,15 +214,10 @@ export interface LayoutFooter extends Schema.Component {
     description: '';
   };
   attributes: {
-    footerLogo: Attribute.Component<'layout.logo'>;
-    menuLinks: Attribute.Component<'links.link', true>;
-    legalLinks: Attribute.Component<'links.link', true>;
+    companyProfile: Attribute.Component<'layout.logo'>;
     socialLinks: Attribute.Component<'links.social-link', true>;
-    categories: Attribute.Relation<
-      'layout.footer',
-      'oneToMany',
-      'api::category.category'
-    >;
+    disclaimer: Attribute.Component<'elements.disclaimer'>;
+    footerHeading: Attribute.Component<'elements.footer-heading'>;
   };
 }
 
@@ -156,6 +230,7 @@ export interface LayoutLogo extends Schema.Component {
   attributes: {
     logoImg: Attribute.Media & Attribute.Required;
     logoText: Attribute.String;
+    caption: Attribute.String;
   };
 }
 
@@ -186,7 +261,7 @@ export interface LinksButtonLink extends Schema.Component {
     url: Attribute.String;
     newTab: Attribute.Boolean & Attribute.DefaultTo<false>;
     text: Attribute.String;
-    type: Attribute.Enumeration<['primary', 'secondary']>;
+    type: Attribute.Enumeration<['PRIMARY', 'SECONDARY']>;
   };
 }
 
@@ -230,6 +305,7 @@ export interface LinksSocialLink extends Schema.Component {
     newTab: Attribute.Boolean & Attribute.DefaultTo<false>;
     text: Attribute.String & Attribute.Required;
     social: Attribute.Enumeration<['YOUTUBE', 'TWITTER', 'DISCORD', 'WEBSITE']>;
+    icon: Attribute.Media;
   };
 }
 
@@ -244,6 +320,18 @@ export interface MetaMetadata extends Schema.Component {
   attributes: {
     metaTitle: Attribute.String & Attribute.Required;
     metaDescription: Attribute.Text & Attribute.Required;
+  };
+}
+
+export interface SectionsBenefit extends Schema.Component {
+  collectionName: 'components_sections_benefits';
+  info: {
+    displayName: 'Benefit';
+  };
+  attributes: {
+    prefix: Attribute.String;
+    title: Attribute.String;
+    items: Attribute.Component<'elements.benefit-item', true>;
   };
 }
 
@@ -321,8 +409,9 @@ export interface SectionsHero extends Schema.Component {
   attributes: {
     title: Attribute.String & Attribute.Required;
     description: Attribute.String & Attribute.Required;
-    picture: Attribute.Media & Attribute.Required;
+    backgroundImages: Attribute.Media & Attribute.Required;
     buttons: Attribute.Component<'links.button-link', true>;
+    highlights: Attribute.Component<'elements.hero-highlight', true>;
   };
 }
 
@@ -358,6 +447,29 @@ export interface SectionsLeadForm extends Schema.Component {
   };
 }
 
+export interface SectionsMarquee extends Schema.Component {
+  collectionName: 'components_sections_marquees';
+  info: {
+    displayName: 'Marquee';
+  };
+  attributes: {
+    separator: Attribute.Media;
+    items: Attribute.Component<'elements.marquee-item', true>;
+  };
+}
+
+export interface SectionsOurAdvantage extends Schema.Component {
+  collectionName: 'components_sections_our_advantages';
+  info: {
+    displayName: 'Our Advantage';
+  };
+  attributes: {
+    prefix: Attribute.String;
+    title: Attribute.String;
+    items: Attribute.Component<'elements.advantage-item', true>;
+  };
+}
+
 export interface SectionsPricing extends Schema.Component {
   collectionName: 'components_sections_pricings';
   info: {
@@ -383,11 +495,28 @@ export interface SectionsRichText extends Schema.Component {
   };
 }
 
+export interface SectionsShowcase extends Schema.Component {
+  collectionName: 'components_sections_showcases';
+  info: {
+    displayName: 'Showcase';
+  };
+  attributes: {
+    prefix: Attribute.String;
+    title: Attribute.String;
+    description: Attribute.Text;
+    portofolios: Attribute.Relation<
+      'sections.showcase',
+      'oneToMany',
+      'api::portofolio.portofolio'
+    >;
+  };
+}
+
 export interface SectionsTestimonialsGroup extends Schema.Component {
   collectionName: 'components_slices_testimonials_groups';
   info: {
     name: 'TestimonialsGroup';
-    displayName: 'Testimonials group';
+    displayName: 'Testimonials';
     icon: 'user-friends';
     description: '';
   };
@@ -395,6 +524,7 @@ export interface SectionsTestimonialsGroup extends Schema.Component {
     title: Attribute.String;
     description: Attribute.Text;
     testimonials: Attribute.Component<'elements.testimonial', true>;
+    prefix: Attribute.String;
   };
 }
 
@@ -477,11 +607,18 @@ export interface SharedVideoEmbed extends Schema.Component {
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
+      'elements.advantage-item': ElementsAdvantageItem;
+      'elements.benefit-item': ElementsBenefitItem;
+      'elements.disclaimer': ElementsDisclaimer;
       'elements.feature-column': ElementsFeatureColumn;
+      'elements.feature-heading': ElementsFeatureHeading;
       'elements.feature-row': ElementsFeatureRow;
       'elements.feature': ElementsFeature;
+      'elements.footer-heading': ElementsFooterHeading;
       'elements.footer-section': ElementsFooterSection;
+      'elements.hero-highlight': ElementsHeroHighlight;
       'elements.logos': ElementsLogos;
+      'elements.marquee-item': ElementsMarqueeItem;
       'elements.notification-banner': ElementsNotificationBanner;
       'elements.plan': ElementsPlan;
       'elements.testimonial': ElementsTestimonial;
@@ -493,6 +630,7 @@ declare module '@strapi/types' {
       'links.link': LinksLink;
       'links.social-link': LinksSocialLink;
       'meta.metadata': MetaMetadata;
+      'sections.benefit': SectionsBenefit;
       'sections.bottom-actions': SectionsBottomActions;
       'sections.feature-columns-group': SectionsFeatureColumnsGroup;
       'sections.feature-rows-group': SectionsFeatureRowsGroup;
@@ -501,8 +639,11 @@ declare module '@strapi/types' {
       'sections.hero': SectionsHero;
       'sections.large-video': SectionsLargeVideo;
       'sections.lead-form': SectionsLeadForm;
+      'sections.marquee': SectionsMarquee;
+      'sections.our-advantage': SectionsOurAdvantage;
       'sections.pricing': SectionsPricing;
       'sections.rich-text': SectionsRichText;
+      'sections.showcase': SectionsShowcase;
       'sections.testimonials-group': SectionsTestimonialsGroup;
       'shared.media': SharedMedia;
       'shared.quote': SharedQuote;

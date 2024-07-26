@@ -1,0 +1,12 @@
+{
+  "collectionName": "components_elements_advantage_items",
+  "info": {
+    "displayName": "Advantage Item"
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "string"
+    }
+  }
+}

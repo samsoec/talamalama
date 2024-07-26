@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_sections_showcases",
+  "info": {
+    "displayName": "Showcase"
+  },
+  "options": {},
+  "attributes": {
+    "prefix": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "portofolios": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::portofolio.portofolio"
+    }
+  }
+}

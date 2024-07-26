@@ -19,14 +19,20 @@
       "type": "uid",
       "targetField": "name"
     },
-    "articles": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::article.article",
-      "mappedBy": "category"
-    },
     "description": {
       "type": "text"
+    },
+    "portofolios": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::portofolio.portofolio",
+      "mappedBy": "category"
+    },
+    "serviceFeatures": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::service-feature.service-feature",
+      "mappedBy": "category"
     }
   }
 }

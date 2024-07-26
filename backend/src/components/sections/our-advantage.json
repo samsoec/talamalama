@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_sections_our_advantages",
+  "info": {
+    "displayName": "Our Advantage"
+  },
+  "options": {},
+  "attributes": {
+    "prefix": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "items": {
+      "displayName": "Advantage Item",
+      "type": "component",
+      "repeatable": true,
+      "component": "elements.advantage-item"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_elements_hero_highlights",
+  "info": {
+    "displayName": "Hero Highlight"
+  },
+  "options": {},
+  "attributes": {
+    "caption": {
+      "type": "string"
+    },
+    "value": {
+      "type": "string"
+    },
+    "avatars": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": true
+    }
+  }
+}

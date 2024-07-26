@@ -16,9 +16,9 @@
       "type": "string",
       "required": true
     },
-    "picture": {
+    "backgroundImages": {
       "type": "media",
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "allowedTypes": [
         "images"
@@ -28,6 +28,12 @@
       "type": "component",
       "repeatable": true,
       "component": "links.button-link"
+    },
+    "highlights": {
+      "displayName": "Hero Highlight",
+      "type": "component",
+      "repeatable": true,
+      "component": "elements.hero-highlight"
     }
   }
 }

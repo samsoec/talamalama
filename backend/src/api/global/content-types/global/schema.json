@@ -9,8 +9,6 @@
     "description": ""
   },
   "options": {
-    "increments": true,
-    "timestamps": true,
     "draftAndPublish": false
   },
   "pluginOptions": {
@@ -42,16 +40,6 @@
         }
       }
     },
-    "notificationBanner": {
-      "type": "component",
-      "repeatable": false,
-      "component": "elements.notification-banner",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
     "navbar": {
       "type": "component",
       "repeatable": false,
@@ -71,6 +59,36 @@
         }
       },
       "component": "layout.footer"
+    },
+    "copyright": {
+      "type": "component",
+      "repeatable": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "elements.footer-section"
+    },
+    "serviceLinks": {
+      "type": "component",
+      "repeatable": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "elements.footer-section"
+    },
+    "pageLinks": {
+      "type": "component",
+      "repeatable": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "elements.footer-section"
     }
   }
 }

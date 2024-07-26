@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_elements_disclaimers",
+  "info": {
+    "displayName": "Disclaimer",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    }
+  }
+}
