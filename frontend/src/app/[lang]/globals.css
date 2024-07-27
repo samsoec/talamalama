@@ -4,7 +4,7 @@
 @import "react-slideshow-image/dist/styles.css";
 
 body {
-  @apply dark:bg-black
+  @apply dark:bg-primary
 }
 
 
@@ -14,27 +14,27 @@ body {
 
 /* Headers */
 .rich-text h1 {
-  @apply text-4xl font-bold mb-4 text-violet-400;
+  @apply text-4xl font-bold mb-4 text-gray-400;
 }
 
 .rich-text h2 {
-  @apply text-3xl font-bold mb-4 text-violet-400;
+  @apply text-3xl font-bold mb-4 text-gray-400;
 }
 
 .rich-text h3 {
-  @apply text-2xl font-bold mb-4 text-violet-400;
+  @apply text-2xl font-bold mb-4 text-gray-400;
 }
 
 .rich-text h4 {
-  @apply text-xl font-bold mb-4 text-violet-400;
+  @apply text-xl font-bold mb-4 text-gray-400;
 }
 
 .rich-text h5 {
-  @apply text-lg font-bold mb-4 text-violet-400;
+  @apply text-lg font-bold mb-4 text-gray-400;
 }
 
 .rich-text h6 {
-  @apply text-base font-bold mb-4 text-violet-200;
+  @apply text-base font-bold mb-4 text-gray-200;
 }
 
 /* Horizontal rules */
@@ -43,7 +43,7 @@ body {
 }
 
 .rich-text a {
-  @apply text-violet-400 underline;
+  @apply text-gray-400 underline;
 }
 
 /* Typographic replacements */
@@ -119,7 +119,7 @@ body {
 
 /* Custom containers */
 .rich-text .warning {
-  @apply bg-yellow-100 border-yellow-500 text-yellow-700 px-4 py-2 rounded-lg mb-4;
+  @apply px-4 py-2 rounded-lg mb-4;
 }
 
 

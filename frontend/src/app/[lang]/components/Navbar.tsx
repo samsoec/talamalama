@@ -13,6 +13,13 @@ interface NavLink {
   text: string;
 }
 
+interface Button {
+  id: number;
+  text: string;
+  url: string;
+  newTab: boolean;
+}
+
 interface MobileNavLink extends NavLink {
   closeMenu: () => void;
 }
@@ -24,8 +31,8 @@ function NavLink({ url, text }: NavLink) {
     <li className="flex">
       <Link
         href={url}
-        className={`flex items-center mx-4 -mb-1 border-b-2 dark:border-transparent ${
-          path === url && "dark:text-violet-400 dark:border-violet-400"
+        className={`flex items-center mx-4 -mb-1 text-gray-300 hover:text-gray-100 ${
+          path === url && "text-gray-100"
         }}`}
       >
         {text}
@@ -45,7 +52,7 @@ function MobileNavLink({ url, text, closeMenu }: MobileNavLink) {
         href={url}
         onClick={handleClick}
         className={`-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-100 hover:bg-gray-900 ${
-          path === url && "dark:text-violet-400 dark:border-violet-400"
+          path === url && "text-violet-400 border-violet-400"
         }}`}
       >
         {text}
@@ -55,31 +62,47 @@ function MobileNavLink({ url, text, closeMenu }: MobileNavLink) {
 }
 
 export default function Navbar({
+  button,
   links,
   logoUrl,
-  logoText,
 }: {
+  button: Button;
   links: Array<NavLink>;
   logoUrl: string | null;
-  logoText: string | null;
 }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const closeMenu = () => {
     setMobileMenuOpen(false);
   };
   return (
-    <div className="p-4 dark:bg-black dark:text-gray-100">
-      <div className="container flex justify-between h-16 mx-auto px-0 sm:px-6">
-        <Logo src={logoUrl}>
-          {logoText && <h2 className="text-2xl font-bold">{logoText}</h2>}
-        </Logo>
+    <div className="p-4 bg-primary text-gray-100">
+      <div className="container flex justify-between h-16 mx-auto gap-2">
+        <Logo src={logoUrl}/>
 
-        <div className="items-center flex-shrink-0 hidden lg:flex">
-          <ul className="items-stretch hidden space-x-3 lg:flex">
-            {links.map((item: NavLink) => (
-              <NavLink key={item.id} {...item} />
-            ))}
-          </ul>
+        <div className="flex-1 justify-between hidden lg:flex">
+          <div className="items-center flex-shrink-0 hidden lg:flex">
+            <ul className="items-stretch space-x-3 hidden lg:flex">
+              {links.map((item: NavLink) => (
+                <NavLink key={item.id} {...item} />
+              ))}
+            </ul>
+          </div>
+
+          <div className="flex items-center">
+            <Link
+              href={button.url}
+              target={button.newTab ? "_blank" : "_self"}
+              aria-label="Reach Us"
+              className="-mb-1"
+            >
+              <button
+                type="button"
+                className="px-6 py-3 text-sm rounded-full hover:underline bg-accent text-gray-100"
+              >
+                {button.text}
+              </button>
+            </Link>
+          </div>
         </div>
 
         <Dialog
@@ -102,7 +125,7 @@ export default function Navbar({
                 onClick={() => setMobileMenuOpen(false)}
               >
                 <span className="sr-only">Close menu</span>
-                <XMarkIcon className="h-6 w-6" aria-hidden="true" />
+                <XMarkIcon className="h-6 w-6 text-gray-100" aria-hidden="true" />
               </button>
             </div>
             <div className="mt-6 flow-root">
@@ -116,6 +139,19 @@ export default function Navbar({
                     />
                   ))}
                 </div>
+                <Link
+                  href={button.url}
+                  target={button.newTab ? "_blank" : "_self"}
+                  aria-label="Reach Us"
+                  className="-mb-1"
+                >
+                  <button
+                    type="button"
+                    className="px-6 py-3 text-sm rounded-full hover:underline bg-accent text-gray-100 w-full justify-center"
+                  >
+                    {button.text}
+                  </button>
+                </Link>
               </div>
             </div>
           </Dialog.Panel>

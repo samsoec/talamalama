@@ -14,12 +14,9 @@ interface FooterLink {
   social?: string;
 }
 
-interface CategoryLink {
-  id: string;
-  attributes: {
-    name: string;
-    slug: string;
-  };
+interface FooterLinkGroup {
+  title: string;
+  links: Array<FooterLink>;
 }
 
 function FooterLink({ url, text }: FooterLink) {
@@ -28,8 +25,8 @@ function FooterLink({ url, text }: FooterLink) {
     <li className="flex">
       <Link
         href={url}
-        className={`hover:dark:text-violet-400 ${
-          path === url && "dark:text-violet-400 dark:border-violet-400"
+        className={`hover:text-violet-400 ${
+          path === url && "text-violet-400 border-violet-400"
         }}`}
       >
         {text}
@@ -38,111 +35,95 @@ function FooterLink({ url, text }: FooterLink) {
   );
 }
 
-function CategoryLink({ attributes }: CategoryLink) {
-  return (
-    <li className="flex">
-      <Link
-        href={`/blog/${attributes.slug}`}
-        className="hover:dark:text-violet-400"
-      >
-        {attributes.name}
-      </Link>
-    </li>
-  );
-}
-
-function RenderSocialIcon({ social }: { social: string | undefined }) {
-  switch (social) {
-    case "WEBSITE":
-      return <CgWebsite />;
-    case "TWITTER":
-      return <AiFillTwitterCircle />;
-    case "YOUTUBE":
-      return <AiFillYoutube />;
-    case "DISCORD":
-      return <FaDiscord />;
-    default:
-      return null;
-  }
-}
-
 export default function Footer({
   logoUrl,
-  logoText,
-  menuLinks,
-  categoryLinks,
-  legalLinks,
+  tagLine,
+  pageLinks,
+  serviceLinks,
   socialLinks,
+  copyright: {
+    title: copyrightTitle,
+    links: copyrightLinks,
+  },
+  disclaimer: {
+    title: disclaimerTitle,
+    text: disclaimerText,
+  },
 }: {
+  socialLinks: FooterLinkGroup;
+  pageLinks: FooterLinkGroup;
+  serviceLinks: FooterLinkGroup;
   logoUrl: string | null;
-  logoText: string | null;
-  menuLinks: Array<FooterLink>;
-  categoryLinks: Array<CategoryLink>;
-  legalLinks: Array<FooterLink>;
-  socialLinks: Array<FooterLink>;
+  tagLine: string;
+  copyright: FooterLinkGroup;
+  disclaimer: {
+    title: string;
+    text: string;
+  };
 }) {
 
   return (
-    <footer className="py-6 dark:bg-black dark:text-gray-50">
-      <div className="container px-6 mx-auto space-y-6 divide-y divide-gray-400 md:space-y-12 divide-opacity-50">
-        <div className="grid grid-cols-12">
-          <div className="pb-6 col-span-full md:pb-0 md:col-span-6">
-            <Logo src={logoUrl}>
-              {logoText && <h2 className="text-2xl font-bold">{logoText}</h2>}
-            </Logo>
-          </div>
+    <footer>
+      <div className="py-8 bg-primary text-gray-100 bg-black text-gray-50">
+        <div className="container mx-auto space-y-6 divide-y divide-gray-400 md:space-y-12 divide-opacity-50">
+          <div className="grid grid-cols-12">
+            <div className="pb-6 gap-2 col-span-full md:pb-0 md:col-span-3">
+              <Logo src={logoUrl}/>
+              <span className="pb-1 text-lg">{tagLine}</span>
+            </div>
 
-          <div className="col-span-6 text-center md:text-left md:col-span-3">
-            <p className="pb-1 text-lg font-medium">Categories</p>
-            <ul>
-              {categoryLinks.map((link: CategoryLink) => (
-                <CategoryLink key={link.id} {...link} />
-              ))}
-            </ul>
-          </div>
+            <div className="col-span-full text-center md:text-left md:col-span-2 gap-2">
+              <p className="pb-1 text-lg font-medium">{serviceLinks.title}</p>
+              <ul className="gap-1">
+                {serviceLinks.links.map((link: FooterLink) => (
+                  <FooterLink key={link.id} {...link} />
+                ))}
+              </ul>
+            </div>
 
-          <div className="col-span-6 text-center md:text-left md:col-span-3">
-            <p className="pb-1 text-lg font-medium">Menu</p>
-            <ul>
-              {menuLinks.map((link: FooterLink) => (
-                <FooterLink key={link.id} {...link} />
-              ))}
-            </ul>
+            <div className="col-span-full text-center md:text-left md:col-span-2 gap-2">
+              <p className="pb-1 text-lg font-medium">{pageLinks.title}</p>
+              <ul className="gap-1">
+                {pageLinks.links.map((link: FooterLink) => (
+                  <FooterLink key={link.id} {...link} />
+                ))}
+              </ul>
+            </div>
+
+            <div className="col-span-full text-center md:text-left md:col-span-2 gap-2">
+              <p className="pb-1 text-lg font-medium">{socialLinks.title}</p>
+              <ul className="gap-1">
+                {pageLinks.links.map((link: FooterLink) => (
+                  <FooterLink key={link.id} {...link} />
+                ))}
+              </ul>
+            </div>
+
+            <div className="col-span-full text-center md:text-left md:col-span-3 gap-2">
+              <p className="pb-1 text-lg font-medium">{disclaimerTitle}</p>
+              <p className="pb-1 text-sm">{disclaimerText}</p>
+            </div>
+
           </div>
         </div>
-        <div className="grid justify-center pt-6 lg:justify-between">
-          <div className="flex">
-            <span className="mr-2">
-              ©{new Date().getFullYear()} All rights reserved
-            </span>
-            <ul className="flex">
-              {legalLinks.map((link: FooterLink) => (
-                <Link
-                  href={link.url}
-                  className="text-gray-400 hover:text-gray-300 mr-2"
-                  key={link.id}
-                >
-                  {link.text}
-                </Link>
-              ))}
-            </ul>
-          </div>
-          <div className="flex justify-center pt-4 space-x-4 lg:pt-0 lg:col-end-13">
-            {socialLinks.map((link: FooterLink) => {
-              return (
-                <a
-                  key={link.id}
-                  rel="noopener noreferrer"
-                  href={link.url}
-                  title={link.text}
-                  target={link.newTab ? "_blank" : "_self"}
-                  className="flex items-center justify-center w-10 h-10 rounded-full dark:bg-violet-400 dark:text-gray-900"
-                >
-                  <RenderSocialIcon social={link.social} />
-                </a>
-              );
-            })}
-          </div>
+      </div> 
+      {/* Copyright */}
+      <div className="flex bg-accent">
+        <div className="container flex py-2 gap-2 mx-auto justify-between text-gray-100 flex-col lg:flex-row text-center">
+          <span>
+            {copyrightTitle}
+          </span>
+          <ul className="flex gap-2 flex-col lg:flex-row">
+            {copyrightLinks.map((link: FooterLink) => (
+              <Link
+                href={link.url}
+                className="text-gray-100 mr-2"
+                key={link.id}
+              >
+                {link.text}
+              </Link>
+            ))}
+          </ul>
         </div>
       </div>
     </footer>

@@ -20,16 +20,20 @@ async function getGlobal(lang: string): Promise<any> {
 
   const urlParamsObject = {
     populate: [
-      "metadata.shareImage",
+      "metadata",
       "favicon",
-      "notificationBanner.link",
       "navbar.links",
+      "navbar.button",
       "navbar.navbarLogo.logoImg",
-      "footer.footerLogo.logoImg",
-      "footer.menuLinks",
-      "footer.legalLinks",
       "footer.socialLinks",
-      "footer.categories",
+      "footer.companyProfile.logoImg",
+      "footer.disclaimer",
+      "serviceLinks",
+      "serviceLinks.links",
+      "pageLinks",
+      "pageLinks.links",
+      "copyright",
+      "copyright.links",
     ],
     locale: lang,
   };
@@ -64,38 +68,54 @@ export default async function RootLayout({
   // TODO: CREATE A CUSTOM ERROR PAGE
   if (!global.data) return null;
   
-  const { notificationBanner, navbar, footer } = global.data.attributes;
+  const { navbar, footer, copyright, serviceLinks, pageLinks } = global.data.attributes;
 
   const navbarLogoUrl = getStrapiMedia(
     navbar.navbarLogo.logoImg.data?.attributes.url
   );
 
+  console.log("global", global.data.attributes);
+
   const footerLogoUrl = getStrapiMedia(
-    footer.footerLogo.logoImg.data?.attributes.url
+    footer.companyProfile.logoImg.data?.attributes.url
   );
 
   return (
     <html lang={params.lang}>
       <body>
         <Navbar
+          button={navbar.button}
           links={navbar.links}
           logoUrl={navbarLogoUrl}
-          logoText={navbar.navbarLogo.logoText}
         />
 
         <main className="dark:bg-black dark:text-gray-100 min-h-screen">
           {children}
         </main>
 
-        <Banner data={notificationBanner} />
-
         <Footer
           logoUrl={footerLogoUrl}
-          logoText={footer.footerLogo.logoText}
-          menuLinks={footer.menuLinks}
-          categoryLinks={footer.categories.data}
-          legalLinks={footer.legalLinks}
-          socialLinks={footer.socialLinks}
+          tagLine={footer.companyProfile.caption}
+          serviceLinks={{
+            title: serviceLinks.title,
+            links: serviceLinks.links,
+          }}
+          pageLinks={{
+            title: pageLinks.title,
+            links: pageLinks.links,
+          }}
+          socialLinks={{
+            title: "Social Media",
+            links: footer.socialLinks.links,
+          }}
+          copyright={{
+            title: copyright.title,
+            links: copyright.links,
+          }}
+          disclaimer={{
+            title: footer.disclaimer.title,
+            text: footer.disclaimer.text,
+          }}
         />
       </body>
     </html>
