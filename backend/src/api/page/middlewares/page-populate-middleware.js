@@ -34,6 +34,22 @@ const populate = {
       submitButton: {
         populate: true,
       },
+      icon: {
+        fields: ["url", "alternativeText", "caption", "width", "height"],
+      },
+      categories: {
+        fields: ["name", "slug", "description"],
+        populate: {
+          serviceFeatures: {
+            fields: ["name", "description", "slug"],
+            populate: {
+              picture: {
+                fields: ["url", "alternativeText", "caption", "width", "height"],
+              },
+            },
+          }
+        },
+      },
     },
   },
   seo: {

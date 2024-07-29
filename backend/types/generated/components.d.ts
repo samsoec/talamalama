@@ -49,19 +49,6 @@ export interface ElementsFeatureColumn extends Schema.Component {
   };
 }
 
-export interface ElementsFeatureHeading extends Schema.Component {
-  collectionName: 'components_elements_feature_headings';
-  info: {
-    displayName: 'Feature Heading';
-  };
-  attributes: {
-    heading: Attribute.String;
-    newTab: Attribute.Boolean;
-    url: Attribute.String;
-    icon: Attribute.Media;
-  };
-}
-
 export interface ElementsFeatureRow extends Schema.Component {
   collectionName: 'components_slices_feature_rows';
   info: {
@@ -217,7 +204,6 @@ export interface LayoutFooter extends Schema.Component {
     companyProfile: Attribute.Component<'layout.logo'>;
     socialLinks: Attribute.Component<'links.social-link', true>;
     disclaimer: Attribute.Component<'elements.disclaimer'>;
-    footerHeading: Attribute.Component<'elements.footer-heading'>;
   };
 }
 
@@ -347,6 +333,16 @@ export interface SectionsBottomActions extends Schema.Component {
     title: Attribute.String;
     buttons: Attribute.Component<'links.button-link', true>;
     description: Attribute.Text;
+  };
+}
+
+export interface SectionsDivider extends Schema.Component {
+  collectionName: 'components_sections_dividers';
+  info: {
+    displayName: 'Divider';
+  };
+  attributes: {
+    title: Attribute.String;
   };
 }
 
@@ -483,6 +479,20 @@ export interface SectionsPricing extends Schema.Component {
   };
 }
 
+export interface SectionsReachUs extends Schema.Component {
+  collectionName: 'components_sections_reach_uses';
+  info: {
+    displayName: 'Reach Us';
+    description: '';
+  };
+  attributes: {
+    heading: Attribute.String & Attribute.Required;
+    url: Attribute.String;
+    newTab: Attribute.Boolean;
+    icon: Attribute.Media & Attribute.Required;
+  };
+}
+
 export interface SectionsRichText extends Schema.Component {
   collectionName: 'components_sections_rich_texts';
   info: {
@@ -492,6 +502,21 @@ export interface SectionsRichText extends Schema.Component {
   };
   attributes: {
     content: Attribute.RichText;
+  };
+}
+
+export interface SectionsServiceGroup extends Schema.Component {
+  collectionName: 'components_sections_service_groups';
+  info: {
+    displayName: 'Service Group';
+  };
+  attributes: {
+    heading: Attribute.String;
+    categories: Attribute.Relation<
+      'sections.service-group',
+      'oneToMany',
+      'api::category.category'
+    >;
   };
 }
 
@@ -611,7 +636,6 @@ declare module '@strapi/types' {
       'elements.benefit-item': ElementsBenefitItem;
       'elements.disclaimer': ElementsDisclaimer;
       'elements.feature-column': ElementsFeatureColumn;
-      'elements.feature-heading': ElementsFeatureHeading;
       'elements.feature-row': ElementsFeatureRow;
       'elements.feature': ElementsFeature;
       'elements.footer-heading': ElementsFooterHeading;
@@ -632,6 +656,7 @@ declare module '@strapi/types' {
       'meta.metadata': MetaMetadata;
       'sections.benefit': SectionsBenefit;
       'sections.bottom-actions': SectionsBottomActions;
+      'sections.divider': SectionsDivider;
       'sections.feature-columns-group': SectionsFeatureColumnsGroup;
       'sections.feature-rows-group': SectionsFeatureRowsGroup;
       'sections.features': SectionsFeatures;
@@ -642,7 +667,9 @@ declare module '@strapi/types' {
       'sections.marquee': SectionsMarquee;
       'sections.our-advantage': SectionsOurAdvantage;
       'sections.pricing': SectionsPricing;
+      'sections.reach-us': SectionsReachUs;
       'sections.rich-text': SectionsRichText;
+      'sections.service-group': SectionsServiceGroup;
       'sections.showcase': SectionsShowcase;
       'sections.testimonials-group': SectionsTestimonialsGroup;
       'shared.media': SharedMedia;

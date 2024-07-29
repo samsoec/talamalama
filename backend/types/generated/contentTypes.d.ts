@@ -800,8 +800,8 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
     draftAndPublish: false;
   };
   attributes: {
-    name: Attribute.String;
-    slug: Attribute.UID<'api::category.category', 'name'>;
+    name: Attribute.String & Attribute.Required & Attribute.Unique;
+    slug: Attribute.UID<'api::category.category', 'name'> & Attribute.Required;
     description: Attribute.Text;
     portofolios: Attribute.Relation<
       'api::category.category',
@@ -1004,26 +1004,6 @@ export interface ApiPagePage extends Schema.CollectionType {
           localized: true;
         };
       }>;
-    contentSections: Attribute.DynamicZone<
-      [
-        'sections.hero',
-        'sections.bottom-actions',
-        'sections.feature-columns-group',
-        'sections.feature-rows-group',
-        'sections.testimonials-group',
-        'sections.large-video',
-        'sections.rich-text',
-        'sections.pricing',
-        'sections.lead-form',
-        'sections.features',
-        'sections.heading'
-      ]
-    > &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
     slug: Attribute.String &
       Attribute.SetPluginOptions<{
         i18n: {
@@ -1043,6 +1023,33 @@ export interface ApiPagePage extends Schema.CollectionType {
         };
       }>;
     seo: Attribute.Component<'shared.seo'> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    contentSections: Attribute.DynamicZone<
+      [
+        'sections.reach-us',
+        'sections.benefit',
+        'sections.bottom-actions',
+        'sections.divider',
+        'sections.feature-columns-group',
+        'sections.feature-rows-group',
+        'sections.features',
+        'sections.heading',
+        'sections.hero',
+        'sections.large-video',
+        'sections.lead-form',
+        'sections.marquee',
+        'sections.our-advantage',
+        'sections.pricing',
+        'sections.rich-text',
+        'sections.service-group',
+        'sections.showcase',
+        'sections.testimonials-group'
+      ]
+    > &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -1117,14 +1124,16 @@ export interface ApiServiceFeatureServiceFeature extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    name: Attribute.String;
+    name: Attribute.String & Attribute.Required & Attribute.Unique;
     category: Attribute.Relation<
       'api::service-feature.service-feature',
       'manyToOne',
       'api::category.category'
     >;
     description: Attribute.Text;
-    cover: Attribute.Media;
+    picture: Attribute.Media & Attribute.Required;
+    slug: Attribute.UID<'api::service-feature.service-feature', 'name'> &
+      Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

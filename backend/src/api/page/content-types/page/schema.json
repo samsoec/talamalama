@@ -25,27 +25,6 @@
         }
       }
     },
-    "contentSections": {
-      "type": "dynamiczone",
-      "components": [
-        "sections.hero",
-        "sections.bottom-actions",
-        "sections.feature-columns-group",
-        "sections.feature-rows-group",
-        "sections.testimonials-group",
-        "sections.large-video",
-        "sections.rich-text",
-        "sections.pricing",
-        "sections.lead-form",
-        "sections.features",
-        "sections.heading"
-      ],
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
     "slug": {
       "pluginOptions": {
         "i18n": {
@@ -80,6 +59,34 @@
         }
       },
       "component": "shared.seo"
+    },
+    "contentSections": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "dynamiczone",
+      "components": [
+        "sections.reach-us",
+        "sections.benefit",
+        "sections.bottom-actions",
+        "sections.divider",
+        "sections.feature-columns-group",
+        "sections.feature-rows-group",
+        "sections.features",
+        "sections.heading",
+        "sections.hero",
+        "sections.large-video",
+        "sections.lead-form",
+        "sections.marquee",
+        "sections.our-advantage",
+        "sections.pricing",
+        "sections.rich-text",
+        "sections.service-group",
+        "sections.showcase",
+        "sections.testimonials-group"
+      ]
     }
   }
 }

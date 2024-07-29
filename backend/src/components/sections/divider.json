@@ -1,0 +1,12 @@
+{
+  "collectionName": "components_sections_dividers",
+  "info": {
+    "displayName": "Divider"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    }
+  }
+}
