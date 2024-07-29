@@ -4,7 +4,6 @@ import { getStrapiMedia, getStrapiURL } from "./utils/api-helpers";
 import { fetchAPI } from "./utils/fetch-api";
 
 import { i18n } from "../../../i18n-config";
-import Banner from "./components/Banner";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import {FALLBACK_SEO} from "@/app/[lang]/utils/constants";
@@ -74,8 +73,6 @@ export default async function RootLayout({
     navbar.navbarLogo.logoImg.data?.attributes.url
   );
 
-  console.log("global", global.data.attributes);
-
   const footerLogoUrl = getStrapiMedia(
     footer.companyProfile.logoImg.data?.attributes.url
   );
@@ -106,7 +103,7 @@ export default async function RootLayout({
           }}
           socialLinks={{
             title: "Social Media",
-            links: footer.socialLinks.links,
+            links: footer.socialLinks,
           }}
           copyright={{
             title: copyright.title,

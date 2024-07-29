@@ -31,7 +31,7 @@ function NavLink({ url, text }: NavLink) {
     <li className="flex">
       <Link
         href={url}
-        className={`flex items-center mx-4 -mb-1 text-gray-300 hover:text-gray-100 ${
+        className={`flex items-center mx-4 -mb-1 transition ease-in-out delay-50 text-gray-300 hover:text-gray-100 ${
           path === url && "text-gray-100"
         }}`}
       >
@@ -97,7 +97,7 @@ export default function Navbar({
             >
               <button
                 type="button"
-                className="px-6 py-3 text-sm rounded-full hover:underline bg-accent text-gray-100"
+                className="px-6 py-3 text-sm rounded-full bg-accent text-gray-100 transition ease-in-out delay-150 hover:scale-110"
               >
                 {button.text}
               </button>

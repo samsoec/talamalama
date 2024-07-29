@@ -11,13 +11,13 @@ export interface Attribute {
 	height: number;
 }
 
-export interface Data {
+export interface Data<T> {
 	id: number;
-	attributes: Attribute;
+	attributes: T;
 }
 
 export interface Picture {
-	data: Data;
+	data: Data<Attribute>;
 }
 
 export interface Button {
@@ -49,11 +49,6 @@ export interface Attribute {
 	contentSections: ContentSection[];
 }
 
-export interface Data {
-	id: number;
-	attributes: Attribute;
-}
-
 export interface Pagination {
 	page: number;
 	pageSize: number;
@@ -66,6 +61,24 @@ export interface Meta {
 }
 
 export interface RootObject {
-	data: Data[];
+	data: Data<Attribute>[];
 	meta: Meta;
+}
+
+export interface Category {
+	name: string;
+	slug: string;
+	description: string;
+	serviceFeatures: ArrayData<Service>;
+}
+
+export interface Service {
+	slug: string;
+	name: string;
+	description: string;
+	picture: Picture;
+}
+
+export interface ArrayData<T> {
+	data: Data<T>[];
 }
