@@ -5,6 +5,7 @@ import Pricing from "../components/Pricing";
 import Email from "../components/Email";
 import ReachUs from "../components/ReachUs";
 import ServiceGroup from "../components/ServiceGroup";
+import Portofolio from "../components/Portofolio";
 
 export function sectionRenderer(section: any, index: number) {
   switch (section.__component) {
@@ -24,6 +25,8 @@ export function sectionRenderer(section: any, index: number) {
       return <ReachUs key={index} data={section} />;
     case "sections.service-group":
       return <ServiceGroup key={index} data={section} />;
+    case "sections.portofolio":
+      return <Portofolio key={index} data={section} />;
     default:
       return null;
   }

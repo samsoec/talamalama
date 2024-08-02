@@ -77,8 +77,23 @@ export interface Service {
 	name: string;
 	description: string;
 	picture: Picture;
+	category: Category;
 }
 
 export interface ArrayData<T> {
 	data: Data<T>[];
+}
+
+export interface Industry {
+	slug: string;
+	name: string;
+	description: string;
+}
+
+export interface Portofolio {
+	title: string;
+	slug: string;
+	description: string;
+	cover: Picture;
+	services: ArrayData<Service>;
 }
