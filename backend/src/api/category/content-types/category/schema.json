@@ -25,12 +25,6 @@
     "description": {
       "type": "text"
     },
-    "portofolios": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::portofolio.portofolio",
-      "mappedBy": "category"
-    },
     "serviceFeatures": {
       "type": "relation",
       "relation": "oneToMany",

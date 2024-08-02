@@ -4,7 +4,8 @@
   "info": {
     "singularName": "industry",
     "pluralName": "industries",
-    "displayName": "Industry"
+    "displayName": "Industry",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -12,10 +13,22 @@
   "pluginOptions": {},
   "attributes": {
     "name": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "description": {
       "type": "text"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name",
+      "required": true
+    },
+    "portofolios": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::portofolio.portofolio",
+      "mappedBy": "industry"
     }
   }
 }

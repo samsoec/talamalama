@@ -466,6 +466,26 @@ export interface SectionsOurAdvantage extends Schema.Component {
   };
 }
 
+export interface SectionsPortofolio extends Schema.Component {
+  collectionName: 'components_sections_portofolios';
+  info: {
+    displayName: 'Portofolio';
+  };
+  attributes: {
+    heading: Attribute.String & Attribute.Required;
+    industries: Attribute.Relation<
+      'sections.portofolio',
+      'oneToMany',
+      'api::industry.industry'
+    >;
+    serviceFeatures: Attribute.Relation<
+      'sections.portofolio',
+      'oneToMany',
+      'api::service-feature.service-feature'
+    >;
+  };
+}
+
 export interface SectionsPricing extends Schema.Component {
   collectionName: 'components_sections_pricings';
   info: {
@@ -666,6 +686,7 @@ declare module '@strapi/types' {
       'sections.lead-form': SectionsLeadForm;
       'sections.marquee': SectionsMarquee;
       'sections.our-advantage': SectionsOurAdvantage;
+      'sections.portofolio': SectionsPortofolio;
       'sections.pricing': SectionsPricing;
       'sections.reach-us': SectionsReachUs;
       'sections.rich-text': SectionsRichText;

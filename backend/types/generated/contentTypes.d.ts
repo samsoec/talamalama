@@ -803,11 +803,6 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
     name: Attribute.String & Attribute.Required & Attribute.Unique;
     slug: Attribute.UID<'api::category.category', 'name'> & Attribute.Required;
     description: Attribute.Text;
-    portofolios: Attribute.Relation<
-      'api::category.category',
-      'oneToMany',
-      'api::portofolio.portofolio'
-    >;
     serviceFeatures: Attribute.Relation<
       'api::category.category',
       'oneToMany',
@@ -920,13 +915,20 @@ export interface ApiIndustryIndustry extends Schema.CollectionType {
     singularName: 'industry';
     pluralName: 'industries';
     displayName: 'Industry';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    name: Attribute.String;
+    name: Attribute.String & Attribute.Required;
     description: Attribute.Text;
+    slug: Attribute.UID<'api::industry.industry', 'name'> & Attribute.Required;
+    portofolios: Attribute.Relation<
+      'api::industry.industry',
+      'oneToMany',
+      'api::portofolio.portofolio'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1047,7 +1049,8 @@ export interface ApiPagePage extends Schema.CollectionType {
         'sections.rich-text',
         'sections.service-group',
         'sections.showcase',
-        'sections.testimonials-group'
+        'sections.testimonials-group',
+        'sections.portofolio'
       ]
     > &
       Attribute.SetPluginOptions<{
@@ -1083,17 +1086,22 @@ export interface ApiPortofolioPortofolio extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    title: Attribute.String;
-    description: Attribute.String;
-    slug: Attribute.UID;
-    cover: Attribute.Media;
-    carousel: Attribute.Media;
-    category: Attribute.Relation<
+    title: Attribute.String & Attribute.Required;
+    description: Attribute.Text;
+    slug: Attribute.UID<'api::portofolio.portofolio', 'title'> &
+      Attribute.Required;
+    cover: Attribute.Media & Attribute.Required;
+    carousel: Attribute.Media & Attribute.Required;
+    services: Attribute.Relation<
+      'api::portofolio.portofolio',
+      'manyToMany',
+      'api::service-feature.service-feature'
+    >;
+    industry: Attribute.Relation<
       'api::portofolio.portofolio',
       'manyToOne',
-      'api::category.category'
+      'api::industry.industry'
     >;
-    isShownInShowcase: Attribute.Boolean;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1134,6 +1142,11 @@ export interface ApiServiceFeatureServiceFeature extends Schema.CollectionType {
     picture: Attribute.Media & Attribute.Required;
     slug: Attribute.UID<'api::service-feature.service-feature', 'name'> &
       Attribute.Required;
+    portofolios: Attribute.Relation<
+      'api::service-feature.service-feature',
+      'manyToMany',
+      'api::portofolio.portofolio'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

@@ -39,6 +39,12 @@
       "type": "uid",
       "targetField": "name",
       "required": true
+    },
+    "portofolios": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::portofolio.portofolio",
+      "mappedBy": "services"
     }
   }
 }

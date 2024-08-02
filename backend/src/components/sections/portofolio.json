@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_sections_portofolios",
+  "info": {
+    "displayName": "Portofolio"
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "required": true
+    },
+    "industries": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::industry.industry"
+    },
+    "serviceFeatures": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::service-feature.service-feature"
+    }
+  }
+}

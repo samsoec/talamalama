@@ -13,29 +13,29 @@
   "pluginOptions": {},
   "attributes": {
     "title": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "description": {
-      "type": "string"
+      "type": "text"
     },
     "slug": {
-      "type": "uid"
+      "type": "uid",
+      "required": true,
+      "targetField": "title"
     },
     "cover": {
       "type": "media",
       "multiple": false,
-      "required": false,
+      "required": true,
       "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
+        "images"
       ]
     },
     "carousel": {
       "type": "media",
       "multiple": true,
-      "required": false,
+      "required": true,
       "allowedTypes": [
         "images",
         "files",
@@ -43,14 +43,17 @@
         "audios"
       ]
     },
-    "category": {
+    "services": {
       "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::category.category",
+      "relation": "manyToMany",
+      "target": "api::service-feature.service-feature",
       "inversedBy": "portofolios"
     },
-    "isShownInShowcase": {
-      "type": "boolean"
+    "industry": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::industry.industry",
+      "inversedBy": "portofolios"
     }
   }
 }

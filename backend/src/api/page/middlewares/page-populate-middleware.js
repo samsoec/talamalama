@@ -50,11 +50,31 @@ const populate = {
           }
         },
       },
+      industries: {
+        fields: ["name", "slug", "description"],
+      },
+      serviceFeatures: {
+        fields: ["name", "slug", "description"],
+      },
     },
   },
   seo: {
     fields: ["metaTitle", "metaDescription"],
     populate: { shareImage: true },
+  },
+  portofolios: {
+    fields: ["title", "slug"],
+    populate: {
+      cover: {
+        fields: ["url", "alternativeText", "caption", "width", "height"],
+      },
+      services: {
+        fields: ["name", "slug"],
+      },
+      industry: {
+        fields: ["name", "slug"],
+      },
+    },
   }
 };
 
@@ -62,7 +82,7 @@ module.exports = (config, { strapi }) => {
   // Add your own logic here.
   return async (ctx, next) => {
     ctx.query = {
-      populate,
+      populate: ctx.query.populate ? ctx.query.populate : populate,
       filters: { slug: ctx.query.filters.slug },
       locale: ctx.query.locale,
     };
