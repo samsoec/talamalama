@@ -9,7 +9,8 @@
   "options": {},
   "attributes": {
     "title": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "description": {
       "type": "text"
@@ -17,7 +18,8 @@
     "testimonials": {
       "type": "component",
       "repeatable": true,
-      "component": "elements.testimonial"
+      "component": "elements.testimonial",
+      "required": true
     },
     "prefix": {
       "type": "string"

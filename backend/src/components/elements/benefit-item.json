@@ -1,25 +1,26 @@
 {
   "collectionName": "components_elements_benefit_items",
   "info": {
-    "displayName": "Benefit Item"
+    "displayName": "Benefit Item",
+    "description": ""
   },
   "options": {},
   "attributes": {
     "image": {
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ],
       "type": "media",
-      "multiple": false
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
     },
     "title": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "description": {
-      "type": "string"
+      "type": "text",
+      "required": true
     }
   }
 }

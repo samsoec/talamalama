@@ -4,6 +4,7 @@ export interface ElementsAdvantageItem extends Schema.Component {
   collectionName: 'components_elements_advantage_items';
   info: {
     displayName: 'Advantage Item';
+    description: '';
   };
   attributes: {
     text: Attribute.String;
@@ -14,11 +15,12 @@ export interface ElementsBenefitItem extends Schema.Component {
   collectionName: 'components_elements_benefit_items';
   info: {
     displayName: 'Benefit Item';
+    description: '';
   };
   attributes: {
-    image: Attribute.Media;
-    title: Attribute.String;
-    description: Attribute.String;
+    image: Attribute.Media & Attribute.Required;
+    title: Attribute.String & Attribute.Required;
+    description: Attribute.Text & Attribute.Required;
   };
 }
 
@@ -136,9 +138,10 @@ export interface ElementsMarqueeItem extends Schema.Component {
   collectionName: 'components_elements_marquee_items';
   info: {
     displayName: 'Marquee Item';
+    description: '';
   };
   attributes: {
-    text: Attribute.String;
+    text: Attribute.String & Attribute.Required;
   };
 }
 
@@ -191,6 +194,17 @@ export interface ElementsTestimonial extends Schema.Component {
     authorName: Attribute.String & Attribute.Required;
     authorTitle: Attribute.String;
     rating: Attribute.Decimal;
+  };
+}
+
+export interface ElementsWorkflowItem extends Schema.Component {
+  collectionName: 'components_elements_workflow_items';
+  info: {
+    displayName: 'Workflow Item';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    cover: Attribute.Media & Attribute.Required;
   };
 }
 
@@ -313,11 +327,13 @@ export interface SectionsBenefit extends Schema.Component {
   collectionName: 'components_sections_benefits';
   info: {
     displayName: 'Benefit';
+    description: '';
   };
   attributes: {
     prefix: Attribute.String;
-    title: Attribute.String;
-    items: Attribute.Component<'elements.benefit-item', true>;
+    title: Attribute.String & Attribute.Required;
+    items: Attribute.Component<'elements.benefit-item', true> &
+      Attribute.Required;
   };
 }
 
@@ -447,10 +463,12 @@ export interface SectionsMarquee extends Schema.Component {
   collectionName: 'components_sections_marquees';
   info: {
     displayName: 'Marquee';
+    description: '';
   };
   attributes: {
-    separator: Attribute.Media;
-    items: Attribute.Component<'elements.marquee-item', true>;
+    separator: Attribute.Media & Attribute.Required;
+    items: Attribute.Component<'elements.marquee-item', true> &
+      Attribute.Required;
   };
 }
 
@@ -458,11 +476,14 @@ export interface SectionsOurAdvantage extends Schema.Component {
   collectionName: 'components_sections_our_advantages';
   info: {
     displayName: 'Our Advantage';
+    description: '';
   };
   attributes: {
     prefix: Attribute.String;
-    title: Attribute.String;
-    items: Attribute.Component<'elements.advantage-item', true>;
+    title: Attribute.String & Attribute.Required;
+    items: Attribute.Component<'elements.advantage-item', true> &
+      Attribute.Required;
+    picture: Attribute.Media & Attribute.Required;
   };
 }
 
@@ -544,10 +565,11 @@ export interface SectionsShowcase extends Schema.Component {
   collectionName: 'components_sections_showcases';
   info: {
     displayName: 'Showcase';
+    description: '';
   };
   attributes: {
     prefix: Attribute.String;
-    title: Attribute.String;
+    title: Attribute.String & Attribute.Required;
     description: Attribute.Text;
     portofolios: Attribute.Relation<
       'sections.showcase',
@@ -566,10 +588,24 @@ export interface SectionsTestimonialsGroup extends Schema.Component {
     description: '';
   };
   attributes: {
-    title: Attribute.String;
+    title: Attribute.String & Attribute.Required;
     description: Attribute.Text;
-    testimonials: Attribute.Component<'elements.testimonial', true>;
+    testimonials: Attribute.Component<'elements.testimonial', true> &
+      Attribute.Required;
     prefix: Attribute.String;
+  };
+}
+
+export interface SectionsWorkflow extends Schema.Component {
+  collectionName: 'components_sections_workflows';
+  info: {
+    displayName: 'Workflow';
+  };
+  attributes: {
+    prefix: Attribute.String;
+    title: Attribute.String & Attribute.Required;
+    description: Attribute.Text;
+    items: Attribute.Component<'elements.workflow-item', true>;
   };
 }
 
@@ -666,6 +702,7 @@ declare module '@strapi/types' {
       'elements.notification-banner': ElementsNotificationBanner;
       'elements.plan': ElementsPlan;
       'elements.testimonial': ElementsTestimonial;
+      'elements.workflow-item': ElementsWorkflowItem;
       'layout.footer': LayoutFooter;
       'layout.logo': LayoutLogo;
       'layout.navbar': LayoutNavbar;
@@ -693,6 +730,7 @@ declare module '@strapi/types' {
       'sections.service-group': SectionsServiceGroup;
       'sections.showcase': SectionsShowcase;
       'sections.testimonials-group': SectionsTestimonialsGroup;
+      'sections.workflow': SectionsWorkflow;
       'shared.media': SharedMedia;
       'shared.quote': SharedQuote;
       'shared.rich-text': SharedRichText;

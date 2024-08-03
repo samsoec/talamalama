@@ -1,7 +1,8 @@
 {
   "collectionName": "components_sections_showcases",
   "info": {
-    "displayName": "Showcase"
+    "displayName": "Showcase",
+    "description": ""
   },
   "options": {},
   "attributes": {
@@ -9,7 +10,8 @@
       "type": "string"
     },
     "title": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "description": {
       "type": "text"

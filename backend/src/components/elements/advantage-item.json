@@ -1,7 +1,8 @@
 {
   "collectionName": "components_elements_advantage_items",
   "info": {
-    "displayName": "Advantage Item"
+    "displayName": "Advantage Item",
+    "description": ""
   },
   "options": {},
   "attributes": {

@@ -10,14 +10,38 @@ const populate = {
       picture: {
         fields: ["url", "alternativeText", "caption", "width", "height"],
       },
-      buttons: {
-        populate: true,
+      backgroundImages: {
+        fields: ["url", "alternativeText", "caption", "width", "height"],
       },
-      feature: {
+      separator: {
+        fields: ["url", "alternativeText", "caption", "width", "height"],
+      },
+      items: {
         populate: {
-          fields: ["title", "description", "showLink", "newTab", "url", "text"],
-          media: {
+          image: {
             fields: ["url", "alternativeText", "caption", "width", "height"],
+          },
+          cover: {
+            fields: ["url", "alternativeText", "caption", "width", "height"],
+          },
+        },
+      },
+      highlights: {
+        fields: ["caption", "value"],
+        populate: {
+          avatars: {
+            fields: ["url", "alternativeText", "caption", "width", "height"],
+          },
+        }
+      },
+      portofolios: {
+        fields: ["title", "slug"],
+        populate: {
+          cover: {
+            fields: ["url", "alternativeText", "caption", "width", "height"],
+          },
+          services: {
+            fields: ["name", "slug"],
           },
         },
       },
@@ -27,12 +51,6 @@ const populate = {
             fields: ["url", "alternativeText", "caption", "width", "height"],
           },
         },
-      },
-      plans: {
-        populate: ["product_features"],
-      },
-      submitButton: {
-        populate: true,
       },
       icon: {
         fields: ["url", "alternativeText", "caption", "width", "height"],

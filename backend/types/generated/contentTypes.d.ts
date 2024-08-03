@@ -1050,7 +1050,8 @@ export interface ApiPagePage extends Schema.CollectionType {
         'sections.service-group',
         'sections.showcase',
         'sections.testimonials-group',
-        'sections.portofolio'
+        'sections.portofolio',
+        'sections.workflow'
       ]
     > &
       Attribute.SetPluginOptions<{

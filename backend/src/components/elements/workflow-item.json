@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_elements_workflow_items",
+  "info": {
+    "displayName": "Workflow Item"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "cover": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    }
+  }
+}
