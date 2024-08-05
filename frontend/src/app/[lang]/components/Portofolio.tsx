@@ -78,73 +78,50 @@ export default function Portofolio({ data: {
 
   return (
     <div className="py-8 px-4 lg:px-0 bg-primary text-gray-100">
-      <div className="container mx-auto space-y-6 divide-y divide-gray-400 md:space-y-12 divide-opacity-50">
+      <div className="container mx-auto lg:max-w-[1000px] md:max-w-md sm:max-w-sm max-w-xs">
 
-        <div className="flex flex-row justify-center">
-          <div>
-            <p className="py-8 text-4xl md:text-6xl text-center font-semibold max-w-7xl">{heading}</p>
-            <div className="flex flex-col items-center py-8">
-              <div className="lg:max-w-[1000px] md:max-w-md sm:max-w-sm max-w-xs">
+        <p className="py-8 text-4xl md:text-6xl text-center font-semibold max-w-7xl">{heading}</p>
+        
+        {/* Filters Here */}
+        <ul className="flex w-full justify-center text-sm font-medium py-8 text-gray-100">
+          <li onClick={clearFilter} id="show-all">
+            <div className={`me-2 rounded-full border cursor-pointer transition ease-in-out delay-50 ${isShowAll(filter) ? "bg-white text-gray-700" : "text-white border-gray-700 hover:border-gray-500 border-solid"}`}>
+              <span className="inline-block px-4 py-3 rounded-lg">Semua</span>
+            </div>
+          </li>
+          <li>
+            <Filter
+              label={`Industri${filter.industry ? `: ${industries.data.find((industry) => industry.attributes.slug === filter.industry)?.attributes.name}` : ''}`}
+              selected={filter.industry}
+              options={industries.data.map((industry) => ({
+                label: industry.attributes.name,
+                value: industry.attributes.slug,
+              }))}
+              onSelect={(value) => setFilter({ ...filter, industry: value })}
+            />
+          </li>
+          <li>
+            <Filter
+              label={`Service${filter.service ? `: ${serviceFeatures.data.find((service) => service.attributes.slug === filter.service)?.attributes.name}` : ''}`}
+              selected={filter.service}
+              options={serviceFeatures.data.map((service) => ({
+                label: service.attributes.name,
+                value: service.attributes.slug,
+              }))}
+              onSelect={(value) => setFilter({ ...filter, service: value })}
+            />
+          </li>
+        </ul>
 
-                {/* Filters Here */}
-                <ul className="flex w-full justify-center text-sm font-medium py-8 text-gray-100">
-                  <li onClick={clearFilter} id="show-all">
-                    <div className={`me-2 rounded-full border cursor-pointer transition ease-in-out delay-50 ${isShowAll(filter) ? "bg-white text-gray-700" : "text-white border-gray-700 hover:border-gray-500 border-solid"}`}>
-                      <span className="inline-block px-4 py-3 rounded-lg">Semua</span>
-                    </div>
-                  </li>
-                  <li>
-                    <Filter
-                      label={`Industri${filter.industry ? `: ${industries.data.find((industry) => industry.attributes.slug === filter.industry)?.attributes.name}` : ''}`}
-                      selected={filter.industry}
-                      options={industries.data.map((industry) => ({
-                        label: industry.attributes.name,
-                        value: industry.attributes.slug,
-                      }))}
-                      onSelect={(value) => setFilter({ ...filter, industry: value })}
-                    />
-                  </li>
-                  <li>
-                    <Filter
-                      label={`Service${filter.service ? `: ${serviceFeatures.data.find((service) => service.attributes.slug === filter.service)?.attributes.name}` : ''}`}
-                      selected={filter.service}
-                      options={serviceFeatures.data.map((service) => ({
-                        label: service.attributes.name,
-                        value: service.attributes.slug,
-                      }))}
-                      onSelect={(value) => setFilter({ ...filter, service: value })}
-                    />
-                  </li>
-                </ul>
-
-
-                {/* Portofolio Grid For Desktop */}
-                <div className="hidden lg:flex">
-                  <Slideshow<Data<Model>[]>
-                    data={splitArrayIntoChunks(portofolio, 6)}
-                    renderItem={(items) => (
-                      <div className="w-full grid grid-cols-12 gap-4">
-                        {items.map((item) => (
-                          <div className="col-span-6 gap-4">
-                            <PortofolioCard
-                              key={item.id}
-                              slug={item.attributes.slug}
-                              title={item.attributes.title}
-                              subtitle={item.attributes.services.data.map((service) => service.attributes.name).join(" / ")}
-                              cover={item.attributes.cover}
-                            />
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  />
-                </div>
-
-                {/* Portofolio Grid For Mobile */}
-                <div className="lg:hidden">
-                  <Slideshow<Data<Model>>
-                    data={portofolio}
-                    renderItem={(item) => (
+        {portofolio.length > 0 && (
+          <>
+            {/* Portofolio Grid For Desktop */}
+            <div className="hidden lg:flex">
+              <Slideshow<Data<Model>[]>
+                data={splitArrayIntoChunks(portofolio, 6)}
+                renderItem={(items) => (
+                  <div className="w-full grid grid-cols-2 grid-rows-3 gap-4">
+                    {items.map((item) => (
                       <PortofolioCard
                         key={item.id}
                         slug={item.attributes.slug}
@@ -152,14 +129,34 @@ export default function Portofolio({ data: {
                         subtitle={item.attributes.services.data.map((service) => service.attributes.name).join(" / ")}
                         cover={item.attributes.cover}
                       />
-                    )}
-                  />
-                </div>
-              </div>
+                    ))}
+                  </div>
+                )}
+              />
             </div>
-          </div>
-        </div>
+          </>
+        )}
         
+
+        {portofolio.length > 0 && (
+          <>
+            {/* Portofolio Grid For Mobile */}
+            <div className="lg:hidden">
+              <Slideshow<Data<Model>>
+                data={portofolio}
+                renderItem={(item) => (
+                  <PortofolioCard
+                    key={item.id}
+                    slug={item.attributes.slug}
+                    title={item.attributes.title}
+                    subtitle={item.attributes.services.data.map((service) => service.attributes.name).join(" / ")}
+                    cover={item.attributes.cover}
+                  />
+                )}
+              />
+            </div>
+          </>
+        )}
         
 
       </div>

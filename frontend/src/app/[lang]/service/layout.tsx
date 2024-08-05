@@ -1,0 +1,8 @@
+export default function layout({children} : {children: React.ReactNode}) {
+  return (
+    <div>
+      <div className="h-[96px] w-full"/>
+      {children}
+    </div>
+  )
+}
