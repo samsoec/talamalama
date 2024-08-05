@@ -75,7 +75,7 @@ export default function Navbar({
     setMobileMenuOpen(false);
   };
   return (
-    <div className="p-4 bg-primary text-gray-100">
+    <div className="absolute top-0 right-0 left-0 p-4 bg-primary text-gray-100">
       <div className="container flex justify-between h-16 mx-auto gap-2">
         <Logo src={logoUrl}/>
 

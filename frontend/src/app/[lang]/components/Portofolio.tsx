@@ -1,16 +1,11 @@
 "use client";
 
-import Link from "next/link";
-import Image from "next/image";
-import { ArrayData, Category, Industry, Picture, Portofolio as Model, Service, Data } from "../utils/model";
-import { getStrapiMedia } from "../utils/api-helpers";
+import { ArrayData, Industry, Portofolio as Model, Service, Data } from "../utils/model";
 import { useCallback, useEffect, useState } from "react";
 import Filter from "./Filter";
 import { fetchAPI } from "../utils/fetch-api";
 import PortofolioCard from "../views/portofolio-card";
-import Slider from "./Slider";
 import Slideshow from "./Slideshow";
-import ImageSlider from "./ImageSlider";
 
 
 interface PortofolioProps {

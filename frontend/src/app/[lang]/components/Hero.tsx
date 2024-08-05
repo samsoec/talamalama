@@ -1,8 +1,7 @@
 import Link from "next/link";
-import Image from "next/image";
 import HighlightedText from "./HighlightedText";
-import { getStrapiMedia } from "../utils/api-helpers";
 import { renderButtonStyle } from "../utils/render-button-style";
+import { Avatar, Avatars } from "./Avatars";
 
 interface Button {
   id: string;
@@ -23,6 +22,15 @@ interface Picture {
   };
 }
 
+interface Highlight {
+  id: string;
+  caption: string;
+  value: string;
+  avatars: {
+    data?: Avatar[];
+  };
+}
+
 interface HeroProps {
   data: {
     id: string;
@@ -30,30 +38,30 @@ interface HeroProps {
     description: string;
     picture: Picture;
     buttons: Button[];
+    highlights: Highlight[];
   };
 }
 
 export default function Hero({ data }: HeroProps) {
-  const imgUrl = getStrapiMedia(data.picture.data.attributes.url);
-
   return (
-    <section className="dark:bg-black dark:text-gray-100">
-      <div className="container flex flex-col justify-center p-6 mx-auto sm:py-12 lg:py-24 lg:flex-row lg:justify-between">
-        <div className="flex flex-col justify-center p-6 text-center rounded-lg lg:max-w-md xl:max-w-lg lg:text-left">
-          <HighlightedText
-            text={data.title}
-            tag="h1"
-            className="text-5xl font-bold leading-none sm:text-6xl mb-8"
-            color="dark:text-violet-400"
-          />
-
-          <HighlightedText
-            text={data.description}
-            tag="p"
-            className="tmt-6 mb-8 text-lg sm:mb-12"
-            color="dark:text-violet-400"
-          />
-          <div className="flex flex-col space-y-4 sm:items-center sm:justify-center sm:flex-row sm:space-y-0 sm:space-x-4 lg:justify-start">
+    <section className="bg-primary text-gray-100 h-svh flex items-end">
+      <div className="container flex flex-col justify-center mx-auto mb-16 sm:py-12 lg:py-24 lg:flex-row lg:justify-between">
+        <div className="flex flex-col justify-center p-6 rounded-lg lg:text-left gap-8">
+          <div className="flex flex-col gap-4">
+            <HighlightedText
+              text={data.title}
+              tag="h1"
+              className="text-4xl leading-none sm:text-6xl xl:max-w-3xl"
+              color="dark:text-violet-400"
+            />
+            <HighlightedText
+              text={data.description}
+              tag="p"
+              className="tmt-6 text-md sm:mb-12 xl:max-w-xl"
+              color="dark:text-violet-400"
+            />
+          </div>
+          <div className="flex flex-row gap-2">
             {data.buttons.map((button: Button, index: number) => (
               <Link
                 key={index}
@@ -65,17 +73,14 @@ export default function Hero({ data }: HeroProps) {
               </Link>
             ))}
           </div>
-        </div>
-        <div className="flex items-center justify-center p-6 mt-8 lg:mt-0 h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128">
-          <Image
-            src={imgUrl || ""}
-            alt={
-              data.picture.data.attributes.alternativeText || "none provided"
-            }
-            className="object-contain h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128 "
-            width={600}
-            height={600}
-          />
+          <div className="flex flex-row gap-4 items-end">
+            {data.highlights.map((item) => (
+              <div className="flex flex-col gap-2">
+                {item.avatars.data ? <Avatars data={item.avatars.data}/> : <span className="text-4xl">{item.value}</span>}
+                <span className="text-sm">{item.caption}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

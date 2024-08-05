@@ -6,6 +6,10 @@ import Email from "../components/Email";
 import ReachUs from "../components/ReachUs";
 import ServiceGroup from "../components/ServiceGroup";
 import Portofolio from "../components/Portofolio";
+import { Marquee } from "../components/Marquee";
+import Benefit from "../components/Benefit";
+import Advantage from "../components/Advantage";
+import PortofolioShowcase from "../components/PortofolioShowcase";
 
 export function sectionRenderer(section: any, index: number) {
   switch (section.__component) {
@@ -27,6 +31,14 @@ export function sectionRenderer(section: any, index: number) {
       return <ServiceGroup key={index} data={section} />;
     case "sections.portofolio":
       return <Portofolio key={index} data={section} />;
+    case "sections.marquee":
+      return <Marquee key={index} data={section} />;
+    case "sections.benefit":
+      return <Benefit key={index} data={section} />;
+    case "sections.our-advantage":
+      return <Advantage key={index} data={section} />;
+    case "sections.showcase":
+      return <PortofolioShowcase key={index} data={section} />;
     default:
       return null;
   }
