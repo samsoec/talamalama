@@ -16,6 +16,9 @@ const populate = {
       separator: {
         fields: ["url", "alternativeText", "caption", "width", "height"],
       },
+      buttons: {
+        fields: ["url", "text", "newTab", "type"],
+      },
       items: {
         populate: {
           image: {

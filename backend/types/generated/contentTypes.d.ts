@@ -1103,6 +1103,18 @@ export interface ApiPortofolioPortofolio extends Schema.CollectionType {
       'manyToOne',
       'api::industry.industry'
     >;
+    year: Attribute.String;
+    clientName: Attribute.String;
+    seo: Attribute.Component<'shared.seo'> & Attribute.Required;
+    blocks: Attribute.DynamicZone<
+      [
+        'shared.media',
+        'shared.quote',
+        'shared.rich-text',
+        'shared.slider',
+        'shared.video-embed'
+      ]
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
