@@ -113,6 +113,18 @@ export default function Portofolio({ data: {
           </li>
         </ul>
 
+        {isLoading && (
+          <div className="flex justify-center items-center h-96">
+            <span className="text-2xl text-gray-100">Loading...</span>
+          </div>
+        )}
+
+        {isEmpty && !isLoading && (
+          <div className="flex justify-center items-center h-96">
+            <span className="text-2xl text-gray-100">Data tidak ditemukan</span>
+          </div>
+        )}
+
         {portofolio.length > 0 && (
           <>
             {/* Portofolio Grid For Desktop */}
