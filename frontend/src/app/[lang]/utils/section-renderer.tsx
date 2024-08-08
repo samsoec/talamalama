@@ -10,6 +10,7 @@ import { Marquee } from "../components/Marquee";
 import Benefit from "../components/Benefit";
 import Advantage from "../components/Advantage";
 import PortofolioShowcase from "../components/PortofolioShowcase";
+import Workflow from "../components/Workflow";
 
 export function sectionRenderer(section: any, index: number) {
   switch (section.__component) {
@@ -39,6 +40,8 @@ export function sectionRenderer(section: any, index: number) {
       return <Advantage key={index} data={section} />;
     case "sections.showcase":
       return <PortofolioShowcase key={index} data={section} />;
+    case "sections.workflow":
+      return <Workflow key={index} data={section} />;
     default:
       return null;
   }
