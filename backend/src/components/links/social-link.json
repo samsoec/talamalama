@@ -18,24 +18,16 @@
       "type": "string",
       "required": true
     },
-    "social": {
-      "type": "enumeration",
-      "enum": [
-        "YOUTUBE",
-        "TWITTER",
-        "DISCORD",
-        "WEBSITE"
-      ]
-    },
     "icon": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     }
   }
 }

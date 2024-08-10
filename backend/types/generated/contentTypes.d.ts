@@ -797,7 +797,7 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
     description: 'Organize your content into categories';
   };
   options: {
-    draftAndPublish: false;
+    draftAndPublish: true;
   };
   attributes: {
     name: Attribute.String & Attribute.Required & Attribute.Unique;
@@ -810,6 +810,7 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::category.category',
       'oneToOne',
@@ -947,41 +948,6 @@ export interface ApiIndustryIndustry extends Schema.CollectionType {
   };
 }
 
-export interface ApiLeadFormSubmissionLeadFormSubmission
-  extends Schema.CollectionType {
-  collectionName: 'lead_form_submissions';
-  info: {
-    singularName: 'lead-form-submission';
-    pluralName: 'lead-form-submissions';
-    displayName: 'Lead form submission';
-    name: 'lead-form-submission';
-    description: '';
-  };
-  options: {
-    increments: true;
-    timestamps: true;
-    draftAndPublish: false;
-  };
-  attributes: {
-    email: Attribute.String;
-    status: Attribute.Enumeration<['seen', 'contacted', 'ignored']>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::lead-form-submission.lead-form-submission',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::lead-form-submission.lead-form-submission',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface ApiPagePage extends Schema.CollectionType {
   collectionName: 'pages';
   info: {
@@ -1001,18 +967,14 @@ export interface ApiPagePage extends Schema.CollectionType {
   };
   attributes: {
     shortName: Attribute.String &
+      Attribute.Required &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
         };
       }>;
-    slug: Attribute.String &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: false;
-        };
-      }>;
     heading: Attribute.String &
+      Attribute.Required &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -1034,19 +996,10 @@ export interface ApiPagePage extends Schema.CollectionType {
       [
         'sections.reach-us',
         'sections.benefit',
-        'sections.bottom-actions',
         'sections.divider',
-        'sections.feature-columns-group',
-        'sections.feature-rows-group',
-        'sections.features',
-        'sections.heading',
         'sections.hero',
-        'sections.large-video',
-        'sections.lead-form',
         'sections.marquee',
         'sections.our-advantage',
-        'sections.pricing',
-        'sections.rich-text',
         'sections.service-group',
         'sections.showcase',
         'sections.testimonials-group',
@@ -1054,6 +1007,13 @@ export interface ApiPagePage extends Schema.CollectionType {
         'sections.workflow'
       ]
     > &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    slug: Attribute.UID<'api::page.page', 'shortName'> &
+      Attribute.Required &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -1199,7 +1159,6 @@ declare module '@strapi/types' {
       'api::category.category': ApiCategoryCategory;
       'api::global.global': ApiGlobalGlobal;
       'api::industry.industry': ApiIndustryIndustry;
-      'api::lead-form-submission.lead-form-submission': ApiLeadFormSubmissionLeadFormSubmission;
       'api::page.page': ApiPagePage;
       'api::portofolio.portofolio': ApiPortofolioPortofolio;
       'api::service-feature.service-feature': ApiServiceFeatureServiceFeature;

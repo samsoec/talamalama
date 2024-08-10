@@ -8,7 +8,7 @@
     "description": "Organize your content into categories"
   },
   "options": {
-    "draftAndPublish": false
+    "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
