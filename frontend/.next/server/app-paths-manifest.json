@@ -1,7 +1,7 @@
 {
   "/_not-found": "app/_not-found.js",
-  "/[lang]/page": "app/[lang]/page.js",
   "/[lang]/[...slug]/page": "app/[lang]/[...slug]/page.js",
+  "/[lang]/page": "app/[lang]/page.js",
   "/[lang]/hello/route": "app/[lang]/hello/route.js",
   "/[lang]/portofolio/page": "app/[lang]/portofolio/page.js",
   "/[lang]/service/page": "app/[lang]/service/page.js",
