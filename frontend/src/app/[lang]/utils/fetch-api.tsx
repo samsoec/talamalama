@@ -22,7 +22,7 @@ export async function fetchAPI(
       `/api${path}${queryString ? `?${queryString}` : ""}`
     )}`;
 
-    console.log("API", requestUrl, mergedOptions);
+    console.log(`[${new Date().toISOString()}] API `, requestUrl, options);
 
     // Trigger API call
     const response = await fetch(requestUrl, mergedOptions);
