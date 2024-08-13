@@ -14,7 +14,7 @@ const nextConfig = {
         hostname: 'images.pexels.com',
       },
       {
-        protocol: 'http',
+        protocol: 'https',
         hostname: 'admin.samsoec.my.id',
         pathname: '/uploads/**',
       },
