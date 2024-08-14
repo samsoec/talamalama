@@ -112,13 +112,15 @@ export default function Footer({
           </span>
           <ul className="flex gap-2 flex-col lg:flex-row">
             {copyrightLinks.map((link: FooterLink) => (
-              <Link
-                href={link.url}
-                className="text-gray-100 mr-2"
-                key={link.id}
-              >
-                {link.text}
-              </Link>
+              <li className="mr-2">
+                <Link
+                  href={link.url}
+                  className="text-gray-100"
+                  key={link.id}
+                >
+                  {link.text}
+                </Link>
+              </li>
             ))}
           </ul>
         </div>

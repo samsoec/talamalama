@@ -39,7 +39,7 @@ export default function Portofolio({ data: {
       const urlParamsObject = {
         sort: { createdAt: "desc" },
         populate: {
-          cover: { fields: ["url"] },
+          cover: { fields: ["url", "alternativeText"] },
           services: { fields: ["name", "slug"] },
           industry: { fields: ["name", "slug"] },
         },

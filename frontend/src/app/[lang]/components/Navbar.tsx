@@ -159,6 +159,7 @@ export default function Navbar({
         <button
           className="p-4 lg:hidden"
           onClick={() => setMobileMenuOpen(true)}
+          aria-label="Open menu"
         >
           <Bars3Icon className="h-7 w-7 text-gray-100" aria-hidden="true" />
         </button>

@@ -67,7 +67,7 @@ function CategoryView({ category }: { category: Category }) {
       return (
         <Image 
           src={iconUrl} 
-          alt={picture.data.attributes.slug} 
+          alt={picture.data.attributes.alternativeText} 
           fill={true}
           objectFit='cover'
           objectPosition='center'

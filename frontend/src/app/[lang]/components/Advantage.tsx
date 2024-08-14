@@ -34,8 +34,8 @@ export default function Advantage({ data: {
           {pictureUrl && (
             <div className="relative w-full aspect-square flex-1">
               <Image
-                src={pictureUrl} 
-                alt={picture.data.attributes.slug} 
+                src={pictureUrl}
+                alt={picture.data.attributes.alternativeText} 
                 fill={true}
                 objectFit='contain'
                 objectPosition='top'

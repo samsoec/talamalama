@@ -22,7 +22,7 @@ export default function BenefitCard({
       return (
         <Image
           src={iconUrl} 
-          alt={picture.data.attributes.slug} 
+          alt={picture.data.attributes.alternativeText} 
           fill={true}
           objectFit='contain'
           objectPosition='center'
