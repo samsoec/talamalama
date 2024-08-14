@@ -33,7 +33,7 @@ export default function WorkflowCard({
   return (
     <div className="flex flex-col border border-gray-600 bg-zinc-800 rounded-lg w-full">
       <span className="text-gray-100 text-lg p-4">{title}</span>
-      <div className="relative w-full aspect-video">
+      <div className="relative w-full aspect-square">
         {renderImage(cover)}
       </div>
     </div>
