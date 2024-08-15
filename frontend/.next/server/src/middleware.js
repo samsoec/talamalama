@@ -1,25 +1,8142 @@
-(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[727],{67:e=>{"use strict";e.exports=require("node:async_hooks")},195:e=>{"use strict";e.exports=require("node:buffer")},713:(e,t,r)=>{"use strict";let n;r.r(t),r.d(t,{default:()=>eJ});var a,i,s,o,d,u,l,c,_,p,g,h,f={};async function w(){if("_ENTRIES"in globalThis&&_ENTRIES.middleware_instrumentation&&_ENTRIES.middleware_instrumentation.register)try{await _ENTRIES.middleware_instrumentation.register()}catch(e){throw e.message=`An error occurred while loading instrumentation hook: ${e.message}`,e}}r.r(f),r.d(f,{config:()=>ez,middleware:()=>e$});let y=null;function m(){return y||(y=w()),y}function b(e){return`The edge runtime does not support Node.js '${e}' module.
-Learn More: https://nextjs.org/docs/messages/node-module-in-edge-runtime`}process!==r.g.process&&(process.env=r.g.process.env,r.g.process=process),Object.defineProperty(globalThis,"__import_unsupported",{value:function(e){let t=new Proxy(function(){},{get(t,r){if("then"===r)return{};throw Error(b(e))},construct(){throw Error(b(e))},apply(r,n,a){if("function"==typeof a[0])return a[0](t);throw Error(b(e))}});return new Proxy({},{get:()=>t})},enumerable:!1,configurable:!1}),m();class v extends Error{constructor({page:e}){super(`The middleware "${e}" accepts an async API directly with the form:
+// runtime can't be in strict mode because a global variable is assign and maybe created.
+(self["webpackChunk_N_E"] = self["webpackChunk_N_E"] || []).push([[727],{
+
+/***/ 64:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  "default": () => (/* binding */ nHandler)
+});
+
+// NAMESPACE OBJECT: ./src/middleware.ts
+var middleware_namespaceObject = {};
+__webpack_require__.r(middleware_namespaceObject);
+__webpack_require__.d(middleware_namespaceObject, {
+  config: () => (config),
+  middleware: () => (middleware)
+});
+
+;// CONCATENATED MODULE: ./node_modules/next/dist/esm/server/web/globals.js
+async function registerInstrumentation() {
+    if ("_ENTRIES" in globalThis && _ENTRIES.middleware_instrumentation && _ENTRIES.middleware_instrumentation.register) {
+        try {
+            await _ENTRIES.middleware_instrumentation.register();
+        } catch (err) {
+            err.message = `An error occurred while loading instrumentation hook: ${err.message}`;
+            throw err;
+        }
+    }
+}
+let registerInstrumentationPromise = null;
+function ensureInstrumentationRegistered() {
+    if (!registerInstrumentationPromise) {
+        registerInstrumentationPromise = registerInstrumentation();
+    }
+    return registerInstrumentationPromise;
+}
+function getUnsupportedModuleErrorMessage(module) {
+    // warning: if you change these messages, you must adjust how react-dev-overlay's middleware detects modules not found
+    return `The edge runtime does not support Node.js '${module}' module.
+Learn More: https://nextjs.org/docs/messages/node-module-in-edge-runtime`;
+}
+function __import_unsupported(moduleName) {
+    const proxy = new Proxy(function() {}, {
+        get (_obj, prop) {
+            if (prop === "then") {
+                return {};
+            }
+            throw new Error(getUnsupportedModuleErrorMessage(moduleName));
+        },
+        construct () {
+            throw new Error(getUnsupportedModuleErrorMessage(moduleName));
+        },
+        apply (_target, _this, args) {
+            if (typeof args[0] === "function") {
+                return args[0](proxy);
+            }
+            throw new Error(getUnsupportedModuleErrorMessage(moduleName));
+        }
+    });
+    return new Proxy({}, {
+        get: ()=>proxy
+    });
+}
+function enhanceGlobals() {
+    // The condition is true when the "process" module is provided
+    if (process !== __webpack_require__.g.process) {
+        // prefer local process but global.process has correct "env"
+        process.env = __webpack_require__.g.process.env;
+        __webpack_require__.g.process = process;
+    }
+    // to allow building code that import but does not use node.js modules,
+    // webpack will expect this function to exist in global scope
+    Object.defineProperty(globalThis, "__import_unsupported", {
+        value: __import_unsupported,
+        enumerable: false,
+        configurable: false
+    });
+    // Eagerly fire instrumentation hook to make the startup faster.
+    void ensureInstrumentationRegistered();
+}
+enhanceGlobals(); //# sourceMappingURL=globals.js.map
+
+;// CONCATENATED MODULE: ./node_modules/next/dist/esm/server/web/error.js
+class PageSignatureError extends Error {
+    constructor({ page }){
+        super(`The middleware "${page}" accepts an async API directly with the form:
   
   export function middleware(request, event) {
     return NextResponse.redirect('/new-location')
   }
   
   Read more: https://nextjs.org/docs/messages/middleware-new-signature
-  `)}}class S extends Error{constructor(){super(`The request.page has been deprecated in favour of \`URLPattern\`.
+  `);
+    }
+}
+class RemovedPageError extends Error {
+    constructor(){
+        super(`The request.page has been deprecated in favour of \`URLPattern\`.
   Read more: https://nextjs.org/docs/messages/middleware-request-page
-  `)}}class x extends Error{constructor(){super(`The request.ua has been removed in favour of \`userAgent\` function.
+  `);
+    }
+}
+class RemovedUAError extends Error {
+    constructor(){
+        super(`The request.ua has been removed in favour of \`userAgent\` function.
   Read more: https://nextjs.org/docs/messages/middleware-parse-user-agent
-  `)}}function C(e){let t={},r=[];if(e)for(let[n,a]of e.entries())"set-cookie"===n.toLowerCase()?(r.push(...function(e){var t,r,n,a,i,s=[],o=0;function d(){for(;o<e.length&&/\s/.test(e.charAt(o));)o+=1;return o<e.length}for(;o<e.length;){for(t=o,i=!1;d();)if(","===(r=e.charAt(o))){for(n=o,o+=1,d(),a=o;o<e.length&&"="!==(r=e.charAt(o))&&";"!==r&&","!==r;)o+=1;o<e.length&&"="===e.charAt(o)?(i=!0,o=a,s.push(e.substring(t,n)),t=o):o=n+1}else o+=1;(!i||o>=e.length)&&s.push(e.substring(t,e.length))}return s}(a)),t[n]=1===r.length?r[0]:r):t[n]=a;return t}function T(e){try{return String(new URL(String(e)))}catch(t){throw Error(`URL is malformed "${String(e)}". Please use only absolute URLs - https://nextjs.org/docs/messages/middleware-relative-urls`,{cause:t})}}let M=Symbol("response"),P=Symbol("passThrough"),O=Symbol("waitUntil");class R{constructor(e){this[O]=[],this[P]=!1}respondWith(e){this[M]||(this[M]=Promise.resolve(e))}passThroughOnException(){this[P]=!0}waitUntil(e){this[O].push(e)}}class N extends R{constructor(e){super(e.request),this.sourcePage=e.page}get request(){throw new v({page:this.sourcePage})}respondWith(){throw new v({page:this.sourcePage})}}function E(e){return e.replace(/\/$/,"")||"/"}function L(e){let t=e.indexOf("#"),r=e.indexOf("?"),n=r>-1&&(t<0||r<t);return n||t>-1?{pathname:e.substring(0,n?r:t),query:n?e.substring(r,t>-1?t:void 0):"",hash:t>-1?e.slice(t):""}:{pathname:e,query:"",hash:""}}function A(e,t){if(!e.startsWith("/")||!t)return e;let{pathname:r,query:n,hash:a}=L(e);return""+t+r+n+a}function I(e,t){if(!e.startsWith("/")||!t)return e;let{pathname:r,query:n,hash:a}=L(e);return""+r+t+n+a}function k(e,t){if("string"!=typeof e)return!1;let{pathname:r}=L(e);return r===t||r.startsWith(t+"/")}function D(e,t){let r;let n=e.split("/");return(t||[]).some(t=>!!n[1]&&n[1].toLowerCase()===t.toLowerCase()&&(r=t,n.splice(1,1),e=n.join("/")||"/",!0)),{pathname:e,detectedLocale:r}}let q=/(?!^https?:\/\/)(127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}|\[::1\]|localhost)/;function B(e,t){return new URL(String(e).replace(q,"localhost"),t&&String(t).replace(q,"localhost"))}let G=Symbol("NextURLInternal");class j{constructor(e,t,r){let n,a;"object"==typeof t&&"pathname"in t||"string"==typeof t?(n=t,a=r||{}):a=r||t||{},this[G]={url:B(e,n??a.base),options:a,basePath:""},this.analyze()}analyze(){var e,t,r,n,a;let i=function(e,t){var r,n;let{basePath:a,i18n:i,trailingSlash:s}=null!=(r=t.nextConfig)?r:{},o={pathname:e,trailingSlash:"/"!==e?e.endsWith("/"):s};a&&k(o.pathname,a)&&(o.pathname=function(e,t){if(!k(e,t))return e;let r=e.slice(t.length);return r.startsWith("/")?r:"/"+r}(o.pathname,a),o.basePath=a);let d=o.pathname;if(o.pathname.startsWith("/_next/data/")&&o.pathname.endsWith(".json")){let e=o.pathname.replace(/^\/_next\/data\//,"").replace(/\.json$/,"").split("/"),r=e[0];o.buildId=r,d="index"!==e[1]?"/"+e.slice(1).join("/"):"/",!0===t.parseData&&(o.pathname=d)}if(i){let e=t.i18nProvider?t.i18nProvider.analyze(o.pathname):D(o.pathname,i.locales);o.locale=e.detectedLocale,o.pathname=null!=(n=e.pathname)?n:o.pathname,!e.detectedLocale&&o.buildId&&(e=t.i18nProvider?t.i18nProvider.analyze(d):D(d,i.locales)).detectedLocale&&(o.locale=e.detectedLocale)}return o}(this[G].url.pathname,{nextConfig:this[G].options.nextConfig,parseData:!0,i18nProvider:this[G].options.i18nProvider}),s=function(e,t){let r;if((null==t?void 0:t.host)&&!Array.isArray(t.host))r=t.host.toString().split(":",1)[0];else{if(!e.hostname)return;r=e.hostname}return r.toLowerCase()}(this[G].url,this[G].options.headers);this[G].domainLocale=this[G].options.i18nProvider?this[G].options.i18nProvider.detectDomainLocale(s):function(e,t,r){if(e)for(let i of(r&&(r=r.toLowerCase()),e)){var n,a;if(t===(null==(n=i.domain)?void 0:n.split(":",1)[0].toLowerCase())||r===i.defaultLocale.toLowerCase()||(null==(a=i.locales)?void 0:a.some(e=>e.toLowerCase()===r)))return i}}(null==(t=this[G].options.nextConfig)?void 0:null==(e=t.i18n)?void 0:e.domains,s);let o=(null==(r=this[G].domainLocale)?void 0:r.defaultLocale)||(null==(a=this[G].options.nextConfig)?void 0:null==(n=a.i18n)?void 0:n.defaultLocale);this[G].url.pathname=i.pathname,this[G].defaultLocale=o,this[G].basePath=i.basePath??"",this[G].buildId=i.buildId,this[G].locale=i.locale??o,this[G].trailingSlash=i.trailingSlash}formatPathname(){var e;let t;return t=function(e,t,r,n){if(!t||t===r)return e;let a=e.toLowerCase();return!n&&(k(a,"/api")||k(a,"/"+t.toLowerCase()))?e:A(e,"/"+t)}((e={basePath:this[G].basePath,buildId:this[G].buildId,defaultLocale:this[G].options.forceLocale?void 0:this[G].defaultLocale,locale:this[G].locale,pathname:this[G].url.pathname,trailingSlash:this[G].trailingSlash}).pathname,e.locale,e.buildId?void 0:e.defaultLocale,e.ignorePrefix),(e.buildId||!e.trailingSlash)&&(t=E(t)),e.buildId&&(t=I(A(t,"/_next/data/"+e.buildId),"/"===e.pathname?"index.json":".json")),t=A(t,e.basePath),!e.buildId&&e.trailingSlash?t.endsWith("/")?t:I(t,"/"):E(t)}formatSearch(){return this[G].url.search}get buildId(){return this[G].buildId}set buildId(e){this[G].buildId=e}get locale(){return this[G].locale??""}set locale(e){var t,r;if(!this[G].locale||!(null==(r=this[G].options.nextConfig)?void 0:null==(t=r.i18n)?void 0:t.locales.includes(e)))throw TypeError(`The NextURL configuration includes no locale "${e}"`);this[G].locale=e}get defaultLocale(){return this[G].defaultLocale}get domainLocale(){return this[G].domainLocale}get searchParams(){return this[G].url.searchParams}get host(){return this[G].url.host}set host(e){this[G].url.host=e}get hostname(){return this[G].url.hostname}set hostname(e){this[G].url.hostname=e}get port(){return this[G].url.port}set port(e){this[G].url.port=e}get protocol(){return this[G].url.protocol}set protocol(e){this[G].url.protocol=e}get href(){let e=this.formatPathname(),t=this.formatSearch();return`${this.protocol}//${this.host}${e}${t}${this.hash}`}set href(e){this[G].url=B(e),this.analyze()}get origin(){return this[G].url.origin}get pathname(){return this[G].url.pathname}set pathname(e){this[G].url.pathname=e}get hash(){return this[G].url.hash}set hash(e){this[G].url.hash=e}get search(){return this[G].url.search}set search(e){this[G].url.search=e}get password(){return this[G].url.password}set password(e){this[G].url.password=e}get username(){return this[G].url.username}set username(e){this[G].url.username=e}get basePath(){return this[G].basePath}set basePath(e){this[G].basePath=e.startsWith("/")?e:`/${e}`}toString(){return this.href}toJSON(){return this.href}[Symbol.for("edge-runtime.inspect.custom")](){return{href:this.href,origin:this.origin,protocol:this.protocol,username:this.username,password:this.password,host:this.host,hostname:this.hostname,port:this.port,pathname:this.pathname,search:this.search,searchParams:this.searchParams,hash:this.hash}}clone(){return new j(String(this),this[G].options)}}var U=r(283);let V=Symbol("internal request");class H extends Request{constructor(e,t={}){let r="string"!=typeof e&&"url"in e?e.url:String(e);T(r),e instanceof Request?super(e,t):super(r,t);let n=new j(r,{headers:C(this.headers),nextConfig:t.nextConfig});this[V]={cookies:new U.RequestCookies(this.headers),geo:t.geo||{},ip:t.ip,nextUrl:n,url:n.toString()}}[Symbol.for("edge-runtime.inspect.custom")](){return{cookies:this.cookies,geo:this.geo,ip:this.ip,nextUrl:this.nextUrl,url:this.url,bodyUsed:this.bodyUsed,cache:this.cache,credentials:this.credentials,destination:this.destination,headers:Object.fromEntries(this.headers),integrity:this.integrity,keepalive:this.keepalive,method:this.method,mode:this.mode,redirect:this.redirect,referrer:this.referrer,referrerPolicy:this.referrerPolicy,signal:this.signal}}get cookies(){return this[V].cookies}get geo(){return this[V].geo}get ip(){return this[V].ip}get nextUrl(){return this[V].nextUrl}get page(){throw new S}get ua(){throw new x}get url(){return this[V].url}}let K=Symbol("internal response"),F=new Set([301,302,303,307,308]);function $(e,t){var r;if(null==e?void 0:null==(r=e.request)?void 0:r.headers){if(!(e.request.headers instanceof Headers))throw Error("request.headers must be an instance of Headers");let r=[];for(let[n,a]of e.request.headers)t.set("x-middleware-request-"+n,a),r.push(n);t.set("x-middleware-override-headers",r.join(","))}}class z extends Response{constructor(e,t={}){super(e,t),this[K]={cookies:new U.ResponseCookies(this.headers),url:t.url?new j(t.url,{headers:C(this.headers),nextConfig:t.nextConfig}):void 0}}[Symbol.for("edge-runtime.inspect.custom")](){return{cookies:this.cookies,url:this.url,body:this.body,bodyUsed:this.bodyUsed,headers:Object.fromEntries(this.headers),ok:this.ok,redirected:this.redirected,status:this.status,statusText:this.statusText,type:this.type}}get cookies(){return this[K].cookies}static json(e,t){let r=Response.json(e,t);return new z(r.body,r)}static redirect(e,t){let r="number"==typeof t?t:(null==t?void 0:t.status)??307;if(!F.has(r))throw RangeError('Failed to execute "redirect" on "response": Invalid status code');let n="object"==typeof t?t:{},a=new Headers(null==n?void 0:n.headers);return a.set("Location",T(e)),new z(null,{...n,headers:a,status:r})}static rewrite(e,t){let r=new Headers(null==t?void 0:t.headers);return r.set("x-middleware-rewrite",T(e)),$(t,r),new z(null,{...t,headers:r})}static next(e){let t=new Headers(null==e?void 0:e.headers);return t.set("x-middleware-next","1"),$(e,t),new z(null,{...e,headers:t})}}function W(e,t){let r="string"==typeof t?new URL(t):t,n=new URL(e,t),a=r.protocol+"//"+r.host;return n.protocol+"//"+n.host===a?n.toString().replace(a,""):n.toString()}let Z=[["RSC"],["Next-Router-State-Tree"],["Next-Router-Prefetch"]];r(253);let Y={client:"client",server:"server",edgeServer:"edge-server"};Y.client,Y.server,Y.edgeServer,Symbol("polyfills");let J=["__nextFallback","__nextLocale","__nextInferredLocaleFromDefault","__nextDefaultLocale","__nextIsNotFound","_rsc"],X=["__nextDataReq"],Q="nxtP",ee={shared:"shared",reactServerComponents:"rsc",serverSideRendering:"ssr",actionBrowser:"action-browser",api:"api",middleware:"middleware",edgeAsset:"edge-asset",appPagesBrowser:"app-pages-browser",appMetadataRoute:"app-metadata-route",appRouteHandler:"app-route-handler"};({...ee,GROUP:{server:[ee.reactServerComponents,ee.actionBrowser,ee.appMetadataRoute,ee.appRouteHandler],nonClientServerTarget:[ee.middleware,ee.api],app:[ee.reactServerComponents,ee.actionBrowser,ee.appMetadataRoute,ee.appRouteHandler,ee.serverSideRendering,ee.appPagesBrowser,ee.shared]}});class et{static get(e,t,r){let n=Reflect.get(e,t,r);return"function"==typeof n?n.bind(e):n}static set(e,t,r,n){return Reflect.set(e,t,r,n)}static has(e,t){return Reflect.has(e,t)}static deleteProperty(e,t){return Reflect.deleteProperty(e,t)}}class er extends Error{constructor(){super("Headers cannot be modified. Read more: https://nextjs.org/docs/app/api-reference/functions/headers")}static callable(){throw new er}}class en extends Headers{constructor(e){super(),this.headers=new Proxy(e,{get(t,r,n){if("symbol"==typeof r)return et.get(t,r,n);let a=r.toLowerCase(),i=Object.keys(e).find(e=>e.toLowerCase()===a);if(void 0!==i)return et.get(t,i,n)},set(t,r,n,a){if("symbol"==typeof r)return et.set(t,r,n,a);let i=r.toLowerCase(),s=Object.keys(e).find(e=>e.toLowerCase()===i);return et.set(t,s??r,n,a)},has(t,r){if("symbol"==typeof r)return et.has(t,r);let n=r.toLowerCase(),a=Object.keys(e).find(e=>e.toLowerCase()===n);return void 0!==a&&et.has(t,a)},deleteProperty(t,r){if("symbol"==typeof r)return et.deleteProperty(t,r);let n=r.toLowerCase(),a=Object.keys(e).find(e=>e.toLowerCase()===n);return void 0===a||et.deleteProperty(t,a)}})}static seal(e){return new Proxy(e,{get(e,t,r){switch(t){case"append":case"delete":case"set":return er.callable;default:return et.get(e,t,r)}}})}merge(e){return Array.isArray(e)?e.join(", "):e}static from(e){return e instanceof Headers?e:new en(e)}append(e,t){let r=this.headers[e];"string"==typeof r?this.headers[e]=[r,t]:Array.isArray(r)?r.push(t):this.headers[e]=t}delete(e){delete this.headers[e]}get(e){let t=this.headers[e];return void 0!==t?this.merge(t):null}has(e){return void 0!==this.headers[e]}set(e,t){this.headers[e]=t}forEach(e,t){for(let[r,n]of this.entries())e.call(t,n,r,this)}*entries(){for(let e of Object.keys(this.headers)){let t=e.toLowerCase(),r=this.get(t);yield[t,r]}}*keys(){for(let e of Object.keys(this.headers)){let t=e.toLowerCase();yield t}}*values(){for(let e of Object.keys(this.headers)){let t=this.get(e);yield t}}[Symbol.iterator](){return this.entries()}}class ea extends Error{constructor(){super("Cookies can only be modified in a Server Action or Route Handler. Read more: https://nextjs.org/docs/app/api-reference/functions/cookies#cookiessetname-value-options")}static callable(){throw new ea}}class ei{static seal(e){return new Proxy(e,{get(e,t,r){switch(t){case"clear":case"delete":case"set":return ea.callable;default:return et.get(e,t,r)}}})}}let es=Symbol.for("next.mutated.cookies");class eo{static wrap(e,t){let r=new U.ResponseCookies(new Headers);for(let t of e.getAll())r.set(t);let n=[],a=new Set,i=()=>{var e;let i=null==fetch.__nextGetStaticStore?void 0:null==(e=fetch.__nextGetStaticStore.call(fetch))?void 0:e.getStore();if(i&&(i.pathWasRevalidated=!0),n=r.getAll().filter(e=>a.has(e.name)),t){let e=[];for(let t of n){let r=new U.ResponseCookies(new Headers);r.set(t),e.push(r.toString())}t(e)}};return new Proxy(r,{get(e,t,r){switch(t){case es:return n;case"delete":return function(...t){a.add("string"==typeof t[0]?t[0]:t[0].name);try{e.delete(...t)}finally{i()}};case"set":return function(...t){a.add("string"==typeof t[0]?t[0]:t[0].name);try{return e.set(...t)}finally{i()}};default:return et.get(e,t,r)}}})}}let ed="__prerender_bypass";Symbol("__next_preview_data"),Symbol(ed);class eu{constructor(e,t,r,n){var a;let i=e&&function(e,t){let r=en.from(e.headers);return{isOnDemandRevalidate:r.get("x-prerender-revalidate")===t.previewModeId,revalidateOnlyGenerated:r.has("x-prerender-revalidate-if-generated")}}(t,e).isOnDemandRevalidate,s=null==(a=r.get(ed))?void 0:a.value;this.isEnabled=!!(!i&&s&&e&&s===e.previewModeId),this._previewModeId=null==e?void 0:e.previewModeId,this._mutableCookies=n}enable(){if(!this._previewModeId)throw Error("Invariant: previewProps missing previewModeId this should never happen");this._mutableCookies.set({name:ed,value:this._previewModeId,httpOnly:!0,sameSite:"none",secure:!0,path:"/"})}disable(){this._mutableCookies.set({name:ed,value:"",httpOnly:!0,sameSite:"none",secure:!0,path:"/",expires:new Date(0)})}}let el={wrap(e,{req:t,res:r,renderOpts:n},a){let i;function s(e){r&&r.setHeader("Set-Cookie",e)}n&&"previewProps"in n&&(i=n.previewProps);let o={},d={get headers(){return o.headers||(o.headers=function(e){let t=en.from(e);for(let e of Z)t.delete(e.toString().toLowerCase());return en.seal(t)}(t.headers)),o.headers},get cookies(){return o.cookies||(o.cookies=function(e){let t=new U.RequestCookies(en.from(e));return ei.seal(t)}(t.headers)),o.cookies},get mutableCookies(){return o.mutableCookies||(o.mutableCookies=function(e,t){let r=new U.RequestCookies(en.from(e));return eo.wrap(r,t)}(t.headers,(null==n?void 0:n.onUpdateCookies)||(r?s:void 0))),o.mutableCookies},get draftMode(){return o.draftMode||(o.draftMode=new eu(i,t,this.cookies,this.mutableCookies)),o.draftMode}};return e.run(d,a,d)}},ec=Error("Invariant: AsyncLocalStorage accessed in runtime where it is not available");class e_{disable(){throw ec}getStore(){}run(){throw ec}exit(){throw ec}enterWith(){throw ec}}let ep=globalThis.AsyncLocalStorage,eg=ep?new ep:new e_;!function(e){e.handleRequest="BaseServer.handleRequest",e.run="BaseServer.run",e.pipe="BaseServer.pipe",e.getStaticHTML="BaseServer.getStaticHTML",e.render="BaseServer.render",e.renderToResponseWithComponents="BaseServer.renderToResponseWithComponents",e.renderToResponse="BaseServer.renderToResponse",e.renderToHTML="BaseServer.renderToHTML",e.renderError="BaseServer.renderError",e.renderErrorToResponse="BaseServer.renderErrorToResponse",e.renderErrorToHTML="BaseServer.renderErrorToHTML",e.render404="BaseServer.render404"}(a||(a={})),function(e){e.loadDefaultErrorComponents="LoadComponents.loadDefaultErrorComponents",e.loadComponents="LoadComponents.loadComponents"}(i||(i={})),function(e){e.getRequestHandler="NextServer.getRequestHandler",e.getServer="NextServer.getServer",e.getServerRequestHandler="NextServer.getServerRequestHandler",e.createServer="createServer.createServer"}(s||(s={})),function(e){e.compression="NextNodeServer.compression",e.getBuildId="NextNodeServer.getBuildId",e.getLayoutOrPageModule="NextNodeServer.getLayoutOrPageModule",e.generateStaticRoutes="NextNodeServer.generateStaticRoutes",e.generateFsStaticRoutes="NextNodeServer.generateFsStaticRoutes",e.generatePublicRoutes="NextNodeServer.generatePublicRoutes",e.generateImageRoutes="NextNodeServer.generateImageRoutes.route",e.sendRenderResult="NextNodeServer.sendRenderResult",e.proxyRequest="NextNodeServer.proxyRequest",e.runApi="NextNodeServer.runApi",e.render="NextNodeServer.render",e.renderHTML="NextNodeServer.renderHTML",e.imageOptimizer="NextNodeServer.imageOptimizer",e.getPagePath="NextNodeServer.getPagePath",e.getRoutesManifest="NextNodeServer.getRoutesManifest",e.findPageComponents="NextNodeServer.findPageComponents",e.getFontManifest="NextNodeServer.getFontManifest",e.getServerComponentManifest="NextNodeServer.getServerComponentManifest",e.getRequestHandler="NextNodeServer.getRequestHandler",e.renderToHTML="NextNodeServer.renderToHTML",e.renderError="NextNodeServer.renderError",e.renderErrorToHTML="NextNodeServer.renderErrorToHTML",e.render404="NextNodeServer.render404",e.route="route",e.onProxyReq="onProxyReq",e.apiResolver="apiResolver",e.internalFetch="internalFetch"}(o||(o={})),(d||(d={})).startServer="startServer.startServer",function(e){e.getServerSideProps="Render.getServerSideProps",e.getStaticProps="Render.getStaticProps",e.renderToString="Render.renderToString",e.renderDocument="Render.renderDocument",e.createBodyResult="Render.createBodyResult"}(u||(u={})),function(e){e.renderToString="AppRender.renderToString",e.renderToReadableStream="AppRender.renderToReadableStream",e.getBodyResult="AppRender.getBodyResult",e.fetch="AppRender.fetch"}(l||(l={})),(c||(c={})).executeRoute="Router.executeRoute",(_||(_={})).runHandler="Node.runHandler",(p||(p={})).runHandler="AppRouteRouteHandlers.runHandler",function(e){e.generateMetadata="ResolveMetadata.generateMetadata",e.generateViewport="ResolveMetadata.generateViewport"}(g||(g={}));let eh=["BaseServer.handleRequest","Render.getServerSideProps","Render.getStaticProps","AppRender.fetch","AppRender.getBodyResult","Render.renderDocument","Node.runHandler","AppRouteRouteHandlers.runHandler","ResolveMetadata.generateMetadata","ResolveMetadata.generateViewport","NextNodeServer.findPageComponents","NextNodeServer.getLayoutOrPageModule"],{context:ef,propagation:ew,trace:ey,SpanStatusCode:em,SpanKind:eb,ROOT_CONTEXT:ev}=n=r(38),eS=e=>null!==e&&"object"==typeof e&&"function"==typeof e.then,ex=(e,t)=>{(null==t?void 0:t.bubble)===!0?e.setAttribute("next.bubble",!0):(t&&e.recordException(t),e.setStatus({code:em.ERROR,message:null==t?void 0:t.message})),e.end()},eC=new Map,eT=n.createContextKey("next.rootSpanId"),eM=0,eP=()=>eM++;class eO{getTracerInstance(){return ey.getTracer("next.js","0.0.1")}getContext(){return ef}getActiveScopeSpan(){return ey.getSpan(null==ef?void 0:ef.active())}withPropagatedContext(e,t,r){let n=ef.active();if(ey.getSpanContext(n))return t();let a=ew.extract(n,e,r);return ef.with(a,t)}trace(...e){var t;let[r,n,a]=e,{fn:i,options:s}="function"==typeof n?{fn:n,options:{}}:{fn:a,options:{...n}};if(!eh.includes(r)&&"1"!==process.env.NEXT_OTEL_VERBOSE||s.hideSpan)return i();let o=s.spanName??r,d=this.getSpanContext((null==s?void 0:s.parentSpan)??this.getActiveScopeSpan()),u=!1;d?(null==(t=ey.getSpanContext(d))?void 0:t.isRemote)&&(u=!0):(d=ev,u=!0);let l=eP();return s.attributes={"next.span_name":o,"next.span_type":r,...s.attributes},ef.with(d.setValue(eT,l),()=>this.getTracerInstance().startActiveSpan(o,s,e=>{let t=()=>{eC.delete(l)};u&&eC.set(l,new Map(Object.entries(s.attributes??{})));try{if(i.length>1)return i(e,t=>ex(e,t));let r=i(e);if(eS(r))return r.then(t=>(e.end(),t)).catch(t=>{throw ex(e,t),t}).finally(t);return e.end(),t(),r}catch(r){throw ex(e,r),t(),r}}))}wrap(...e){let t=this,[r,n,a]=3===e.length?e:[e[0],{},e[1]];return eh.includes(r)||"1"===process.env.NEXT_OTEL_VERBOSE?function(){let e=n;"function"==typeof e&&"function"==typeof a&&(e=e.apply(this,arguments));let i=arguments.length-1,s=arguments[i];if("function"!=typeof s)return t.trace(r,e,()=>a.apply(this,arguments));{let n=t.getContext().bind(ef.active(),s);return t.trace(r,e,(e,t)=>(arguments[i]=function(e){return null==t||t(e),n.apply(this,arguments)},a.apply(this,arguments)))}}:a}startSpan(...e){let[t,r]=e,n=this.getSpanContext((null==r?void 0:r.parentSpan)??this.getActiveScopeSpan());return this.getTracerInstance().startSpan(t,r,n)}getSpanContext(e){return e?ey.setSpan(ef.active(),e):void 0}getRootSpanAttributes(){let e=ef.active().getValue(eT);return eC.get(e)}}let eR=(()=>{let e=new eO;return()=>e})();class eN extends H{constructor(e){super(e.input,e.init),this.sourcePage=e.page}get request(){throw new v({page:this.sourcePage})}respondWith(){throw new v({page:this.sourcePage})}waitUntil(){throw new v({page:this.sourcePage})}}let eE={keys:e=>Array.from(e.keys()),get:(e,t)=>e.get(t)??void 0},eL=(e,t)=>eR().withPropagatedContext(e.headers,t,eE),eA=!1;async function eI(e){let t,n;!function(){if(!eA&&(eA=!0,"true"===process.env.NEXT_PRIVATE_TEST_PROXY)){let{interceptTestApis:e,wrapRequestHandler:t}=r(895);e(),eL=t(eL)}}(),await m();let a=void 0!==self.__BUILD_MANIFEST,i="string"==typeof self.__PRERENDER_MANIFEST?JSON.parse(self.__PRERENDER_MANIFEST):void 0;e.request.url=e.request.url.replace(/\.rsc($|\?)/,"$1");let s=new j(e.request.url,{headers:e.request.headers,nextConfig:e.request.nextConfig});for(let e of[...s.searchParams.keys()]){let t=s.searchParams.getAll(e);if(e!==Q&&e.startsWith(Q)){let r=e.substring(Q.length);for(let e of(s.searchParams.delete(r),t))s.searchParams.append(r,e);s.searchParams.delete(e)}}let o=s.buildId;s.buildId="";let d=e.request.headers["x-nextjs-data"];d&&"/index"===s.pathname&&(s.pathname="/");let u=function(e){let t=new Headers;for(let[r,n]of Object.entries(e))for(let e of Array.isArray(n)?n:[n])void 0!==e&&("number"==typeof e&&(e=e.toString()),t.append(r,e));return t}(e.request.headers),l=new Map;if(!a)for(let e of Z){let t=e.toString().toLowerCase();u.get(t)&&(l.set(t,u.get(t)),u.delete(t))}let c=new eN({page:e.page,input:(function(e,t){let r="string"==typeof e,n=r?new URL(e):e;for(let e of J)n.searchParams.delete(e);if(t)for(let e of X)n.searchParams.delete(e);return r?n.toString():n})(s,!0).toString(),init:{body:e.request.body,geo:e.request.geo,headers:u,ip:e.request.ip,method:e.request.method,nextConfig:e.request.nextConfig,signal:e.request.signal}});d&&Object.defineProperty(c,"__isData",{enumerable:!1,value:!0}),!globalThis.__incrementalCache&&e.IncrementalCache&&(globalThis.__incrementalCache=new e.IncrementalCache({appDir:!0,fetchCache:!0,minimalMode:!0,fetchCacheKeyPrefix:void 0,dev:!1,requestHeaders:e.request.headers,requestProtocol:"https",getPrerenderManifest:()=>({version:-1,routes:{},dynamicRoutes:{},notFoundRoutes:[],preview:{previewModeId:"development-id"}})}));let _=new N({request:c,page:e.page});if((t=await eL(c,()=>"/middleware"===e.page||"/src/middleware"===e.page?el.wrap(eg,{req:c,renderOpts:{onUpdateCookies:e=>{n=e},previewProps:(null==i?void 0:i.preview)||{previewModeId:"development-id",previewModeEncryptionKey:"",previewModeSigningKey:""}}},()=>e.handler(c,_)):e.handler(c,_)))&&!(t instanceof Response))throw TypeError("Expected an instance of Response to be returned");t&&n&&t.headers.set("set-cookie",n);let p=null==t?void 0:t.headers.get("x-middleware-rewrite");if(t&&p){let r=new j(p,{forceLocale:!0,headers:e.request.headers,nextConfig:e.request.nextConfig});r.host===c.nextUrl.host&&(r.buildId=o||r.buildId,t.headers.set("x-middleware-rewrite",String(r)));let n=W(String(r),String(s));d&&t.headers.set("x-nextjs-rewrite",n)}let g=null==t?void 0:t.headers.get("Location");if(t&&g&&!a){let r=new j(g,{forceLocale:!1,headers:e.request.headers,nextConfig:e.request.nextConfig});t=new Response(t.body,t),r.host===c.nextUrl.host&&(r.buildId=o||r.buildId,t.headers.set("Location",String(r))),d&&(t.headers.delete("Location"),t.headers.set("x-nextjs-redirect",W(String(r),String(s))))}let h=t||z.next(),f=h.headers.get("x-middleware-override-headers"),w=[];if(f){for(let[e,t]of l)h.headers.set(`x-middleware-request-${e}`,t),w.push(e);w.length>0&&h.headers.set("x-middleware-override-headers",f+","+w.join(","))}return{response:h,waitUntil:Promise.all(_[O]),fetchMetrics:c.fetchMetrics}}r(254),"undefined"==typeof URLPattern||URLPattern;let ek={defaultLocale:"en",locales:["en"]};function eD(e,t,r){if(r||2==arguments.length)for(var n,a=0,i=t.length;a<i;a++)!n&&a in t||(n||(n=Array.prototype.slice.call(t,0,a)),n[a]=t[a]);return e.concat(n||Array.prototype.slice.call(t))}Object.create,Object.create;var eq={supplemental:{languageMatching:{"written-new":[{paradigmLocales:{_locales:"en en_GB es es_419 pt_BR pt_PT"}},{$enUS:{_value:"AS+CA+GU+MH+MP+PH+PR+UM+US+VI"}},{$cnsar:{_value:"HK+MO"}},{$americas:{_value:"019"}},{$maghreb:{_value:"MA+DZ+TN+LY+MR+EH"}},{no:{_desired:"nb",_distance:"1"}},{bs:{_desired:"hr",_distance:"4"}},{bs:{_desired:"sh",_distance:"4"}},{hr:{_desired:"sh",_distance:"4"}},{sr:{_desired:"sh",_distance:"4"}},{aa:{_desired:"ssy",_distance:"4"}},{de:{_desired:"gsw",_distance:"4",_oneway:"true"}},{de:{_desired:"lb",_distance:"4",_oneway:"true"}},{no:{_desired:"da",_distance:"8"}},{nb:{_desired:"da",_distance:"8"}},{ru:{_desired:"ab",_distance:"30",_oneway:"true"}},{en:{_desired:"ach",_distance:"30",_oneway:"true"}},{nl:{_desired:"af",_distance:"20",_oneway:"true"}},{en:{_desired:"ak",_distance:"30",_oneway:"true"}},{en:{_desired:"am",_distance:"30",_oneway:"true"}},{es:{_desired:"ay",_distance:"20",_oneway:"true"}},{ru:{_desired:"az",_distance:"30",_oneway:"true"}},{ur:{_desired:"bal",_distance:"20",_oneway:"true"}},{ru:{_desired:"be",_distance:"20",_oneway:"true"}},{en:{_desired:"bem",_distance:"30",_oneway:"true"}},{hi:{_desired:"bh",_distance:"30",_oneway:"true"}},{en:{_desired:"bn",_distance:"30",_oneway:"true"}},{zh:{_desired:"bo",_distance:"20",_oneway:"true"}},{fr:{_desired:"br",_distance:"20",_oneway:"true"}},{es:{_desired:"ca",_distance:"20",_oneway:"true"}},{fil:{_desired:"ceb",_distance:"30",_oneway:"true"}},{en:{_desired:"chr",_distance:"20",_oneway:"true"}},{ar:{_desired:"ckb",_distance:"30",_oneway:"true"}},{fr:{_desired:"co",_distance:"20",_oneway:"true"}},{fr:{_desired:"crs",_distance:"20",_oneway:"true"}},{sk:{_desired:"cs",_distance:"20"}},{en:{_desired:"cy",_distance:"20",_oneway:"true"}},{en:{_desired:"ee",_distance:"30",_oneway:"true"}},{en:{_desired:"eo",_distance:"30",_oneway:"true"}},{es:{_desired:"eu",_distance:"20",_oneway:"true"}},{da:{_desired:"fo",_distance:"20",_oneway:"true"}},{nl:{_desired:"fy",_distance:"20",_oneway:"true"}},{en:{_desired:"ga",_distance:"20",_oneway:"true"}},{en:{_desired:"gaa",_distance:"30",_oneway:"true"}},{en:{_desired:"gd",_distance:"20",_oneway:"true"}},{es:{_desired:"gl",_distance:"20",_oneway:"true"}},{es:{_desired:"gn",_distance:"20",_oneway:"true"}},{hi:{_desired:"gu",_distance:"30",_oneway:"true"}},{en:{_desired:"ha",_distance:"30",_oneway:"true"}},{en:{_desired:"haw",_distance:"20",_oneway:"true"}},{fr:{_desired:"ht",_distance:"20",_oneway:"true"}},{ru:{_desired:"hy",_distance:"30",_oneway:"true"}},{en:{_desired:"ia",_distance:"30",_oneway:"true"}},{en:{_desired:"ig",_distance:"30",_oneway:"true"}},{en:{_desired:"is",_distance:"20",_oneway:"true"}},{id:{_desired:"jv",_distance:"20",_oneway:"true"}},{en:{_desired:"ka",_distance:"30",_oneway:"true"}},{fr:{_desired:"kg",_distance:"30",_oneway:"true"}},{ru:{_desired:"kk",_distance:"30",_oneway:"true"}},{en:{_desired:"km",_distance:"30",_oneway:"true"}},{en:{_desired:"kn",_distance:"30",_oneway:"true"}},{en:{_desired:"kri",_distance:"30",_oneway:"true"}},{tr:{_desired:"ku",_distance:"30",_oneway:"true"}},{ru:{_desired:"ky",_distance:"30",_oneway:"true"}},{it:{_desired:"la",_distance:"20",_oneway:"true"}},{en:{_desired:"lg",_distance:"30",_oneway:"true"}},{fr:{_desired:"ln",_distance:"30",_oneway:"true"}},{en:{_desired:"lo",_distance:"30",_oneway:"true"}},{en:{_desired:"loz",_distance:"30",_oneway:"true"}},{fr:{_desired:"lua",_distance:"30",_oneway:"true"}},{hi:{_desired:"mai",_distance:"20",_oneway:"true"}},{en:{_desired:"mfe",_distance:"30",_oneway:"true"}},{fr:{_desired:"mg",_distance:"30",_oneway:"true"}},{en:{_desired:"mi",_distance:"20",_oneway:"true"}},{en:{_desired:"ml",_distance:"30",_oneway:"true"}},{ru:{_desired:"mn",_distance:"30",_oneway:"true"}},{hi:{_desired:"mr",_distance:"30",_oneway:"true"}},{id:{_desired:"ms",_distance:"30",_oneway:"true"}},{en:{_desired:"mt",_distance:"30",_oneway:"true"}},{en:{_desired:"my",_distance:"30",_oneway:"true"}},{en:{_desired:"ne",_distance:"30",_oneway:"true"}},{nb:{_desired:"nn",_distance:"20"}},{no:{_desired:"nn",_distance:"20"}},{en:{_desired:"nso",_distance:"30",_oneway:"true"}},{en:{_desired:"ny",_distance:"30",_oneway:"true"}},{en:{_desired:"nyn",_distance:"30",_oneway:"true"}},{fr:{_desired:"oc",_distance:"20",_oneway:"true"}},{en:{_desired:"om",_distance:"30",_oneway:"true"}},{en:{_desired:"or",_distance:"30",_oneway:"true"}},{en:{_desired:"pa",_distance:"30",_oneway:"true"}},{en:{_desired:"pcm",_distance:"20",_oneway:"true"}},{en:{_desired:"ps",_distance:"30",_oneway:"true"}},{es:{_desired:"qu",_distance:"30",_oneway:"true"}},{de:{_desired:"rm",_distance:"20",_oneway:"true"}},{en:{_desired:"rn",_distance:"30",_oneway:"true"}},{fr:{_desired:"rw",_distance:"30",_oneway:"true"}},{hi:{_desired:"sa",_distance:"30",_oneway:"true"}},{en:{_desired:"sd",_distance:"30",_oneway:"true"}},{en:{_desired:"si",_distance:"30",_oneway:"true"}},{en:{_desired:"sn",_distance:"30",_oneway:"true"}},{en:{_desired:"so",_distance:"30",_oneway:"true"}},{en:{_desired:"sq",_distance:"30",_oneway:"true"}},{en:{_desired:"st",_distance:"30",_oneway:"true"}},{id:{_desired:"su",_distance:"20",_oneway:"true"}},{en:{_desired:"sw",_distance:"30",_oneway:"true"}},{en:{_desired:"ta",_distance:"30",_oneway:"true"}},{en:{_desired:"te",_distance:"30",_oneway:"true"}},{ru:{_desired:"tg",_distance:"30",_oneway:"true"}},{en:{_desired:"ti",_distance:"30",_oneway:"true"}},{ru:{_desired:"tk",_distance:"30",_oneway:"true"}},{en:{_desired:"tlh",_distance:"30",_oneway:"true"}},{en:{_desired:"tn",_distance:"30",_oneway:"true"}},{en:{_desired:"to",_distance:"30",_oneway:"true"}},{ru:{_desired:"tt",_distance:"30",_oneway:"true"}},{en:{_desired:"tum",_distance:"30",_oneway:"true"}},{zh:{_desired:"ug",_distance:"20",_oneway:"true"}},{ru:{_desired:"uk",_distance:"20",_oneway:"true"}},{en:{_desired:"ur",_distance:"30",_oneway:"true"}},{ru:{_desired:"uz",_distance:"30",_oneway:"true"}},{fr:{_desired:"wo",_distance:"30",_oneway:"true"}},{en:{_desired:"xh",_distance:"30",_oneway:"true"}},{en:{_desired:"yi",_distance:"30",_oneway:"true"}},{en:{_desired:"yo",_distance:"30",_oneway:"true"}},{zh:{_desired:"za",_distance:"20",_oneway:"true"}},{en:{_desired:"zu",_distance:"30",_oneway:"true"}},{ar:{_desired:"aao",_distance:"10",_oneway:"true"}},{ar:{_desired:"abh",_distance:"10",_oneway:"true"}},{ar:{_desired:"abv",_distance:"10",_oneway:"true"}},{ar:{_desired:"acm",_distance:"10",_oneway:"true"}},{ar:{_desired:"acq",_distance:"10",_oneway:"true"}},{ar:{_desired:"acw",_distance:"10",_oneway:"true"}},{ar:{_desired:"acx",_distance:"10",_oneway:"true"}},{ar:{_desired:"acy",_distance:"10",_oneway:"true"}},{ar:{_desired:"adf",_distance:"10",_oneway:"true"}},{ar:{_desired:"aeb",_distance:"10",_oneway:"true"}},{ar:{_desired:"aec",_distance:"10",_oneway:"true"}},{ar:{_desired:"afb",_distance:"10",_oneway:"true"}},{ar:{_desired:"ajp",_distance:"10",_oneway:"true"}},{ar:{_desired:"apc",_distance:"10",_oneway:"true"}},{ar:{_desired:"apd",_distance:"10",_oneway:"true"}},{ar:{_desired:"arq",_distance:"10",_oneway:"true"}},{ar:{_desired:"ars",_distance:"10",_oneway:"true"}},{ar:{_desired:"ary",_distance:"10",_oneway:"true"}},{ar:{_desired:"arz",_distance:"10",_oneway:"true"}},{ar:{_desired:"auz",_distance:"10",_oneway:"true"}},{ar:{_desired:"avl",_distance:"10",_oneway:"true"}},{ar:{_desired:"ayh",_distance:"10",_oneway:"true"}},{ar:{_desired:"ayl",_distance:"10",_oneway:"true"}},{ar:{_desired:"ayn",_distance:"10",_oneway:"true"}},{ar:{_desired:"ayp",_distance:"10",_oneway:"true"}},{ar:{_desired:"bbz",_distance:"10",_oneway:"true"}},{ar:{_desired:"pga",_distance:"10",_oneway:"true"}},{ar:{_desired:"shu",_distance:"10",_oneway:"true"}},{ar:{_desired:"ssh",_distance:"10",_oneway:"true"}},{az:{_desired:"azb",_distance:"10",_oneway:"true"}},{et:{_desired:"vro",_distance:"10",_oneway:"true"}},{ff:{_desired:"ffm",_distance:"10",_oneway:"true"}},{ff:{_desired:"fub",_distance:"10",_oneway:"true"}},{ff:{_desired:"fue",_distance:"10",_oneway:"true"}},{ff:{_desired:"fuf",_distance:"10",_oneway:"true"}},{ff:{_desired:"fuh",_distance:"10",_oneway:"true"}},{ff:{_desired:"fui",_distance:"10",_oneway:"true"}},{ff:{_desired:"fuq",_distance:"10",_oneway:"true"}},{ff:{_desired:"fuv",_distance:"10",_oneway:"true"}},{gn:{_desired:"gnw",_distance:"10",_oneway:"true"}},{gn:{_desired:"gui",_distance:"10",_oneway:"true"}},{gn:{_desired:"gun",_distance:"10",_oneway:"true"}},{gn:{_desired:"nhd",_distance:"10",_oneway:"true"}},{iu:{_desired:"ikt",_distance:"10",_oneway:"true"}},{kln:{_desired:"enb",_distance:"10",_oneway:"true"}},{kln:{_desired:"eyo",_distance:"10",_oneway:"true"}},{kln:{_desired:"niq",_distance:"10",_oneway:"true"}},{kln:{_desired:"oki",_distance:"10",_oneway:"true"}},{kln:{_desired:"pko",_distance:"10",_oneway:"true"}},{kln:{_desired:"sgc",_distance:"10",_oneway:"true"}},{kln:{_desired:"tec",_distance:"10",_oneway:"true"}},{kln:{_desired:"tuy",_distance:"10",_oneway:"true"}},{kok:{_desired:"gom",_distance:"10",_oneway:"true"}},{kpe:{_desired:"gkp",_distance:"10",_oneway:"true"}},{luy:{_desired:"ida",_distance:"10",_oneway:"true"}},{luy:{_desired:"lkb",_distance:"10",_oneway:"true"}},{luy:{_desired:"lko",_distance:"10",_oneway:"true"}},{luy:{_desired:"lks",_distance:"10",_oneway:"true"}},{luy:{_desired:"lri",_distance:"10",_oneway:"true"}},{luy:{_desired:"lrm",_distance:"10",_oneway:"true"}},{luy:{_desired:"lsm",_distance:"10",_oneway:"true"}},{luy:{_desired:"lto",_distance:"10",_oneway:"true"}},{luy:{_desired:"lts",_distance:"10",_oneway:"true"}},{luy:{_desired:"lwg",_distance:"10",_oneway:"true"}},{luy:{_desired:"nle",_distance:"10",_oneway:"true"}},{luy:{_desired:"nyd",_distance:"10",_oneway:"true"}},{luy:{_desired:"rag",_distance:"10",_oneway:"true"}},{lv:{_desired:"ltg",_distance:"10",_oneway:"true"}},{mg:{_desired:"bhr",_distance:"10",_oneway:"true"}},{mg:{_desired:"bjq",_distance:"10",_oneway:"true"}},{mg:{_desired:"bmm",_distance:"10",_oneway:"true"}},{mg:{_desired:"bzc",_distance:"10",_oneway:"true"}},{mg:{_desired:"msh",_distance:"10",_oneway:"true"}},{mg:{_desired:"skg",_distance:"10",_oneway:"true"}},{mg:{_desired:"tdx",_distance:"10",_oneway:"true"}},{mg:{_desired:"tkg",_distance:"10",_oneway:"true"}},{mg:{_desired:"txy",_distance:"10",_oneway:"true"}},{mg:{_desired:"xmv",_distance:"10",_oneway:"true"}},{mg:{_desired:"xmw",_distance:"10",_oneway:"true"}},{mn:{_desired:"mvf",_distance:"10",_oneway:"true"}},{ms:{_desired:"bjn",_distance:"10",_oneway:"true"}},{ms:{_desired:"btj",_distance:"10",_oneway:"true"}},{ms:{_desired:"bve",_distance:"10",_oneway:"true"}},{ms:{_desired:"bvu",_distance:"10",_oneway:"true"}},{ms:{_desired:"coa",_distance:"10",_oneway:"true"}},{ms:{_desired:"dup",_distance:"10",_oneway:"true"}},{ms:{_desired:"hji",_distance:"10",_oneway:"true"}},{ms:{_desired:"id",_distance:"10",_oneway:"true"}},{ms:{_desired:"jak",_distance:"10",_oneway:"true"}},{ms:{_desired:"jax",_distance:"10",_oneway:"true"}},{ms:{_desired:"kvb",_distance:"10",_oneway:"true"}},{ms:{_desired:"kvr",_distance:"10",_oneway:"true"}},{ms:{_desired:"kxd",_distance:"10",_oneway:"true"}},{ms:{_desired:"lce",_distance:"10",_oneway:"true"}},{ms:{_desired:"lcf",_distance:"10",_oneway:"true"}},{ms:{_desired:"liw",_distance:"10",_oneway:"true"}},{ms:{_desired:"max",_distance:"10",_oneway:"true"}},{ms:{_desired:"meo",_distance:"10",_oneway:"true"}},{ms:{_desired:"mfa",_distance:"10",_oneway:"true"}},{ms:{_desired:"mfb",_distance:"10",_oneway:"true"}},{ms:{_desired:"min",_distance:"10",_oneway:"true"}},{ms:{_desired:"mqg",_distance:"10",_oneway:"true"}},{ms:{_desired:"msi",_distance:"10",_oneway:"true"}},{ms:{_desired:"mui",_distance:"10",_oneway:"true"}},{ms:{_desired:"orn",_distance:"10",_oneway:"true"}},{ms:{_desired:"ors",_distance:"10",_oneway:"true"}},{ms:{_desired:"pel",_distance:"10",_oneway:"true"}},{ms:{_desired:"pse",_distance:"10",_oneway:"true"}},{ms:{_desired:"tmw",_distance:"10",_oneway:"true"}},{ms:{_desired:"urk",_distance:"10",_oneway:"true"}},{ms:{_desired:"vkk",_distance:"10",_oneway:"true"}},{ms:{_desired:"vkt",_distance:"10",_oneway:"true"}},{ms:{_desired:"xmm",_distance:"10",_oneway:"true"}},{ms:{_desired:"zlm",_distance:"10",_oneway:"true"}},{ms:{_desired:"zmi",_distance:"10",_oneway:"true"}},{ne:{_desired:"dty",_distance:"10",_oneway:"true"}},{om:{_desired:"gax",_distance:"10",_oneway:"true"}},{om:{_desired:"hae",_distance:"10",_oneway:"true"}},{om:{_desired:"orc",_distance:"10",_oneway:"true"}},{or:{_desired:"spv",_distance:"10",_oneway:"true"}},{ps:{_desired:"pbt",_distance:"10",_oneway:"true"}},{ps:{_desired:"pst",_distance:"10",_oneway:"true"}},{qu:{_desired:"qub",_distance:"10",_oneway:"true"}},{qu:{_desired:"qud",_distance:"10",_oneway:"true"}},{qu:{_desired:"quf",_distance:"10",_oneway:"true"}},{qu:{_desired:"qug",_distance:"10",_oneway:"true"}},{qu:{_desired:"quh",_distance:"10",_oneway:"true"}},{qu:{_desired:"quk",_distance:"10",_oneway:"true"}},{qu:{_desired:"qul",_distance:"10",_oneway:"true"}},{qu:{_desired:"qup",_distance:"10",_oneway:"true"}},{qu:{_desired:"qur",_distance:"10",_oneway:"true"}},{qu:{_desired:"qus",_distance:"10",_oneway:"true"}},{qu:{_desired:"quw",_distance:"10",_oneway:"true"}},{qu:{_desired:"qux",_distance:"10",_oneway:"true"}},{qu:{_desired:"quy",_distance:"10",_oneway:"true"}},{qu:{_desired:"qva",_distance:"10",_oneway:"true"}},{qu:{_desired:"qvc",_distance:"10",_oneway:"true"}},{qu:{_desired:"qve",_distance:"10",_oneway:"true"}},{qu:{_desired:"qvh",_distance:"10",_oneway:"true"}},{qu:{_desired:"qvi",_distance:"10",_oneway:"true"}},{qu:{_desired:"qvj",_distance:"10",_oneway:"true"}},{qu:{_desired:"qvl",_distance:"10",_oneway:"true"}},{qu:{_desired:"qvm",_distance:"10",_oneway:"true"}},{qu:{_desired:"qvn",_distance:"10",_oneway:"true"}},{qu:{_desired:"qvo",_distance:"10",_oneway:"true"}},{qu:{_desired:"qvp",_distance:"10",_oneway:"true"}},{qu:{_desired:"qvs",_distance:"10",_oneway:"true"}},{qu:{_desired:"qvw",_distance:"10",_oneway:"true"}},{qu:{_desired:"qvz",_distance:"10",_oneway:"true"}},{qu:{_desired:"qwa",_distance:"10",_oneway:"true"}},{qu:{_desired:"qwc",_distance:"10",_oneway:"true"}},{qu:{_desired:"qwh",_distance:"10",_oneway:"true"}},{qu:{_desired:"qws",_distance:"10",_oneway:"true"}},{qu:{_desired:"qxa",_distance:"10",_oneway:"true"}},{qu:{_desired:"qxc",_distance:"10",_oneway:"true"}},{qu:{_desired:"qxh",_distance:"10",_oneway:"true"}},{qu:{_desired:"qxl",_distance:"10",_oneway:"true"}},{qu:{_desired:"qxn",_distance:"10",_oneway:"true"}},{qu:{_desired:"qxo",_distance:"10",_oneway:"true"}},{qu:{_desired:"qxp",_distance:"10",_oneway:"true"}},{qu:{_desired:"qxr",_distance:"10",_oneway:"true"}},{qu:{_desired:"qxt",_distance:"10",_oneway:"true"}},{qu:{_desired:"qxu",_distance:"10",_oneway:"true"}},{qu:{_desired:"qxw",_distance:"10",_oneway:"true"}},{sc:{_desired:"sdc",_distance:"10",_oneway:"true"}},{sc:{_desired:"sdn",_distance:"10",_oneway:"true"}},{sc:{_desired:"sro",_distance:"10",_oneway:"true"}},{sq:{_desired:"aae",_distance:"10",_oneway:"true"}},{sq:{_desired:"aat",_distance:"10",_oneway:"true"}},{sq:{_desired:"aln",_distance:"10",_oneway:"true"}},{syr:{_desired:"aii",_distance:"10",_oneway:"true"}},{uz:{_desired:"uzs",_distance:"10",_oneway:"true"}},{yi:{_desired:"yih",_distance:"10",_oneway:"true"}},{zh:{_desired:"cdo",_distance:"10",_oneway:"true"}},{zh:{_desired:"cjy",_distance:"10",_oneway:"true"}},{zh:{_desired:"cpx",_distance:"10",_oneway:"true"}},{zh:{_desired:"czh",_distance:"10",_oneway:"true"}},{zh:{_desired:"czo",_distance:"10",_oneway:"true"}},{zh:{_desired:"gan",_distance:"10",_oneway:"true"}},{zh:{_desired:"hak",_distance:"10",_oneway:"true"}},{zh:{_desired:"hsn",_distance:"10",_oneway:"true"}},{zh:{_desired:"lzh",_distance:"10",_oneway:"true"}},{zh:{_desired:"mnp",_distance:"10",_oneway:"true"}},{zh:{_desired:"nan",_distance:"10",_oneway:"true"}},{zh:{_desired:"wuu",_distance:"10",_oneway:"true"}},{zh:{_desired:"yue",_distance:"10",_oneway:"true"}},{"*":{_desired:"*",_distance:"80"}},{"en-Latn":{_desired:"am-Ethi",_distance:"10",_oneway:"true"}},{"ru-Cyrl":{_desired:"az-Latn",_distance:"10",_oneway:"true"}},{"en-Latn":{_desired:"bn-Beng",_distance:"10",_oneway:"true"}},{"zh-Hans":{_desired:"bo-Tibt",_distance:"10",_oneway:"true"}},{"ru-Cyrl":{_desired:"hy-Armn",_distance:"10",_oneway:"true"}},{"en-Latn":{_desired:"ka-Geor",_distance:"10",_oneway:"true"}},{"en-Latn":{_desired:"km-Khmr",_distance:"10",_oneway:"true"}},{"en-Latn":{_desired:"kn-Knda",_distance:"10",_oneway:"true"}},{"en-Latn":{_desired:"lo-Laoo",_distance:"10",_oneway:"true"}},{"en-Latn":{_desired:"ml-Mlym",_distance:"10",_oneway:"true"}},{"en-Latn":{_desired:"my-Mymr",_distance:"10",_oneway:"true"}},{"en-Latn":{_desired:"ne-Deva",_distance:"10",_oneway:"true"}},{"en-Latn":{_desired:"or-Orya",_distance:"10",_oneway:"true"}},{"en-Latn":{_desired:"pa-Guru",_distance:"10",_oneway:"true"}},{"en-Latn":{_desired:"ps-Arab",_distance:"10",_oneway:"true"}},{"en-Latn":{_desired:"sd-Arab",_distance:"10",_oneway:"true"}},{"en-Latn":{_desired:"si-Sinh",_distance:"10",_oneway:"true"}},{"en-Latn":{_desired:"ta-Taml",_distance:"10",_oneway:"true"}},{"en-Latn":{_desired:"te-Telu",_distance:"10",_oneway:"true"}},{"en-Latn":{_desired:"ti-Ethi",_distance:"10",_oneway:"true"}},{"ru-Cyrl":{_desired:"tk-Latn",_distance:"10",_oneway:"true"}},{"en-Latn":{_desired:"ur-Arab",_distance:"10",_oneway:"true"}},{"ru-Cyrl":{_desired:"uz-Latn",_distance:"10",_oneway:"true"}},{"en-Latn":{_desired:"yi-Hebr",_distance:"10",_oneway:"true"}},{"sr-Cyrl":{_desired:"sr-Latn",_distance:"5"}},{"zh-Hans":{_desired:"za-Latn",_distance:"10",_oneway:"true"}},{"zh-Hans":{_desired:"zh-Hani",_distance:"20",_oneway:"true"}},{"zh-Hant":{_desired:"zh-Hani",_distance:"20",_oneway:"true"}},{"ar-Arab":{_desired:"ar-Latn",_distance:"20",_oneway:"true"}},{"bn-Beng":{_desired:"bn-Latn",_distance:"20",_oneway:"true"}},{"gu-Gujr":{_desired:"gu-Latn",_distance:"20",_oneway:"true"}},{"hi-Deva":{_desired:"hi-Latn",_distance:"20",_oneway:"true"}},{"kn-Knda":{_desired:"kn-Latn",_distance:"20",_oneway:"true"}},{"ml-Mlym":{_desired:"ml-Latn",_distance:"20",_oneway:"true"}},{"mr-Deva":{_desired:"mr-Latn",_distance:"20",_oneway:"true"}},{"ta-Taml":{_desired:"ta-Latn",_distance:"20",_oneway:"true"}},{"te-Telu":{_desired:"te-Latn",_distance:"20",_oneway:"true"}},{"zh-Hans":{_desired:"zh-Latn",_distance:"20",_oneway:"true"}},{"ja-Jpan":{_desired:"ja-Latn",_distance:"5",_oneway:"true"}},{"ja-Jpan":{_desired:"ja-Hani",_distance:"5",_oneway:"true"}},{"ja-Jpan":{_desired:"ja-Hira",_distance:"5",_oneway:"true"}},{"ja-Jpan":{_desired:"ja-Kana",_distance:"5",_oneway:"true"}},{"ja-Jpan":{_desired:"ja-Hrkt",_distance:"5",_oneway:"true"}},{"ja-Hrkt":{_desired:"ja-Hira",_distance:"5",_oneway:"true"}},{"ja-Hrkt":{_desired:"ja-Kana",_distance:"5",_oneway:"true"}},{"ko-Kore":{_desired:"ko-Hani",_distance:"5",_oneway:"true"}},{"ko-Kore":{_desired:"ko-Hang",_distance:"5",_oneway:"true"}},{"ko-Kore":{_desired:"ko-Jamo",_distance:"5",_oneway:"true"}},{"ko-Hang":{_desired:"ko-Jamo",_distance:"5",_oneway:"true"}},{"*-*":{_desired:"*-*",_distance:"50"}},{"ar-*-$maghreb":{_desired:"ar-*-$maghreb",_distance:"4"}},{"ar-*-$!maghreb":{_desired:"ar-*-$!maghreb",_distance:"4"}},{"ar-*-*":{_desired:"ar-*-*",_distance:"5"}},{"en-*-$enUS":{_desired:"en-*-$enUS",_distance:"4"}},{"en-*-GB":{_desired:"en-*-$!enUS",_distance:"3"}},{"en-*-$!enUS":{_desired:"en-*-$!enUS",_distance:"4"}},{"en-*-*":{_desired:"en-*-*",_distance:"5"}},{"es-*-$americas":{_desired:"es-*-$americas",_distance:"4"}},{"es-*-$!americas":{_desired:"es-*-$!americas",_distance:"4"}},{"es-*-*":{_desired:"es-*-*",_distance:"5"}},{"pt-*-$americas":{_desired:"pt-*-$americas",_distance:"4"}},{"pt-*-$!americas":{_desired:"pt-*-$!americas",_distance:"4"}},{"pt-*-*":{_desired:"pt-*-*",_distance:"5"}},{"zh-Hant-$cnsar":{_desired:"zh-Hant-$cnsar",_distance:"4"}},{"zh-Hant-$!cnsar":{_desired:"zh-Hant-$!cnsar",_distance:"4"}},{"zh-Hant-*":{_desired:"zh-Hant-*",_distance:"5"}},{"*-*-*":{_desired:"*-*-*",_distance:"4"}}]}}},eB={"001":["001","001-status-grouping","002","005","009","011","013","014","015","017","018","019","021","029","030","034","035","039","053","054","057","061","142","143","145","150","151","154","155","AC","AD","AE","AF","AG","AI","AL","AM","AO","AQ","AR","AS","AT","AU","AW","AX","AZ","BA","BB","BD","BE","BF","BG","BH","BI","BJ","BL","BM","BN","BO","BQ","BR","BS","BT","BV","BW","BY","BZ","CA","CC","CD","CF","CG","CH","CI","CK","CL","CM","CN","CO","CP","CQ","CR","CU","CV","CW","CX","CY","CZ","DE","DG","DJ","DK","DM","DO","DZ","EA","EC","EE","EG","EH","ER","ES","ET","EU","EZ","FI","FJ","FK","FM","FO","FR","GA","GB","GD","GE","GF","GG","GH","GI","GL","GM","GN","GP","GQ","GR","GS","GT","GU","GW","GY","HK","HM","HN","HR","HT","HU","IC","ID","IE","IL","IM","IN","IO","IQ","IR","IS","IT","JE","JM","JO","JP","KE","KG","KH","KI","KM","KN","KP","KR","KW","KY","KZ","LA","LB","LC","LI","LK","LR","LS","LT","LU","LV","LY","MA","MC","MD","ME","MF","MG","MH","MK","ML","MM","MN","MO","MP","MQ","MR","MS","MT","MU","MV","MW","MX","MY","MZ","NA","NC","NE","NF","NG","NI","NL","NO","NP","NR","NU","NZ","OM","PA","PE","PF","PG","PH","PK","PL","PM","PN","PR","PS","PT","PW","PY","QA","QO","RE","RO","RS","RU","RW","SA","SB","SC","SD","SE","SG","SH","SI","SJ","SK","SL","SM","SN","SO","SR","SS","ST","SV","SX","SY","SZ","TA","TC","TD","TF","TG","TH","TJ","TK","TL","TM","TN","TO","TR","TT","TV","TW","TZ","UA","UG","UM","UN","US","UY","UZ","VA","VC","VE","VG","VI","VN","VU","WF","WS","XK","YE","YT","ZA","ZM","ZW"],"002":["002","002-status-grouping","011","014","015","017","018","202","AO","BF","BI","BJ","BW","CD","CF","CG","CI","CM","CV","DJ","DZ","EA","EG","EH","ER","ET","GA","GH","GM","GN","GQ","GW","IC","IO","KE","KM","LR","LS","LY","MA","MG","ML","MR","MU","MW","MZ","NA","NE","NG","RE","RW","SC","SD","SH","SL","SN","SO","SS","ST","SZ","TD","TF","TG","TN","TZ","UG","YT","ZA","ZM","ZW"],"003":["003","013","021","029","AG","AI","AW","BB","BL","BM","BQ","BS","BZ","CA","CR","CU","CW","DM","DO","GD","GL","GP","GT","HN","HT","JM","KN","KY","LC","MF","MQ","MS","MX","NI","PA","PM","PR","SV","SX","TC","TT","US","VC","VG","VI"],"005":["005","AR","BO","BR","BV","CL","CO","EC","FK","GF","GS","GY","PE","PY","SR","UY","VE"],"009":["009","053","054","057","061","AC","AQ","AS","AU","CC","CK","CP","CX","DG","FJ","FM","GU","HM","KI","MH","MP","NC","NF","NR","NU","NZ","PF","PG","PN","PW","QO","SB","TA","TK","TO","TV","UM","VU","WF","WS"],"011":["011","BF","BJ","CI","CV","GH","GM","GN","GW","LR","ML","MR","NE","NG","SH","SL","SN","TG"],"013":["013","BZ","CR","GT","HN","MX","NI","PA","SV"],"014":["014","BI","DJ","ER","ET","IO","KE","KM","MG","MU","MW","MZ","RE","RW","SC","SO","SS","TF","TZ","UG","YT","ZM","ZW"],"015":["015","DZ","EA","EG","EH","IC","LY","MA","SD","TN"],"017":["017","AO","CD","CF","CG","CM","GA","GQ","ST","TD"],"018":["018","BW","LS","NA","SZ","ZA"],"019":["003","005","013","019","019-status-grouping","021","029","419","AG","AI","AR","AW","BB","BL","BM","BO","BQ","BR","BS","BV","BZ","CA","CL","CO","CR","CU","CW","DM","DO","EC","FK","GD","GF","GL","GP","GS","GT","GY","HN","HT","JM","KN","KY","LC","MF","MQ","MS","MX","NI","PA","PE","PM","PR","PY","SR","SV","SX","TC","TT","US","UY","VC","VE","VG","VI"],"021":["021","BM","CA","GL","PM","US"],"029":["029","AG","AI","AW","BB","BL","BQ","BS","CU","CW","DM","DO","GD","GP","HT","JM","KN","KY","LC","MF","MQ","MS","PR","SX","TC","TT","VC","VG","VI"],"030":["030","CN","HK","JP","KP","KR","MN","MO","TW"],"034":["034","AF","BD","BT","IN","IR","LK","MV","NP","PK"],"035":["035","BN","ID","KH","LA","MM","MY","PH","SG","TH","TL","VN"],"039":["039","AD","AL","BA","ES","GI","GR","HR","IT","ME","MK","MT","PT","RS","SI","SM","VA","XK"],"053":["053","AU","CC","CX","HM","NF","NZ"],"054":["054","FJ","NC","PG","SB","VU"],"057":["057","FM","GU","KI","MH","MP","NR","PW","UM"],"061":["061","AS","CK","NU","PF","PN","TK","TO","TV","WF","WS"],142:["030","034","035","142","143","145","AE","AF","AM","AZ","BD","BH","BN","BT","CN","CY","GE","HK","ID","IL","IN","IQ","IR","JO","JP","KG","KH","KP","KR","KW","KZ","LA","LB","LK","MM","MN","MO","MV","MY","NP","OM","PH","PK","PS","QA","SA","SG","SY","TH","TJ","TL","TM","TR","TW","UZ","VN","YE"],143:["143","KG","KZ","TJ","TM","UZ"],145:["145","AE","AM","AZ","BH","CY","GE","IL","IQ","JO","KW","LB","OM","PS","QA","SA","SY","TR","YE"],150:["039","150","151","154","155","AD","AL","AT","AX","BA","BE","BG","BY","CH","CQ","CZ","DE","DK","EE","ES","FI","FO","FR","GB","GG","GI","GR","HR","HU","IE","IM","IS","IT","JE","LI","LT","LU","LV","MC","MD","ME","MK","MT","NL","NO","PL","PT","RO","RS","RU","SE","SI","SJ","SK","SM","UA","VA","XK"],151:["151","BG","BY","CZ","HU","MD","PL","RO","RU","SK","UA"],154:["154","AX","CQ","DK","EE","FI","FO","GB","GG","IE","IM","IS","JE","LT","LV","NO","SE","SJ"],155:["155","AT","BE","CH","DE","FR","LI","LU","MC","NL"],202:["011","014","017","018","202","AO","BF","BI","BJ","BW","CD","CF","CG","CI","CM","CV","DJ","ER","ET","GA","GH","GM","GN","GQ","GW","IO","KE","KM","LR","LS","MG","ML","MR","MU","MW","MZ","NA","NE","NG","RE","RW","SC","SH","SL","SN","SO","SS","ST","SZ","TD","TF","TG","TZ","UG","YT","ZA","ZM","ZW"],419:["005","013","029","419","AG","AI","AR","AW","BB","BL","BO","BQ","BR","BS","BV","BZ","CL","CO","CR","CU","CW","DM","DO","EC","FK","GD","GF","GP","GS","GT","GY","HN","HT","JM","KN","KY","LC","MF","MQ","MS","MX","NI","PA","PE","PR","PY","SR","SV","SX","TC","TT","UY","VC","VE","VG","VI"],EU:["AT","BE","BG","CY","CZ","DE","DK","EE","ES","EU","FI","FR","GR","HR","HU","IE","IT","LT","LU","LV","MT","NL","PL","PT","RO","SE","SI","SK"],EZ:["AT","BE","CY","DE","EE","ES","EZ","FI","FR","GR","IE","IT","LT","LU","LV","MT","NL","PT","SI","SK"],QO:["AC","AQ","CP","DG","QO","TA"],UN:["AD","AE","AF","AG","AL","AM","AO","AR","AT","AU","AZ","BA","BB","BD","BE","BF","BG","BH","BI","BJ","BN","BO","BR","BS","BT","BW","BY","BZ","CA","CD","CF","CG","CH","CI","CL","CM","CN","CO","CR","CU","CV","CY","CZ","DE","DJ","DK","DM","DO","DZ","EC","EE","EG","ER","ES","ET","FI","FJ","FM","FR","GA","GB","GD","GE","GH","GM","GN","GQ","GR","GT","GW","GY","HN","HR","HT","HU","ID","IE","IL","IN","IQ","IR","IS","IT","JM","JO","JP","KE","KG","KH","KI","KM","KN","KP","KR","KW","KZ","LA","LB","LC","LI","LK","LR","LS","LT","LU","LV","LY","MA","MC","MD","ME","MG","MH","MK","ML","MM","MN","MR","MT","MU","MV","MW","MX","MY","MZ","NA","NE","NG","NI","NL","NO","NP","NR","NZ","OM","PA","PE","PG","PH","PK","PL","PT","PW","PY","QA","RO","RS","RU","RW","SA","SB","SC","SD","SE","SG","SI","SK","SL","SM","SN","SO","SR","SS","ST","SV","SY","SZ","TD","TG","TH","TJ","TL","TM","TN","TO","TR","TT","TV","TZ","UA","UG","UN","US","UY","UZ","VC","VE","VN","VU","WS","YE","ZA","ZM","ZW"]},eG=/-u(?:-[0-9a-z]{2,8})+/gi;function ej(e,t,r){if(void 0===r&&(r=Error),!e)throw new r(t)}function eU(e,t,r){var n=t.split("-"),a=n[0],i=n[1],s=n[2],o=!0;if(s&&"$"===s[0]){var d="!"!==s[1],u=(d?r[s.slice(1)]:r[s.slice(2)]).map(function(e){return eB[e]||[e]}).reduce(function(e,t){return eD(eD([],e,!0),t,!0)},[]);o&&(o=!(u.indexOf(e.region||"")>1!=d))}else o&&(o=!e.region||"*"===s||s===e.region);return o&&(o=!e.script||"*"===i||i===e.script),o&&(o=!e.language||"*"===a||a===e.language),o}function eV(e){return[e.language,e.script,e.region].filter(Boolean).join("-")}function eH(e,t,r){for(var n=0,a=r.matches;n<a.length;n++){var i=a[n],s=eU(e,i.desired,r.matchVariables)&&eU(t,i.supported,r.matchVariables);if(i.oneway||s||(s=eU(e,i.supported,r.matchVariables)&&eU(t,i.desired,r.matchVariables)),s){var o=10*i.distance;if(r.paradigmLocales.indexOf(eV(e))>-1!=r.paradigmLocales.indexOf(eV(t))>-1)return o-1;return o}}throw Error("No matching distance found")}var eK=r(137),eF=r.n(eK);function e$(e){let t=e.nextUrl.pathname;if(!["/manifest.json","/favicon.ico"].includes(t)&&ek.locales.every(e=>!t.startsWith(`/${e}/`)&&t!==`/${e}`)){let r=function(e){var t,r;let n={};e.headers.forEach((e,t)=>n[t]=e);let a=new(eF())({headers:n}).languages(),i=ek.locales;return t=ek.defaultLocale,function(e,t,r,n,a,i){"lookup"===r.localeMatcher?s=function(e,t,r){for(var n={locale:""},a=0;a<t.length;a++){var i=t[a],s=i.replace(eG,""),o=function(e,t){for(var r=t;;){if(e.indexOf(r)>-1)return r;var n=r.lastIndexOf("-");if(!~n)return;n>=2&&"-"===r[n-2]&&(n-=2),r=r.slice(0,n)}}(e,s);if(o)return n.locale=o,i!==s&&(n.extension=i.slice(s.length,i.length)),n}return n.locale=r(),n}(Array.from(e),t,i):(o=Array.from(e),l=[],c=t.reduce(function(e,t){var r=t.replace(eG,"");return l.push(r),e[r]=t,e},{}),(void 0===_&&(_=838),p=1/0,g={matchedDesiredLocale:"",distances:{}},l.forEach(function(e,t){g.distances[e]||(g.distances[e]={}),o.forEach(function(r){var n,a,i,s,o,d,u=(n=new Intl.Locale(e).maximize(),a=new Intl.Locale(r).maximize(),i={language:n.language,script:n.script||"",region:n.region||""},s={language:a.language,script:a.script||"",region:a.region||""},o=0,d=function(){var e,t;if(!h){var r=null===(t=null===(e=eq.supplemental.languageMatching["written-new"][0])||void 0===e?void 0:e.paradigmLocales)||void 0===t?void 0:t._locales.split(" "),n=eq.supplemental.languageMatching["written-new"].slice(1,5);h={matches:eq.supplemental.languageMatching["written-new"].slice(5).map(function(e){var t=Object.keys(e)[0],r=e[t];return{supported:t,desired:r._desired,distance:+r._distance,oneway:"true"===r.oneway}},{}),matchVariables:n.reduce(function(e,t){var r=Object.keys(t)[0],n=t[r];return e[r.slice(1)]=n._value.split("+"),e},{}),paradigmLocales:eD(eD([],r,!0),r.map(function(e){return new Intl.Locale(e.replace(/_/g,"-")).maximize().toString()}),!0)}}return h}(),i.language!==s.language&&(o+=eH({language:n.language,script:"",region:""},{language:a.language,script:"",region:""},d)),i.script!==s.script&&(o+=eH({language:n.language,script:i.script,region:""},{language:a.language,script:i.script,region:""},d)),i.region!==s.region&&(o+=eH(i,s,d)),o+0+40*t);g.distances[e][r]=u,u<p&&(p=u,g.matchedDesiredLocale=e,g.matchedSupportedLocale=r)})}),p>=_&&(g.matchedDesiredLocale=void 0,g.matchedSupportedLocale=void 0),g).matchedSupportedLocale&&g.matchedDesiredLocale&&(d=g.matchedSupportedLocale,u=c[g.matchedDesiredLocale].slice(g.matchedDesiredLocale.length)||void 0),s=d?{locale:d,extension:u}:{locale:i()});for(var s,o,d,u,l,c,_,p,g,f=s.locale,w={locale:"",dataLocale:f},y="-u",m=0;m<n.length;m++){var b=n[m];ej(f in a,"Missing locale data for ".concat(f));var v=a[f];ej("object"==typeof v&&null!==v,"locale data ".concat(b," must be an object"));var S=v[b];ej(Array.isArray(S),"keyLocaleData for ".concat(b," must be an array"));var x=S[0];ej("string"==typeof x||null===x,"value must be string or null but got ".concat(typeof x," in key ").concat(b));var C="";if(s.extension){var T=function(e,t){ej(2===t.length,"key must have 2 elements");var r=e.length,n="-".concat(t,"-"),a=e.indexOf(n);if(-1!==a){for(var i=a+4,s=i,o=i,d=!1;!d;){var u=e.indexOf("-",o);2==(-1===u?r-o:u-o)?d=!0:-1===u?(s=r,d=!0):(s=u,o=u+1)}return e.slice(i,s)}if(n="-".concat(t),-1!==(a=e.indexOf(n))&&a+3===r)return""}(s.extension,b);void 0!==T&&(""!==T?~S.indexOf(T)&&(x=T,C="-".concat(b,"-").concat(x)):~T.indexOf("true")&&(x="true",C="-".concat(b)))}if(b in r){var M=r[b];ej("string"==typeof M||null==M,"optionsValue must be String, Undefined or Null"),~S.indexOf(M)&&M!==x&&(x=M,C="")}w[b]=x,y+=C}if(y.length>2){var P=f.indexOf("-x-");-1===P?f+=y:f=f.slice(0,P)+y+f.slice(P,f.length),f=Intl.getCanonicalLocales(f)[0]}return w.locale=f,w}(i,Intl.getCanonicalLocales(a),{localeMatcher:(null==r?void 0:r.algorithm)||"best fit"},[],{},function(){return t}).locale}(e),n="/"===t.charAt(0)?`/${r}${t}`:`/${r}/${t}`;return z.redirect(new URL(n,e.url))}}let ez={matcher:["/((?!_next).*)"]},eW={...f},eZ=eW.middleware||eW.default,eY="/src/middleware";if("function"!=typeof eZ)throw Error(`The Middleware "${eY}" must export a \`middleware\` or a \`default\` function`);function eJ(e){return eI({...e,page:eY,handler:eZ})}},137:(e,t,r)=>{"use strict";/*!
+  `);
+    }
+} //# sourceMappingURL=error.js.map
+
+;// CONCATENATED MODULE: ./node_modules/next/dist/esm/server/web/utils.js
+/**
+ * Converts a Node.js IncomingHttpHeaders object to a Headers object. Any
+ * headers with multiple values will be joined with a comma and space. Any
+ * headers that have an undefined value will be ignored and others will be
+ * coerced to strings.
+ *
+ * @param nodeHeaders the headers object to convert
+ * @returns the converted headers object
+ */ function fromNodeOutgoingHttpHeaders(nodeHeaders) {
+    const headers = new Headers();
+    for (let [key, value] of Object.entries(nodeHeaders)){
+        const values = Array.isArray(value) ? value : [
+            value
+        ];
+        for (let v of values){
+            if (typeof v === "undefined") continue;
+            if (typeof v === "number") {
+                v = v.toString();
+            }
+            headers.append(key, v);
+        }
+    }
+    return headers;
+}
+/*
+  Set-Cookie header field-values are sometimes comma joined in one string. This splits them without choking on commas
+  that are within a single set-cookie field-value, such as in the Expires portion.
+  This is uncommon, but explicitly allowed - see https://tools.ietf.org/html/rfc2616#section-4.2
+  Node.js does this for every header *except* set-cookie - see https://github.com/nodejs/node/blob/d5e363b77ebaf1caf67cd7528224b651c86815c1/lib/_http_incoming.js#L128
+  React Native's fetch does this for *every* header, including set-cookie.
+  
+  Based on: https://github.com/google/j2objc/commit/16820fdbc8f76ca0c33472810ce0cb03d20efe25
+  Credits to: https://github.com/tomball for original and https://github.com/chrusart for JavaScript implementation
+*/ function splitCookiesString(cookiesString) {
+    var cookiesStrings = [];
+    var pos = 0;
+    var start;
+    var ch;
+    var lastComma;
+    var nextStart;
+    var cookiesSeparatorFound;
+    function skipWhitespace() {
+        while(pos < cookiesString.length && /\s/.test(cookiesString.charAt(pos))){
+            pos += 1;
+        }
+        return pos < cookiesString.length;
+    }
+    function notSpecialChar() {
+        ch = cookiesString.charAt(pos);
+        return ch !== "=" && ch !== ";" && ch !== ",";
+    }
+    while(pos < cookiesString.length){
+        start = pos;
+        cookiesSeparatorFound = false;
+        while(skipWhitespace()){
+            ch = cookiesString.charAt(pos);
+            if (ch === ",") {
+                // ',' is a cookie separator if we have later first '=', not ';' or ','
+                lastComma = pos;
+                pos += 1;
+                skipWhitespace();
+                nextStart = pos;
+                while(pos < cookiesString.length && notSpecialChar()){
+                    pos += 1;
+                }
+                // currently special character
+                if (pos < cookiesString.length && cookiesString.charAt(pos) === "=") {
+                    // we found cookies separator
+                    cookiesSeparatorFound = true;
+                    // pos is inside the next cookie, so back up and return it.
+                    pos = nextStart;
+                    cookiesStrings.push(cookiesString.substring(start, lastComma));
+                    start = pos;
+                } else {
+                    // in param ',' or param separator ';',
+                    // we continue from that comma
+                    pos = lastComma + 1;
+                }
+            } else {
+                pos += 1;
+            }
+        }
+        if (!cookiesSeparatorFound || pos >= cookiesString.length) {
+            cookiesStrings.push(cookiesString.substring(start, cookiesString.length));
+        }
+    }
+    return cookiesStrings;
+}
+/**
+ * Converts a Headers object to a Node.js OutgoingHttpHeaders object. This is
+ * required to support the set-cookie header, which may have multiple values.
+ *
+ * @param headers the headers object to convert
+ * @returns the converted headers object
+ */ function toNodeOutgoingHttpHeaders(headers) {
+    const nodeHeaders = {};
+    const cookies = [];
+    if (headers) {
+        for (const [key, value] of headers.entries()){
+            if (key.toLowerCase() === "set-cookie") {
+                // We may have gotten a comma joined string of cookies, or multiple
+                // set-cookie headers. We need to merge them into one header array
+                // to represent all the cookies.
+                cookies.push(...splitCookiesString(value));
+                nodeHeaders[key] = cookies.length === 1 ? cookies[0] : cookies;
+            } else {
+                nodeHeaders[key] = value;
+            }
+        }
+    }
+    return nodeHeaders;
+}
+/**
+ * Validate the correctness of a user-provided URL.
+ */ function validateURL(url) {
+    try {
+        return String(new URL(String(url)));
+    } catch (error) {
+        throw new Error(`URL is malformed "${String(url)}". Please use only absolute URLs - https://nextjs.org/docs/messages/middleware-relative-urls`, {
+            cause: error
+        });
+    }
+} //# sourceMappingURL=utils.js.map
+
+;// CONCATENATED MODULE: ./node_modules/next/dist/esm/server/web/spec-extension/fetch-event.js
+
+const responseSymbol = Symbol("response");
+const passThroughSymbol = Symbol("passThrough");
+const waitUntilSymbol = Symbol("waitUntil");
+class FetchEvent {
+    // eslint-disable-next-line @typescript-eslint/no-useless-constructor
+    constructor(_request){
+        this[waitUntilSymbol] = [];
+        this[passThroughSymbol] = false;
+    }
+    respondWith(response) {
+        if (!this[responseSymbol]) {
+            this[responseSymbol] = Promise.resolve(response);
+        }
+    }
+    passThroughOnException() {
+        this[passThroughSymbol] = true;
+    }
+    waitUntil(promise) {
+        this[waitUntilSymbol].push(promise);
+    }
+}
+class NextFetchEvent extends FetchEvent {
+    constructor(params){
+        super(params.request);
+        this.sourcePage = params.page;
+    }
+    /**
+   * @deprecated The `request` is now the first parameter and the API is now async.
+   *
+   * Read more: https://nextjs.org/docs/messages/middleware-new-signature
+   */ get request() {
+        throw new PageSignatureError({
+            page: this.sourcePage
+        });
+    }
+    /**
+   * @deprecated Using `respondWith` is no longer needed.
+   *
+   * Read more: https://nextjs.org/docs/messages/middleware-new-signature
+   */ respondWith() {
+        throw new PageSignatureError({
+            page: this.sourcePage
+        });
+    }
+} //# sourceMappingURL=fetch-event.js.map
+
+;// CONCATENATED MODULE: ./node_modules/next/dist/esm/shared/lib/i18n/detect-domain-locale.js
+function detectDomainLocale(domainItems, hostname, detectedLocale) {
+    if (!domainItems) return;
+    if (detectedLocale) {
+        detectedLocale = detectedLocale.toLowerCase();
+    }
+    for (const item of domainItems){
+        var _item_domain, _item_locales;
+        // remove port if present
+        const domainHostname = (_item_domain = item.domain) == null ? void 0 : _item_domain.split(":")[0].toLowerCase();
+        if (hostname === domainHostname || detectedLocale === item.defaultLocale.toLowerCase() || ((_item_locales = item.locales) == null ? void 0 : _item_locales.some((locale)=>locale.toLowerCase() === detectedLocale))) {
+            return item;
+        }
+    }
+} //# sourceMappingURL=detect-domain-locale.js.map
+
+;// CONCATENATED MODULE: ./node_modules/next/dist/esm/shared/lib/router/utils/remove-trailing-slash.js
+/**
+ * Removes the trailing slash for a given route or page path. Preserves the
+ * root page. Examples:
+ *   - `/foo/bar/` -> `/foo/bar`
+ *   - `/foo/bar` -> `/foo/bar`
+ *   - `/` -> `/`
+ */ function removeTrailingSlash(route) {
+    return route.replace(/\/$/, "") || "/";
+} //# sourceMappingURL=remove-trailing-slash.js.map
+
+;// CONCATENATED MODULE: ./node_modules/next/dist/esm/shared/lib/router/utils/parse-path.js
+/**
+ * Given a path this function will find the pathname, query and hash and return
+ * them. This is useful to parse full paths on the client side.
+ * @param path A path to parse e.g. /foo/bar?id=1#hash
+ */ function parsePath(path) {
+    const hashIndex = path.indexOf("#");
+    const queryIndex = path.indexOf("?");
+    const hasQuery = queryIndex > -1 && (hashIndex < 0 || queryIndex < hashIndex);
+    if (hasQuery || hashIndex > -1) {
+        return {
+            pathname: path.substring(0, hasQuery ? queryIndex : hashIndex),
+            query: hasQuery ? path.substring(queryIndex, hashIndex > -1 ? hashIndex : undefined) : "",
+            hash: hashIndex > -1 ? path.slice(hashIndex) : ""
+        };
+    }
+    return {
+        pathname: path,
+        query: "",
+        hash: ""
+    };
+} //# sourceMappingURL=parse-path.js.map
+
+;// CONCATENATED MODULE: ./node_modules/next/dist/esm/shared/lib/router/utils/add-path-prefix.js
+
+/**
+ * Adds the provided prefix to the given path. It first ensures that the path
+ * is indeed starting with a slash.
+ */ function addPathPrefix(path, prefix) {
+    if (!path.startsWith("/") || !prefix) {
+        return path;
+    }
+    const { pathname, query, hash } = parsePath(path);
+    return "" + prefix + pathname + query + hash;
+} //# sourceMappingURL=add-path-prefix.js.map
+
+;// CONCATENATED MODULE: ./node_modules/next/dist/esm/shared/lib/router/utils/add-path-suffix.js
+
+/**
+ * Similarly to `addPathPrefix`, this function adds a suffix at the end on the
+ * provided path. It also works only for paths ensuring the argument starts
+ * with a slash.
+ */ function addPathSuffix(path, suffix) {
+    if (!path.startsWith("/") || !suffix) {
+        return path;
+    }
+    const { pathname, query, hash } = parsePath(path);
+    return "" + pathname + suffix + query + hash;
+} //# sourceMappingURL=add-path-suffix.js.map
+
+;// CONCATENATED MODULE: ./node_modules/next/dist/esm/shared/lib/router/utils/path-has-prefix.js
+
+/**
+ * Checks if a given path starts with a given prefix. It ensures it matches
+ * exactly without containing extra chars. e.g. prefix /docs should replace
+ * for /docs, /docs/, /docs/a but not /docsss
+ * @param path The path to check.
+ * @param prefix The prefix to check against.
+ */ function pathHasPrefix(path, prefix) {
+    if (typeof path !== "string") {
+        return false;
+    }
+    const { pathname } = parsePath(path);
+    return pathname === prefix || pathname.startsWith(prefix + "/");
+} //# sourceMappingURL=path-has-prefix.js.map
+
+;// CONCATENATED MODULE: ./node_modules/next/dist/esm/shared/lib/router/utils/add-locale.js
+
+
+/**
+ * For a given path and a locale, if the locale is given, it will prefix the
+ * locale. The path shouldn't be an API path. If a default locale is given the
+ * prefix will be omitted if the locale is already the default locale.
+ */ function addLocale(path, locale, defaultLocale, ignorePrefix) {
+    // If no locale was given or the locale is the default locale, we don't need
+    // to prefix the path.
+    if (!locale || locale === defaultLocale) return path;
+    const lower = path.toLowerCase();
+    // If the path is an API path or the path already has the locale prefix, we
+    // don't need to prefix the path.
+    if (!ignorePrefix) {
+        if (pathHasPrefix(lower, "/api")) return path;
+        if (pathHasPrefix(lower, "/" + locale.toLowerCase())) return path;
+    }
+    // Add the locale prefix to the path.
+    return addPathPrefix(path, "/" + locale);
+} //# sourceMappingURL=add-locale.js.map
+
+;// CONCATENATED MODULE: ./node_modules/next/dist/esm/shared/lib/router/utils/format-next-pathname-info.js
+
+
+
+
+function formatNextPathnameInfo(info) {
+    let pathname = addLocale(info.pathname, info.locale, info.buildId ? undefined : info.defaultLocale, info.ignorePrefix);
+    if (info.buildId || !info.trailingSlash) {
+        pathname = removeTrailingSlash(pathname);
+    }
+    if (info.buildId) {
+        pathname = addPathSuffix(addPathPrefix(pathname, "/_next/data/" + info.buildId), info.pathname === "/" ? "index.json" : ".json");
+    }
+    pathname = addPathPrefix(pathname, info.basePath);
+    return !info.buildId && info.trailingSlash ? !pathname.endsWith("/") ? addPathSuffix(pathname, "/") : pathname : removeTrailingSlash(pathname);
+} //# sourceMappingURL=format-next-pathname-info.js.map
+
+;// CONCATENATED MODULE: ./node_modules/next/dist/esm/shared/lib/get-hostname.js
+/**
+ * Takes an object with a hostname property (like a parsed URL) and some
+ * headers that may contain Host and returns the preferred hostname.
+ * @param parsed An object containing a hostname property.
+ * @param headers A dictionary with headers containing a `host`.
+ */ function getHostname(parsed, headers) {
+    // Get the hostname from the headers if it exists, otherwise use the parsed
+    // hostname.
+    let hostname;
+    if ((headers == null ? void 0 : headers.host) && !Array.isArray(headers.host)) {
+        hostname = headers.host.toString().split(":")[0];
+    } else if (parsed.hostname) {
+        hostname = parsed.hostname;
+    } else return;
+    return hostname.toLowerCase();
+} //# sourceMappingURL=get-hostname.js.map
+
+;// CONCATENATED MODULE: ./node_modules/next/dist/esm/shared/lib/i18n/normalize-locale-path.js
+/**
+ * For a pathname that may include a locale from a list of locales, it
+ * removes the locale from the pathname returning it alongside with the
+ * detected locale.
+ *
+ * @param pathname A pathname that may include a locale.
+ * @param locales A list of locales.
+ * @returns The detected locale and pathname without locale
+ */ function normalizeLocalePath(pathname, locales) {
+    let detectedLocale;
+    // first item will be empty string from splitting at first char
+    const pathnameParts = pathname.split("/");
+    (locales || []).some((locale)=>{
+        if (pathnameParts[1] && pathnameParts[1].toLowerCase() === locale.toLowerCase()) {
+            detectedLocale = locale;
+            pathnameParts.splice(1, 1);
+            pathname = pathnameParts.join("/") || "/";
+            return true;
+        }
+        return false;
+    });
+    return {
+        pathname,
+        detectedLocale
+    };
+} //# sourceMappingURL=normalize-locale-path.js.map
+
+;// CONCATENATED MODULE: ./node_modules/next/dist/esm/shared/lib/router/utils/remove-path-prefix.js
+
+/**
+ * Given a path and a prefix it will remove the prefix when it exists in the
+ * given path. It ensures it matches exactly without containing extra chars
+ * and if the prefix is not there it will be noop.
+ *
+ * @param path The path to remove the prefix from.
+ * @param prefix The prefix to be removed.
+ */ function removePathPrefix(path, prefix) {
+    // If the path doesn't start with the prefix we can return it as is. This
+    // protects us from situations where the prefix is a substring of the path
+    // prefix such as:
+    //
+    // For prefix: /blog
+    //
+    //   /blog -> true
+    //   /blog/ -> true
+    //   /blog/1 -> true
+    //   /blogging -> false
+    //   /blogging/ -> false
+    //   /blogging/1 -> false
+    if (!pathHasPrefix(path, prefix)) {
+        return path;
+    }
+    // Remove the prefix from the path via slicing.
+    const withoutPrefix = path.slice(prefix.length);
+    // If the path without the prefix starts with a `/` we can return it as is.
+    if (withoutPrefix.startsWith("/")) {
+        return withoutPrefix;
+    }
+    // If the path without the prefix doesn't start with a `/` we need to add it
+    // back to the path to make sure it's a valid path.
+    return "/" + withoutPrefix;
+} //# sourceMappingURL=remove-path-prefix.js.map
+
+;// CONCATENATED MODULE: ./node_modules/next/dist/esm/shared/lib/router/utils/get-next-pathname-info.js
+
+
+
+function getNextPathnameInfo(pathname, options) {
+    var _options_nextConfig;
+    const { basePath, i18n, trailingSlash } = (_options_nextConfig = options.nextConfig) != null ? _options_nextConfig : {};
+    const info = {
+        pathname,
+        trailingSlash: pathname !== "/" ? pathname.endsWith("/") : trailingSlash
+    };
+    if (basePath && pathHasPrefix(info.pathname, basePath)) {
+        info.pathname = removePathPrefix(info.pathname, basePath);
+        info.basePath = basePath;
+    }
+    let pathnameNoDataPrefix = info.pathname;
+    if (info.pathname.startsWith("/_next/data/") && info.pathname.endsWith(".json")) {
+        const paths = info.pathname.replace(/^\/_next\/data\//, "").replace(/\.json$/, "").split("/");
+        const buildId = paths[0];
+        info.buildId = buildId;
+        pathnameNoDataPrefix = paths[1] !== "index" ? "/" + paths.slice(1).join("/") : "/";
+        // update pathname with normalized if enabled although
+        // we use normalized to populate locale info still
+        if (options.parseData === true) {
+            info.pathname = pathnameNoDataPrefix;
+        }
+    }
+    // If provided, use the locale route normalizer to detect the locale instead
+    // of the function below.
+    if (i18n) {
+        let result = options.i18nProvider ? options.i18nProvider.analyze(info.pathname) : normalizeLocalePath(info.pathname, i18n.locales);
+        info.locale = result.detectedLocale;
+        var _result_pathname;
+        info.pathname = (_result_pathname = result.pathname) != null ? _result_pathname : info.pathname;
+        if (!result.detectedLocale && info.buildId) {
+            result = options.i18nProvider ? options.i18nProvider.analyze(pathnameNoDataPrefix) : normalizeLocalePath(pathnameNoDataPrefix, i18n.locales);
+            if (result.detectedLocale) {
+                info.locale = result.detectedLocale;
+            }
+        }
+    }
+    return info;
+} //# sourceMappingURL=get-next-pathname-info.js.map
+
+;// CONCATENATED MODULE: ./node_modules/next/dist/esm/server/web/next-url.js
+
+
+
+
+const REGEX_LOCALHOST_HOSTNAME = /(?!^https?:\/\/)(127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}|\[::1\]|localhost)/;
+function parseURL(url, base) {
+    return new URL(String(url).replace(REGEX_LOCALHOST_HOSTNAME, "localhost"), base && String(base).replace(REGEX_LOCALHOST_HOSTNAME, "localhost"));
+}
+const Internal = Symbol("NextURLInternal");
+class NextURL {
+    constructor(input, baseOrOpts, opts){
+        let base;
+        let options;
+        if (typeof baseOrOpts === "object" && "pathname" in baseOrOpts || typeof baseOrOpts === "string") {
+            base = baseOrOpts;
+            options = opts || {};
+        } else {
+            options = opts || baseOrOpts || {};
+        }
+        this[Internal] = {
+            url: parseURL(input, base ?? options.base),
+            options: options,
+            basePath: ""
+        };
+        this.analyze();
+    }
+    analyze() {
+        var _this_Internal_options_nextConfig_i18n, _this_Internal_options_nextConfig, _this_Internal_domainLocale, _this_Internal_options_nextConfig_i18n1, _this_Internal_options_nextConfig1;
+        const info = getNextPathnameInfo(this[Internal].url.pathname, {
+            nextConfig: this[Internal].options.nextConfig,
+            parseData: !undefined,
+            i18nProvider: this[Internal].options.i18nProvider
+        });
+        const hostname = getHostname(this[Internal].url, this[Internal].options.headers);
+        this[Internal].domainLocale = this[Internal].options.i18nProvider ? this[Internal].options.i18nProvider.detectDomainLocale(hostname) : detectDomainLocale((_this_Internal_options_nextConfig = this[Internal].options.nextConfig) == null ? void 0 : (_this_Internal_options_nextConfig_i18n = _this_Internal_options_nextConfig.i18n) == null ? void 0 : _this_Internal_options_nextConfig_i18n.domains, hostname);
+        const defaultLocale = ((_this_Internal_domainLocale = this[Internal].domainLocale) == null ? void 0 : _this_Internal_domainLocale.defaultLocale) || ((_this_Internal_options_nextConfig1 = this[Internal].options.nextConfig) == null ? void 0 : (_this_Internal_options_nextConfig_i18n1 = _this_Internal_options_nextConfig1.i18n) == null ? void 0 : _this_Internal_options_nextConfig_i18n1.defaultLocale);
+        this[Internal].url.pathname = info.pathname;
+        this[Internal].defaultLocale = defaultLocale;
+        this[Internal].basePath = info.basePath ?? "";
+        this[Internal].buildId = info.buildId;
+        this[Internal].locale = info.locale ?? defaultLocale;
+        this[Internal].trailingSlash = info.trailingSlash;
+    }
+    formatPathname() {
+        return formatNextPathnameInfo({
+            basePath: this[Internal].basePath,
+            buildId: this[Internal].buildId,
+            defaultLocale: !this[Internal].options.forceLocale ? this[Internal].defaultLocale : undefined,
+            locale: this[Internal].locale,
+            pathname: this[Internal].url.pathname,
+            trailingSlash: this[Internal].trailingSlash
+        });
+    }
+    formatSearch() {
+        return this[Internal].url.search;
+    }
+    get buildId() {
+        return this[Internal].buildId;
+    }
+    set buildId(buildId) {
+        this[Internal].buildId = buildId;
+    }
+    get locale() {
+        return this[Internal].locale ?? "";
+    }
+    set locale(locale) {
+        var _this_Internal_options_nextConfig_i18n, _this_Internal_options_nextConfig;
+        if (!this[Internal].locale || !((_this_Internal_options_nextConfig = this[Internal].options.nextConfig) == null ? void 0 : (_this_Internal_options_nextConfig_i18n = _this_Internal_options_nextConfig.i18n) == null ? void 0 : _this_Internal_options_nextConfig_i18n.locales.includes(locale))) {
+            throw new TypeError(`The NextURL configuration includes no locale "${locale}"`);
+        }
+        this[Internal].locale = locale;
+    }
+    get defaultLocale() {
+        return this[Internal].defaultLocale;
+    }
+    get domainLocale() {
+        return this[Internal].domainLocale;
+    }
+    get searchParams() {
+        return this[Internal].url.searchParams;
+    }
+    get host() {
+        return this[Internal].url.host;
+    }
+    set host(value) {
+        this[Internal].url.host = value;
+    }
+    get hostname() {
+        return this[Internal].url.hostname;
+    }
+    set hostname(value) {
+        this[Internal].url.hostname = value;
+    }
+    get port() {
+        return this[Internal].url.port;
+    }
+    set port(value) {
+        this[Internal].url.port = value;
+    }
+    get protocol() {
+        return this[Internal].url.protocol;
+    }
+    set protocol(value) {
+        this[Internal].url.protocol = value;
+    }
+    get href() {
+        const pathname = this.formatPathname();
+        const search = this.formatSearch();
+        return `${this.protocol}//${this.host}${pathname}${search}${this.hash}`;
+    }
+    set href(url) {
+        this[Internal].url = parseURL(url);
+        this.analyze();
+    }
+    get origin() {
+        return this[Internal].url.origin;
+    }
+    get pathname() {
+        return this[Internal].url.pathname;
+    }
+    set pathname(value) {
+        this[Internal].url.pathname = value;
+    }
+    get hash() {
+        return this[Internal].url.hash;
+    }
+    set hash(value) {
+        this[Internal].url.hash = value;
+    }
+    get search() {
+        return this[Internal].url.search;
+    }
+    set search(value) {
+        this[Internal].url.search = value;
+    }
+    get password() {
+        return this[Internal].url.password;
+    }
+    set password(value) {
+        this[Internal].url.password = value;
+    }
+    get username() {
+        return this[Internal].url.username;
+    }
+    set username(value) {
+        this[Internal].url.username = value;
+    }
+    get basePath() {
+        return this[Internal].basePath;
+    }
+    set basePath(value) {
+        this[Internal].basePath = value.startsWith("/") ? value : `/${value}`;
+    }
+    toString() {
+        return this.href;
+    }
+    toJSON() {
+        return this.href;
+    }
+    [Symbol.for("edge-runtime.inspect.custom")]() {
+        return {
+            href: this.href,
+            origin: this.origin,
+            protocol: this.protocol,
+            username: this.username,
+            password: this.password,
+            host: this.host,
+            hostname: this.hostname,
+            port: this.port,
+            pathname: this.pathname,
+            search: this.search,
+            searchParams: this.searchParams,
+            hash: this.hash
+        };
+    }
+    clone() {
+        return new NextURL(String(this), this[Internal].options);
+    }
+} //# sourceMappingURL=next-url.js.map
+
+// EXTERNAL MODULE: ./node_modules/next/dist/compiled/@edge-runtime/cookies/index.js
+var _edge_runtime_cookies = __webpack_require__(492);
+;// CONCATENATED MODULE: ./node_modules/next/dist/esm/server/web/spec-extension/cookies.js
+ //# sourceMappingURL=cookies.js.map
+
+;// CONCATENATED MODULE: ./node_modules/next/dist/esm/server/web/spec-extension/request.js
+
+
+
+
+const INTERNALS = Symbol("internal request");
+class NextRequest extends Request {
+    constructor(input, init = {}){
+        const url = typeof input !== "string" && "url" in input ? input.url : String(input);
+        validateURL(url);
+        if (input instanceof Request) super(input, init);
+        else super(url, init);
+        const nextUrl = new NextURL(url, {
+            headers: toNodeOutgoingHttpHeaders(this.headers),
+            nextConfig: init.nextConfig
+        });
+        this[INTERNALS] = {
+            cookies: new _edge_runtime_cookies.RequestCookies(this.headers),
+            geo: init.geo || {},
+            ip: init.ip,
+            nextUrl,
+            url:  false ? 0 : nextUrl.toString()
+        };
+    }
+    [Symbol.for("edge-runtime.inspect.custom")]() {
+        return {
+            cookies: this.cookies,
+            geo: this.geo,
+            ip: this.ip,
+            nextUrl: this.nextUrl,
+            url: this.url,
+            // rest of props come from Request
+            bodyUsed: this.bodyUsed,
+            cache: this.cache,
+            credentials: this.credentials,
+            destination: this.destination,
+            headers: Object.fromEntries(this.headers),
+            integrity: this.integrity,
+            keepalive: this.keepalive,
+            method: this.method,
+            mode: this.mode,
+            redirect: this.redirect,
+            referrer: this.referrer,
+            referrerPolicy: this.referrerPolicy,
+            signal: this.signal
+        };
+    }
+    get cookies() {
+        return this[INTERNALS].cookies;
+    }
+    get geo() {
+        return this[INTERNALS].geo;
+    }
+    get ip() {
+        return this[INTERNALS].ip;
+    }
+    get nextUrl() {
+        return this[INTERNALS].nextUrl;
+    }
+    /**
+   * @deprecated
+   * `page` has been deprecated in favour of `URLPattern`.
+   * Read more: https://nextjs.org/docs/messages/middleware-request-page
+   */ get page() {
+        throw new RemovedPageError();
+    }
+    /**
+   * @deprecated
+   * `ua` has been removed in favour of \`userAgent\` function.
+   * Read more: https://nextjs.org/docs/messages/middleware-parse-user-agent
+   */ get ua() {
+        throw new RemovedUAError();
+    }
+    get url() {
+        return this[INTERNALS].url;
+    }
+} //# sourceMappingURL=request.js.map
+
+;// CONCATENATED MODULE: ./node_modules/next/dist/esm/server/web/spec-extension/response.js
+
+
+
+const response_INTERNALS = Symbol("internal response");
+const REDIRECTS = new Set([
+    301,
+    302,
+    303,
+    307,
+    308
+]);
+function handleMiddlewareField(init, headers) {
+    var _init_request;
+    if (init == null ? void 0 : (_init_request = init.request) == null ? void 0 : _init_request.headers) {
+        if (!(init.request.headers instanceof Headers)) {
+            throw new Error("request.headers must be an instance of Headers");
+        }
+        const keys = [];
+        for (const [key, value] of init.request.headers){
+            headers.set("x-middleware-request-" + key, value);
+            keys.push(key);
+        }
+        headers.set("x-middleware-override-headers", keys.join(","));
+    }
+}
+class NextResponse extends Response {
+    constructor(body, init = {}){
+        super(body, init);
+        this[response_INTERNALS] = {
+            cookies: new _edge_runtime_cookies.ResponseCookies(this.headers),
+            url: init.url ? new NextURL(init.url, {
+                headers: toNodeOutgoingHttpHeaders(this.headers),
+                nextConfig: init.nextConfig
+            }) : undefined
+        };
+    }
+    [Symbol.for("edge-runtime.inspect.custom")]() {
+        return {
+            cookies: this.cookies,
+            url: this.url,
+            // rest of props come from Response
+            body: this.body,
+            bodyUsed: this.bodyUsed,
+            headers: Object.fromEntries(this.headers),
+            ok: this.ok,
+            redirected: this.redirected,
+            status: this.status,
+            statusText: this.statusText,
+            type: this.type
+        };
+    }
+    get cookies() {
+        return this[response_INTERNALS].cookies;
+    }
+    static json(body, init) {
+        const response = Response.json(body, init);
+        return new NextResponse(response.body, response);
+    }
+    static redirect(url, init) {
+        const status = typeof init === "number" ? init : (init == null ? void 0 : init.status) ?? 307;
+        if (!REDIRECTS.has(status)) {
+            throw new RangeError('Failed to execute "redirect" on "response": Invalid status code');
+        }
+        const initObj = typeof init === "object" ? init : {};
+        const headers = new Headers(initObj == null ? void 0 : initObj.headers);
+        headers.set("Location", validateURL(url));
+        return new NextResponse(null, {
+            ...initObj,
+            headers,
+            status
+        });
+    }
+    static rewrite(destination, init) {
+        const headers = new Headers(init == null ? void 0 : init.headers);
+        headers.set("x-middleware-rewrite", validateURL(destination));
+        handleMiddlewareField(init, headers);
+        return new NextResponse(null, {
+            ...init,
+            headers
+        });
+    }
+    static next(init) {
+        const headers = new Headers(init == null ? void 0 : init.headers);
+        headers.set("x-middleware-next", "1");
+        handleMiddlewareField(init, headers);
+        return new NextResponse(null, {
+            ...init,
+            headers
+        });
+    }
+} //# sourceMappingURL=response.js.map
+
+;// CONCATENATED MODULE: ./node_modules/next/dist/esm/shared/lib/router/utils/relativize-url.js
+/**
+ * Given a URL as a string and a base URL it will make the URL relative
+ * if the parsed protocol and host is the same as the one in the base
+ * URL. Otherwise it returns the same URL string.
+ */ function relativizeURL(url, base) {
+    const baseURL = typeof base === "string" ? new URL(base) : base;
+    const relative = new URL(url, base);
+    const origin = baseURL.protocol + "//" + baseURL.host;
+    return relative.protocol + "//" + relative.host === origin ? relative.toString().replace(origin, "") : relative.toString();
+} //# sourceMappingURL=relativize-url.js.map
+
+;// CONCATENATED MODULE: ./node_modules/next/dist/esm/client/components/app-router-headers.js
+const RSC = "RSC";
+const ACTION = "Next-Action";
+const NEXT_ROUTER_STATE_TREE = "Next-Router-State-Tree";
+const NEXT_ROUTER_PREFETCH = "Next-Router-Prefetch";
+const NEXT_URL = "Next-Url";
+const RSC_CONTENT_TYPE_HEADER = "text/x-component";
+const RSC_VARY_HEADER = RSC + ", " + NEXT_ROUTER_STATE_TREE + ", " + NEXT_ROUTER_PREFETCH + ", " + NEXT_URL;
+const FLIGHT_PARAMETERS = [
+    [
+        RSC
+    ],
+    [
+        NEXT_ROUTER_STATE_TREE
+    ],
+    [
+        NEXT_ROUTER_PREFETCH
+    ]
+];
+const NEXT_RSC_UNION_QUERY = "_rsc"; //# sourceMappingURL=app-router-headers.js.map
+
+;// CONCATENATED MODULE: ./node_modules/next/dist/esm/server/internal-utils.js
+
+const INTERNAL_QUERY_NAMES = [
+    "__nextFallback",
+    "__nextLocale",
+    "__nextInferredLocaleFromDefault",
+    "__nextDefaultLocale",
+    "__nextIsNotFound",
+    NEXT_RSC_UNION_QUERY
+];
+const EDGE_EXTENDED_INTERNAL_QUERY_NAMES = [
+    "__nextDataReq"
+];
+function stripInternalQueries(query) {
+    for (const name of INTERNAL_QUERY_NAMES){
+        delete query[name];
+    }
+}
+function stripInternalSearchParams(url, isEdge) {
+    const isStringUrl = typeof url === "string";
+    const instance = isStringUrl ? new URL(url) : url;
+    for (const name of INTERNAL_QUERY_NAMES){
+        instance.searchParams.delete(name);
+    }
+    if (isEdge) {
+        for (const name of EDGE_EXTENDED_INTERNAL_QUERY_NAMES){
+            instance.searchParams.delete(name);
+        }
+    }
+    return isStringUrl ? instance.toString() : instance;
+}
+/**
+ * Headers that are set by the Next.js server and should be stripped from the
+ * request headers going to the user's application.
+ */ const INTERNAL_HEADERS = (/* unused pure expression or super */ null && ([
+    "x-invoke-path",
+    "x-invoke-status",
+    "x-invoke-error",
+    "x-invoke-query",
+    "x-invoke-output",
+    "x-middleware-invoke"
+]));
+/**
+ * Strip internal headers from the request headers.
+ *
+ * @param headers the headers to strip of internal headers
+ */ function stripInternalHeaders(headers) {
+    for (const key of INTERNAL_HEADERS){
+        delete headers[key];
+    }
+} //# sourceMappingURL=internal-utils.js.map
+
+;// CONCATENATED MODULE: ./node_modules/next/dist/esm/shared/lib/router/utils/app-paths.js
+
+
+/**
+ * Normalizes an app route so it represents the actual request path. Essentially
+ * performing the following transformations:
+ *
+ * - `/(dashboard)/user/[id]/page` to `/user/[id]`
+ * - `/(dashboard)/account/page` to `/account`
+ * - `/user/[id]/page` to `/user/[id]`
+ * - `/account/page` to `/account`
+ * - `/page` to `/`
+ * - `/(dashboard)/user/[id]/route` to `/user/[id]`
+ * - `/(dashboard)/account/route` to `/account`
+ * - `/user/[id]/route` to `/user/[id]`
+ * - `/account/route` to `/account`
+ * - `/route` to `/`
+ * - `/` to `/`
+ *
+ * @param route the app route to normalize
+ * @returns the normalized pathname
+ */ function normalizeAppPath(route) {
+    return ensureLeadingSlash(route.split("/").reduce((pathname, segment, index, segments)=>{
+        // Empty segments are ignored.
+        if (!segment) {
+            return pathname;
+        }
+        // Groups are ignored.
+        if (isGroupSegment(segment)) {
+            return pathname;
+        }
+        // Parallel segments are ignored.
+        if (segment[0] === "@") {
+            return pathname;
+        }
+        // The last segment (if it's a leaf) should be ignored.
+        if ((segment === "page" || segment === "route") && index === segments.length - 1) {
+            return pathname;
+        }
+        return pathname + "/" + segment;
+    }, ""));
+}
+/**
+ * Strips the `.rsc` extension if it's in the pathname.
+ * Since this function is used on full urls it checks `?` for searchParams handling.
+ */ function normalizeRscPath(pathname, enabled) {
+    return enabled ? pathname.replace(/\.rsc($|\?)/, "$1") : pathname;
+} //# sourceMappingURL=app-paths.js.map
+
+;// CONCATENATED MODULE: ./node_modules/next/dist/esm/lib/constants.js
+const NEXT_QUERY_PARAM_PREFIX = "nxtP";
+const PRERENDER_REVALIDATE_HEADER = "x-prerender-revalidate";
+const PRERENDER_REVALIDATE_ONLY_GENERATED_HEADER = "x-prerender-revalidate-if-generated";
+const NEXT_CACHE_TAGS_HEADER = "x-next-cache-tags";
+const NEXT_CACHE_SOFT_TAGS_HEADER = "x-next-cache-soft-tags";
+const NEXT_CACHE_REVALIDATED_TAGS_HEADER = "x-next-revalidated-tags";
+const NEXT_CACHE_REVALIDATE_TAG_TOKEN_HEADER = "x-next-revalidate-tag-token";
+const NEXT_CACHE_TAG_MAX_LENGTH = 256;
+const NEXT_CACHE_SOFT_TAG_MAX_LENGTH = 1024;
+const NEXT_CACHE_IMPLICIT_TAG_ID = "_N_T_";
+// in seconds
+const CACHE_ONE_YEAR = 31536000;
+// Patterns to detect middleware files
+const MIDDLEWARE_FILENAME = "middleware";
+const MIDDLEWARE_LOCATION_REGEXP = (/* unused pure expression or super */ null && (`(?:src/)?${MIDDLEWARE_FILENAME}`));
+// Pattern to detect instrumentation hooks file
+const INSTRUMENTATION_HOOK_FILENAME = "instrumentation";
+// Because on Windows absolute paths in the generated code can break because of numbers, eg 1 in the path,
+// we have to use a private alias
+const PAGES_DIR_ALIAS = "private-next-pages";
+const DOT_NEXT_ALIAS = "private-dot-next";
+const ROOT_DIR_ALIAS = "private-next-root-dir";
+const APP_DIR_ALIAS = "private-next-app-dir";
+const RSC_MOD_REF_PROXY_ALIAS = "private-next-rsc-mod-ref-proxy";
+const RSC_ACTION_VALIDATE_ALIAS = "private-next-rsc-action-validate";
+const RSC_ACTION_PROXY_ALIAS = "private-next-rsc-action-proxy";
+const RSC_ACTION_CLIENT_WRAPPER_ALIAS = "private-next-rsc-action-client-wrapper";
+const PUBLIC_DIR_MIDDLEWARE_CONFLICT = (/* unused pure expression or super */ null && (`You can not have a '_next' folder inside of your public folder. This conflicts with the internal '/_next' route. https://nextjs.org/docs/messages/public-next-folder-conflict`));
+const SSG_GET_INITIAL_PROPS_CONFLICT = (/* unused pure expression or super */ null && (`You can not use getInitialProps with getStaticProps. To use SSG, please remove your getInitialProps`));
+const SERVER_PROPS_GET_INIT_PROPS_CONFLICT = (/* unused pure expression or super */ null && (`You can not use getInitialProps with getServerSideProps. Please remove getInitialProps.`));
+const SERVER_PROPS_SSG_CONFLICT = (/* unused pure expression or super */ null && (`You can not use getStaticProps or getStaticPaths with getServerSideProps. To use SSG, please remove getServerSideProps`));
+const STATIC_STATUS_PAGE_GET_INITIAL_PROPS_ERROR = (/* unused pure expression or super */ null && (`can not have getInitialProps/getServerSideProps, https://nextjs.org/docs/messages/404-get-initial-props`));
+const SERVER_PROPS_EXPORT_ERROR = (/* unused pure expression or super */ null && (`pages with \`getServerSideProps\` can not be exported. See more info here: https://nextjs.org/docs/messages/gssp-export`));
+const GSP_NO_RETURNED_VALUE = "Your `getStaticProps` function did not return an object. Did you forget to add a `return`?";
+const GSSP_NO_RETURNED_VALUE = "Your `getServerSideProps` function did not return an object. Did you forget to add a `return`?";
+const UNSTABLE_REVALIDATE_RENAME_ERROR = (/* unused pure expression or super */ null && ("The `unstable_revalidate` property is available for general use.\n" + "Please use `revalidate` instead."));
+const GSSP_COMPONENT_MEMBER_ERROR = (/* unused pure expression or super */ null && (`can not be attached to a page's component and must be exported from the page. See more info here: https://nextjs.org/docs/messages/gssp-component-member`));
+const NON_STANDARD_NODE_ENV = (/* unused pure expression or super */ null && (`You are using a non-standard "NODE_ENV" value in your environment. This creates inconsistencies in the project and is strongly advised against. Read more: https://nextjs.org/docs/messages/non-standard-node-env`));
+const SSG_FALLBACK_EXPORT_ERROR = (/* unused pure expression or super */ null && (`Pages with \`fallback\` enabled in \`getStaticPaths\` can not be exported. See more info here: https://nextjs.org/docs/messages/ssg-fallback-true-export`));
+const ESLINT_DEFAULT_DIRS = (/* unused pure expression or super */ null && ([
+    "app",
+    "pages",
+    "components",
+    "lib",
+    "src"
+]));
+const ESLINT_PROMPT_VALUES = [
+    {
+        title: "Strict",
+        recommended: true,
+        config: {
+            extends: "next/core-web-vitals"
+        }
+    },
+    {
+        title: "Base",
+        config: {
+            extends: "next"
+        }
+    },
+    {
+        title: "Cancel",
+        config: null
+    }
+];
+const SERVER_RUNTIME = {
+    edge: "edge",
+    experimentalEdge: "experimental-edge",
+    nodejs: "nodejs"
+};
+/**
+ * The names of the webpack layers. These layers are the primitives for the
+ * webpack chunks.
+ */ const WEBPACK_LAYERS_NAMES = {
+    /**
+   * The layer for the shared code between the client and server bundles.
+   */ shared: "shared",
+    /**
+   * React Server Components layer (rsc).
+   */ reactServerComponents: "rsc",
+    /**
+   * Server Side Rendering layer for app (ssr).
+   */ serverSideRendering: "ssr",
+    /**
+   * The browser client bundle layer for actions.
+   */ actionBrowser: "action-browser",
+    /**
+   * The layer for the API routes.
+   */ api: "api",
+    /**
+   * The layer for the middleware code.
+   */ middleware: "middleware",
+    /**
+   * The layer for assets on the edge.
+   */ edgeAsset: "edge-asset",
+    /**
+   * The browser client bundle layer for App directory.
+   */ appPagesBrowser: "app-pages-browser",
+    /**
+   * The server bundle layer for metadata routes.
+   */ appMetadataRoute: "app-metadata-route",
+    /**
+   * The layer for the server bundle for App Route handlers.
+   */ appRouteHandler: "app-route-handler"
+};
+const WEBPACK_LAYERS = {
+    ...WEBPACK_LAYERS_NAMES,
+    GROUP: {
+        server: [
+            WEBPACK_LAYERS_NAMES.reactServerComponents,
+            WEBPACK_LAYERS_NAMES.actionBrowser,
+            WEBPACK_LAYERS_NAMES.appMetadataRoute,
+            WEBPACK_LAYERS_NAMES.appRouteHandler
+        ],
+        nonClientServerTarget: [
+            // plus middleware and pages api
+            WEBPACK_LAYERS_NAMES.middleware,
+            WEBPACK_LAYERS_NAMES.api
+        ],
+        app: [
+            WEBPACK_LAYERS_NAMES.reactServerComponents,
+            WEBPACK_LAYERS_NAMES.actionBrowser,
+            WEBPACK_LAYERS_NAMES.appMetadataRoute,
+            WEBPACK_LAYERS_NAMES.appRouteHandler,
+            WEBPACK_LAYERS_NAMES.serverSideRendering,
+            WEBPACK_LAYERS_NAMES.appPagesBrowser
+        ]
+    }
+};
+const WEBPACK_RESOURCE_QUERIES = {
+    edgeSSREntry: "__next_edge_ssr_entry__",
+    metadata: "__next_metadata__",
+    metadataRoute: "__next_metadata_route__",
+    metadataImageMeta: "__next_metadata_image_meta__"
+};
+ //# sourceMappingURL=constants.js.map
+
+;// CONCATENATED MODULE: ./node_modules/next/dist/esm/server/web/spec-extension/adapters/reflect.js
+class ReflectAdapter {
+    static get(target, prop, receiver) {
+        const value = Reflect.get(target, prop, receiver);
+        if (typeof value === "function") {
+            return value.bind(target);
+        }
+        return value;
+    }
+    static set(target, prop, value, receiver) {
+        return Reflect.set(target, prop, value, receiver);
+    }
+    static has(target, prop) {
+        return Reflect.has(target, prop);
+    }
+    static deleteProperty(target, prop) {
+        return Reflect.deleteProperty(target, prop);
+    }
+} //# sourceMappingURL=reflect.js.map
+
+;// CONCATENATED MODULE: ./node_modules/next/dist/esm/server/web/spec-extension/adapters/headers.js
+
+/**
+ * @internal
+ */ class ReadonlyHeadersError extends Error {
+    constructor(){
+        super("Headers cannot be modified. Read more: https://nextjs.org/docs/app/api-reference/functions/headers");
+    }
+    static callable() {
+        throw new ReadonlyHeadersError();
+    }
+}
+class HeadersAdapter extends Headers {
+    constructor(headers){
+        // We've already overridden the methods that would be called, so we're just
+        // calling the super constructor to ensure that the instanceof check works.
+        super();
+        this.headers = new Proxy(headers, {
+            get (target, prop, receiver) {
+                // Because this is just an object, we expect that all "get" operations
+                // are for properties. If it's a "get" for a symbol, we'll just return
+                // the symbol.
+                if (typeof prop === "symbol") {
+                    return ReflectAdapter.get(target, prop, receiver);
+                }
+                const lowercased = prop.toLowerCase();
+                // Let's find the original casing of the key. This assumes that there is
+                // no mixed case keys (e.g. "Content-Type" and "content-type") in the
+                // headers object.
+                const original = Object.keys(headers).find((o)=>o.toLowerCase() === lowercased);
+                // If the original casing doesn't exist, return undefined.
+                if (typeof original === "undefined") return;
+                // If the original casing exists, return the value.
+                return ReflectAdapter.get(target, original, receiver);
+            },
+            set (target, prop, value, receiver) {
+                if (typeof prop === "symbol") {
+                    return ReflectAdapter.set(target, prop, value, receiver);
+                }
+                const lowercased = prop.toLowerCase();
+                // Let's find the original casing of the key. This assumes that there is
+                // no mixed case keys (e.g. "Content-Type" and "content-type") in the
+                // headers object.
+                const original = Object.keys(headers).find((o)=>o.toLowerCase() === lowercased);
+                // If the original casing doesn't exist, use the prop as the key.
+                return ReflectAdapter.set(target, original ?? prop, value, receiver);
+            },
+            has (target, prop) {
+                if (typeof prop === "symbol") return ReflectAdapter.has(target, prop);
+                const lowercased = prop.toLowerCase();
+                // Let's find the original casing of the key. This assumes that there is
+                // no mixed case keys (e.g. "Content-Type" and "content-type") in the
+                // headers object.
+                const original = Object.keys(headers).find((o)=>o.toLowerCase() === lowercased);
+                // If the original casing doesn't exist, return false.
+                if (typeof original === "undefined") return false;
+                // If the original casing exists, return true.
+                return ReflectAdapter.has(target, original);
+            },
+            deleteProperty (target, prop) {
+                if (typeof prop === "symbol") return ReflectAdapter.deleteProperty(target, prop);
+                const lowercased = prop.toLowerCase();
+                // Let's find the original casing of the key. This assumes that there is
+                // no mixed case keys (e.g. "Content-Type" and "content-type") in the
+                // headers object.
+                const original = Object.keys(headers).find((o)=>o.toLowerCase() === lowercased);
+                // If the original casing doesn't exist, return true.
+                if (typeof original === "undefined") return true;
+                // If the original casing exists, delete the property.
+                return ReflectAdapter.deleteProperty(target, original);
+            }
+        });
+    }
+    /**
+   * Seals a Headers instance to prevent modification by throwing an error when
+   * any mutating method is called.
+   */ static seal(headers) {
+        return new Proxy(headers, {
+            get (target, prop, receiver) {
+                switch(prop){
+                    case "append":
+                    case "delete":
+                    case "set":
+                        return ReadonlyHeadersError.callable;
+                    default:
+                        return ReflectAdapter.get(target, prop, receiver);
+                }
+            }
+        });
+    }
+    /**
+   * Merges a header value into a string. This stores multiple values as an
+   * array, so we need to merge them into a string.
+   *
+   * @param value a header value
+   * @returns a merged header value (a string)
+   */ merge(value) {
+        if (Array.isArray(value)) return value.join(", ");
+        return value;
+    }
+    /**
+   * Creates a Headers instance from a plain object or a Headers instance.
+   *
+   * @param headers a plain object or a Headers instance
+   * @returns a headers instance
+   */ static from(headers) {
+        if (headers instanceof Headers) return headers;
+        return new HeadersAdapter(headers);
+    }
+    append(name, value) {
+        const existing = this.headers[name];
+        if (typeof existing === "string") {
+            this.headers[name] = [
+                existing,
+                value
+            ];
+        } else if (Array.isArray(existing)) {
+            existing.push(value);
+        } else {
+            this.headers[name] = value;
+        }
+    }
+    delete(name) {
+        delete this.headers[name];
+    }
+    get(name) {
+        const value = this.headers[name];
+        if (typeof value !== "undefined") return this.merge(value);
+        return null;
+    }
+    has(name) {
+        return typeof this.headers[name] !== "undefined";
+    }
+    set(name, value) {
+        this.headers[name] = value;
+    }
+    forEach(callbackfn, thisArg) {
+        for (const [name, value] of this.entries()){
+            callbackfn.call(thisArg, value, name, this);
+        }
+    }
+    *entries() {
+        for (const key of Object.keys(this.headers)){
+            const name = key.toLowerCase();
+            // We assert here that this is a string because we got it from the
+            // Object.keys() call above.
+            const value = this.get(name);
+            yield [
+                name,
+                value
+            ];
+        }
+    }
+    *keys() {
+        for (const key of Object.keys(this.headers)){
+            const name = key.toLowerCase();
+            yield name;
+        }
+    }
+    *values() {
+        for (const key of Object.keys(this.headers)){
+            // We assert here that this is a string because we got it from the
+            // Object.keys() call above.
+            const value = this.get(key);
+            yield value;
+        }
+    }
+    [Symbol.iterator]() {
+        return this.entries();
+    }
+} //# sourceMappingURL=headers.js.map
+
+;// CONCATENATED MODULE: ./node_modules/next/dist/esm/server/web/spec-extension/adapters/request-cookies.js
+
+
+/**
+ * @internal
+ */ class ReadonlyRequestCookiesError extends Error {
+    constructor(){
+        super("Cookies can only be modified in a Server Action or Route Handler. Read more: https://nextjs.org/docs/app/api-reference/functions/cookies#cookiessetname-value-options");
+    }
+    static callable() {
+        throw new ReadonlyRequestCookiesError();
+    }
+}
+class RequestCookiesAdapter {
+    static seal(cookies) {
+        return new Proxy(cookies, {
+            get (target, prop, receiver) {
+                switch(prop){
+                    case "clear":
+                    case "delete":
+                    case "set":
+                        return ReadonlyRequestCookiesError.callable;
+                    default:
+                        return ReflectAdapter.get(target, prop, receiver);
+                }
+            }
+        });
+    }
+}
+const SYMBOL_MODIFY_COOKIE_VALUES = Symbol.for("next.mutated.cookies");
+function getModifiedCookieValues(cookies) {
+    const modified = cookies[SYMBOL_MODIFY_COOKIE_VALUES];
+    if (!modified || !Array.isArray(modified) || modified.length === 0) {
+        return [];
+    }
+    return modified;
+}
+function appendMutableCookies(headers, mutableCookies) {
+    const modifiedCookieValues = getModifiedCookieValues(mutableCookies);
+    if (modifiedCookieValues.length === 0) {
+        return false;
+    }
+    // Return a new response that extends the response with
+    // the modified cookies as fallbacks. `res` cookies
+    // will still take precedence.
+    const resCookies = new ResponseCookies(headers);
+    const returnedCookies = resCookies.getAll();
+    // Set the modified cookies as fallbacks.
+    for (const cookie of modifiedCookieValues){
+        resCookies.set(cookie);
+    }
+    // Set the original cookies as the final values.
+    for (const cookie of returnedCookies){
+        resCookies.set(cookie);
+    }
+    return true;
+}
+class MutableRequestCookiesAdapter {
+    static wrap(cookies, onUpdateCookies) {
+        const responseCookes = new _edge_runtime_cookies.ResponseCookies(new Headers());
+        for (const cookie of cookies.getAll()){
+            responseCookes.set(cookie);
+        }
+        let modifiedValues = [];
+        const modifiedCookies = new Set();
+        const updateResponseCookies = ()=>{
+            var _fetch___nextGetStaticStore;
+            // TODO-APP: change method of getting staticGenerationAsyncStore
+            const staticGenerationAsyncStore = fetch.__nextGetStaticStore == null ? void 0 : (_fetch___nextGetStaticStore = fetch.__nextGetStaticStore.call(fetch)) == null ? void 0 : _fetch___nextGetStaticStore.getStore();
+            if (staticGenerationAsyncStore) {
+                staticGenerationAsyncStore.pathWasRevalidated = true;
+            }
+            const allCookies = responseCookes.getAll();
+            modifiedValues = allCookies.filter((c)=>modifiedCookies.has(c.name));
+            if (onUpdateCookies) {
+                const serializedCookies = [];
+                for (const cookie of modifiedValues){
+                    const tempCookies = new _edge_runtime_cookies.ResponseCookies(new Headers());
+                    tempCookies.set(cookie);
+                    serializedCookies.push(tempCookies.toString());
+                }
+                onUpdateCookies(serializedCookies);
+            }
+        };
+        return new Proxy(responseCookes, {
+            get (target, prop, receiver) {
+                switch(prop){
+                    // A special symbol to get the modified cookie values
+                    case SYMBOL_MODIFY_COOKIE_VALUES:
+                        return modifiedValues;
+                    // TODO: Throw error if trying to set a cookie after the response
+                    // headers have been set.
+                    case "delete":
+                        return function(...args) {
+                            modifiedCookies.add(typeof args[0] === "string" ? args[0] : args[0].name);
+                            try {
+                                target.delete(...args);
+                            } finally{
+                                updateResponseCookies();
+                            }
+                        };
+                    case "set":
+                        return function(...args) {
+                            modifiedCookies.add(typeof args[0] === "string" ? args[0] : args[0].name);
+                            try {
+                                return target.set(...args);
+                            } finally{
+                                updateResponseCookies();
+                            }
+                        };
+                    default:
+                        return ReflectAdapter.get(target, prop, receiver);
+                }
+            }
+        });
+    }
+} //# sourceMappingURL=request-cookies.js.map
+
+;// CONCATENATED MODULE: ./node_modules/next/dist/esm/server/api-utils/index.js
+
+
+/**
+ *
+ * @param res response object
+ * @param statusCode `HTTP` status code of response
+ */ function sendStatusCode(res, statusCode) {
+    res.statusCode = statusCode;
+    return res;
+}
+/**
+ *
+ * @param res response object
+ * @param [statusOrUrl] `HTTP` status code of redirect
+ * @param url URL of redirect
+ */ function redirect(res, statusOrUrl, url) {
+    if (typeof statusOrUrl === "string") {
+        url = statusOrUrl;
+        statusOrUrl = 307;
+    }
+    if (typeof statusOrUrl !== "number" || typeof url !== "string") {
+        throw new Error(`Invalid redirect arguments. Please use a single argument URL, e.g. res.redirect('/destination') or use a status code and URL, e.g. res.redirect(307, '/destination').`);
+    }
+    res.writeHead(statusOrUrl, {
+        Location: url
+    });
+    res.write(url);
+    res.end();
+    return res;
+}
+function checkIsOnDemandRevalidate(req, previewProps) {
+    const headers = HeadersAdapter.from(req.headers);
+    const previewModeId = headers.get(PRERENDER_REVALIDATE_HEADER);
+    const isOnDemandRevalidate = previewModeId === previewProps.previewModeId;
+    const revalidateOnlyGenerated = headers.has(PRERENDER_REVALIDATE_ONLY_GENERATED_HEADER);
+    return {
+        isOnDemandRevalidate,
+        revalidateOnlyGenerated
+    };
+}
+const COOKIE_NAME_PRERENDER_BYPASS = `__prerender_bypass`;
+const COOKIE_NAME_PRERENDER_DATA = `__next_preview_data`;
+const RESPONSE_LIMIT_DEFAULT = (/* unused pure expression or super */ null && (4 * 1024 * 1024));
+const SYMBOL_PREVIEW_DATA = Symbol(COOKIE_NAME_PRERENDER_DATA);
+const SYMBOL_CLEARED_COOKIES = Symbol(COOKIE_NAME_PRERENDER_BYPASS);
+function clearPreviewData(res, options = {}) {
+    if (SYMBOL_CLEARED_COOKIES in res) {
+        return res;
+    }
+    const { serialize } = __webpack_require__(842);
+    const previous = res.getHeader("Set-Cookie");
+    res.setHeader(`Set-Cookie`, [
+        ...typeof previous === "string" ? [
+            previous
+        ] : Array.isArray(previous) ? previous : [],
+        serialize(COOKIE_NAME_PRERENDER_BYPASS, "", {
+            // To delete a cookie, set `expires` to a date in the past:
+            // https://tools.ietf.org/html/rfc6265#section-4.1.1
+            // `Max-Age: 0` is not valid, thus ignored, and the cookie is persisted.
+            expires: new Date(0),
+            httpOnly: true,
+            sameSite:  true ? "none" : 0,
+            secure: "production" !== "development",
+            path: "/",
+            ...options.path !== undefined ? {
+                path: options.path
+            } : undefined
+        }),
+        serialize(COOKIE_NAME_PRERENDER_DATA, "", {
+            // To delete a cookie, set `expires` to a date in the past:
+            // https://tools.ietf.org/html/rfc6265#section-4.1.1
+            // `Max-Age: 0` is not valid, thus ignored, and the cookie is persisted.
+            expires: new Date(0),
+            httpOnly: true,
+            sameSite:  true ? "none" : 0,
+            secure: "production" !== "development",
+            path: "/",
+            ...options.path !== undefined ? {
+                path: options.path
+            } : undefined
+        })
+    ]);
+    Object.defineProperty(res, SYMBOL_CLEARED_COOKIES, {
+        value: true,
+        enumerable: false
+    });
+    return res;
+}
+/**
+ * Custom error class
+ */ class ApiError extends (/* unused pure expression or super */ null && (Error)) {
+    constructor(statusCode, message){
+        super(message);
+        this.statusCode = statusCode;
+    }
+}
+/**
+ * Sends error in `response`
+ * @param res response object
+ * @param statusCode of response
+ * @param message of response
+ */ function sendError(res, statusCode, message) {
+    res.statusCode = statusCode;
+    res.statusMessage = message;
+    res.end(message);
+}
+/**
+ * Execute getter function only if its needed
+ * @param LazyProps `req` and `params` for lazyProp
+ * @param prop name of property
+ * @param getter function to get data
+ */ function setLazyProp({ req }, prop, getter) {
+    const opts = {
+        configurable: true,
+        enumerable: true
+    };
+    const optsReset = {
+        ...opts,
+        writable: true
+    };
+    Object.defineProperty(req, prop, {
+        ...opts,
+        get: ()=>{
+            const value = getter();
+            // we set the property on the object to avoid recalculating it
+            Object.defineProperty(req, prop, {
+                ...optsReset,
+                value
+            });
+            return value;
+        },
+        set: (value)=>{
+            Object.defineProperty(req, prop, {
+                ...optsReset,
+                value
+            });
+        }
+    });
+} //# sourceMappingURL=index.js.map
+
+;// CONCATENATED MODULE: ./node_modules/next/dist/esm/server/async-storage/draft-mode-provider.js
+
+class DraftModeProvider {
+    constructor(previewProps, req, cookies, mutableCookies){
+        var _cookies_get;
+        // The logic for draftMode() is very similar to tryGetPreviewData()
+        // but Draft Mode does not have any data associated with it.
+        const isOnDemandRevalidate = previewProps && checkIsOnDemandRevalidate(req, previewProps).isOnDemandRevalidate;
+        const cookieValue = (_cookies_get = cookies.get(COOKIE_NAME_PRERENDER_BYPASS)) == null ? void 0 : _cookies_get.value;
+        this.isEnabled = Boolean(!isOnDemandRevalidate && cookieValue && previewProps && cookieValue === previewProps.previewModeId);
+        this._previewModeId = previewProps == null ? void 0 : previewProps.previewModeId;
+        this._mutableCookies = mutableCookies;
+    }
+    enable() {
+        if (!this._previewModeId) {
+            throw new Error("Invariant: previewProps missing previewModeId this should never happen");
+        }
+        this._mutableCookies.set({
+            name: COOKIE_NAME_PRERENDER_BYPASS,
+            value: this._previewModeId,
+            httpOnly: true,
+            sameSite:  true ? "none" : 0,
+            secure: "production" !== "development",
+            path: "/"
+        });
+    }
+    disable() {
+        // To delete a cookie, set `expires` to a date in the past:
+        // https://tools.ietf.org/html/rfc6265#section-4.1.1
+        // `Max-Age: 0` is not valid, thus ignored, and the cookie is persisted.
+        this._mutableCookies.set({
+            name: COOKIE_NAME_PRERENDER_BYPASS,
+            value: "",
+            httpOnly: true,
+            sameSite:  true ? "none" : 0,
+            secure: "production" !== "development",
+            path: "/",
+            expires: new Date(0)
+        });
+    }
+} //# sourceMappingURL=draft-mode-provider.js.map
+
+;// CONCATENATED MODULE: ./node_modules/next/dist/esm/server/async-storage/request-async-storage-wrapper.js
+
+
+
+
+
+function getHeaders(headers) {
+    const cleaned = HeadersAdapter.from(headers);
+    for (const param of FLIGHT_PARAMETERS){
+        cleaned.delete(param.toString().toLowerCase());
+    }
+    return HeadersAdapter.seal(cleaned);
+}
+function getCookies(headers) {
+    const cookies = new _edge_runtime_cookies.RequestCookies(HeadersAdapter.from(headers));
+    return RequestCookiesAdapter.seal(cookies);
+}
+function getMutableCookies(headers, onUpdateCookies) {
+    const cookies = new _edge_runtime_cookies.RequestCookies(HeadersAdapter.from(headers));
+    return MutableRequestCookiesAdapter.wrap(cookies, onUpdateCookies);
+}
+const RequestAsyncStorageWrapper = {
+    /**
+   * Wrap the callback with the given store so it can access the underlying
+   * store using hooks.
+   *
+   * @param storage underlying storage object returned by the module
+   * @param context context to seed the store
+   * @param callback function to call within the scope of the context
+   * @returns the result returned by the callback
+   */ wrap (storage, { req, res, renderOpts }, callback) {
+        let previewProps = undefined;
+        if (renderOpts && "previewProps" in renderOpts) {
+            // TODO: investigate why previewProps isn't on RenderOpts
+            previewProps = renderOpts.previewProps;
+        }
+        function defaultOnUpdateCookies(cookies) {
+            if (res) {
+                res.setHeader("Set-Cookie", cookies);
+            }
+        }
+        const cache = {};
+        const store = {
+            get headers () {
+                if (!cache.headers) {
+                    // Seal the headers object that'll freeze out any methods that could
+                    // mutate the underlying data.
+                    cache.headers = getHeaders(req.headers);
+                }
+                return cache.headers;
+            },
+            get cookies () {
+                if (!cache.cookies) {
+                    // Seal the cookies object that'll freeze out any methods that could
+                    // mutate the underlying data.
+                    cache.cookies = getCookies(req.headers);
+                }
+                return cache.cookies;
+            },
+            get mutableCookies () {
+                if (!cache.mutableCookies) {
+                    cache.mutableCookies = getMutableCookies(req.headers, (renderOpts == null ? void 0 : renderOpts.onUpdateCookies) || (res ? defaultOnUpdateCookies : undefined));
+                }
+                return cache.mutableCookies;
+            },
+            get draftMode () {
+                if (!cache.draftMode) {
+                    cache.draftMode = new DraftModeProvider(previewProps, req, this.cookies, this.mutableCookies);
+                }
+                return cache.draftMode;
+            }
+        };
+        return storage.run(store, callback, store);
+    }
+}; //# sourceMappingURL=request-async-storage-wrapper.js.map
+
+;// CONCATENATED MODULE: ./node_modules/next/dist/esm/client/components/async-local-storage.js
+const sharedAsyncLocalStorageNotAvailableError = new Error("Invariant: AsyncLocalStorage accessed in runtime where it is not available");
+class FakeAsyncLocalStorage {
+    disable() {
+        throw sharedAsyncLocalStorageNotAvailableError;
+    }
+    getStore() {
+        // This fake implementation of AsyncLocalStorage always returns `undefined`.
+        return undefined;
+    }
+    run() {
+        throw sharedAsyncLocalStorageNotAvailableError;
+    }
+    exit() {
+        throw sharedAsyncLocalStorageNotAvailableError;
+    }
+    enterWith() {
+        throw sharedAsyncLocalStorageNotAvailableError;
+    }
+}
+const maybeGlobalAsyncLocalStorage = globalThis.AsyncLocalStorage;
+function createAsyncLocalStorage() {
+    if (maybeGlobalAsyncLocalStorage) {
+        return new maybeGlobalAsyncLocalStorage();
+    }
+    return new FakeAsyncLocalStorage();
+} //# sourceMappingURL=async-local-storage.js.map
+
+;// CONCATENATED MODULE: ./node_modules/next/dist/esm/client/components/request-async-storage.external.js
+
+const requestAsyncStorage = createAsyncLocalStorage(); //# sourceMappingURL=request-async-storage.external.js.map
+
+;// CONCATENATED MODULE: ./node_modules/next/dist/esm/server/web/adapter.js
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class NextRequestHint extends NextRequest {
+    constructor(params){
+        super(params.input, params.init);
+        this.sourcePage = params.page;
+    }
+    get request() {
+        throw new PageSignatureError({
+            page: this.sourcePage
+        });
+    }
+    respondWith() {
+        throw new PageSignatureError({
+            page: this.sourcePage
+        });
+    }
+    waitUntil() {
+        throw new PageSignatureError({
+            page: this.sourcePage
+        });
+    }
+}
+const adapter_FLIGHT_PARAMETERS = [
+    [
+        RSC
+    ],
+    [
+        NEXT_ROUTER_STATE_TREE
+    ],
+    [
+        NEXT_ROUTER_PREFETCH
+    ]
+];
+async function adapter(params) {
+    await ensureInstrumentationRegistered();
+    // TODO-APP: use explicit marker for this
+    const isEdgeRendering = typeof self.__BUILD_MANIFEST !== "undefined";
+    const prerenderManifest = typeof self.__PRERENDER_MANIFEST === "string" ? JSON.parse(self.__PRERENDER_MANIFEST) : undefined;
+    params.request.url = normalizeRscPath(params.request.url, true);
+    const requestUrl = new NextURL(params.request.url, {
+        headers: params.request.headers,
+        nextConfig: params.request.nextConfig
+    });
+    // Iterator uses an index to keep track of the current iteration. Because of deleting and appending below we can't just use the iterator.
+    // Instead we use the keys before iteration.
+    const keys = [
+        ...requestUrl.searchParams.keys()
+    ];
+    for (const key of keys){
+        const value = requestUrl.searchParams.getAll(key);
+        if (key !== NEXT_QUERY_PARAM_PREFIX && key.startsWith(NEXT_QUERY_PARAM_PREFIX)) {
+            const normalizedKey = key.substring(NEXT_QUERY_PARAM_PREFIX.length);
+            requestUrl.searchParams.delete(normalizedKey);
+            for (const val of value){
+                requestUrl.searchParams.append(normalizedKey, val);
+            }
+            requestUrl.searchParams.delete(key);
+        }
+    }
+    // Ensure users only see page requests, never data requests.
+    const buildId = requestUrl.buildId;
+    requestUrl.buildId = "";
+    const isDataReq = params.request.headers["x-nextjs-data"];
+    if (isDataReq && requestUrl.pathname === "/index") {
+        requestUrl.pathname = "/";
+    }
+    const requestHeaders = fromNodeOutgoingHttpHeaders(params.request.headers);
+    const flightHeaders = new Map();
+    // Parameters should only be stripped for middleware
+    if (!isEdgeRendering) {
+        for (const param of adapter_FLIGHT_PARAMETERS){
+            const key = param.toString().toLowerCase();
+            const value = requestHeaders.get(key);
+            if (value) {
+                flightHeaders.set(key, requestHeaders.get(key));
+                requestHeaders.delete(key);
+            }
+        }
+    }
+    const normalizeUrl =  false ? 0 : requestUrl;
+    const request = new NextRequestHint({
+        page: params.page,
+        // Strip internal query parameters off the request.
+        input: stripInternalSearchParams(normalizeUrl, true).toString(),
+        init: {
+            body: params.request.body,
+            geo: params.request.geo,
+            headers: requestHeaders,
+            ip: params.request.ip,
+            method: params.request.method,
+            nextConfig: params.request.nextConfig,
+            signal: params.request.signal
+        }
+    });
+    /**
+   * This allows to identify the request as a data request. The user doesn't
+   * need to know about this property neither use it. We add it for testing
+   * purposes.
+   */ if (isDataReq) {
+        Object.defineProperty(request, "__isData", {
+            enumerable: false,
+            value: true
+        });
+    }
+    if (!globalThis.__incrementalCache && params.IncrementalCache) {
+        globalThis.__incrementalCache = new params.IncrementalCache({
+            appDir: true,
+            fetchCache: true,
+            minimalMode: "production" !== "development",
+            fetchCacheKeyPrefix: undefined,
+            dev: "production" === "development",
+            requestHeaders: params.request.headers,
+            requestProtocol: "https",
+            getPrerenderManifest: ()=>{
+                return {
+                    version: -1,
+                    routes: {},
+                    dynamicRoutes: {},
+                    notFoundRoutes: [],
+                    preview: {
+                        previewModeId: "development-id"
+                    }
+                };
+            }
+        });
+    }
+    const event = new NextFetchEvent({
+        request,
+        page: params.page
+    });
+    let response;
+    let cookiesFromResponse;
+    // we only care to make async storage available for middleware
+    const isMiddleware = params.page === "/middleware" || params.page === "/src/middleware";
+    if (isMiddleware) {
+        response = await RequestAsyncStorageWrapper.wrap(requestAsyncStorage, {
+            req: request,
+            renderOpts: {
+                onUpdateCookies: (cookies)=>{
+                    cookiesFromResponse = cookies;
+                },
+                // @ts-expect-error: TODO: investigate why previewProps isn't on RenderOpts
+                previewProps: (prerenderManifest == null ? void 0 : prerenderManifest.preview) || {
+                    previewModeId: "development-id",
+                    previewModeEncryptionKey: "",
+                    previewModeSigningKey: ""
+                }
+            }
+        }, ()=>params.handler(request, event));
+    } else {
+        response = await params.handler(request, event);
+    }
+    // check if response is a Response object
+    if (response && !(response instanceof Response)) {
+        throw new TypeError("Expected an instance of Response to be returned");
+    }
+    if (response && cookiesFromResponse) {
+        response.headers.set("set-cookie", cookiesFromResponse);
+    }
+    /**
+   * For rewrites we must always include the locale in the final pathname
+   * so we re-create the NextURL forcing it to include it when the it is
+   * an internal rewrite. Also we make sure the outgoing rewrite URL is
+   * a data URL if the request was a data request.
+   */ const rewrite = response == null ? void 0 : response.headers.get("x-middleware-rewrite");
+    if (response && rewrite) {
+        const rewriteUrl = new NextURL(rewrite, {
+            forceLocale: true,
+            headers: params.request.headers,
+            nextConfig: params.request.nextConfig
+        });
+        if (true) {
+            if (rewriteUrl.host === request.nextUrl.host) {
+                rewriteUrl.buildId = buildId || rewriteUrl.buildId;
+                response.headers.set("x-middleware-rewrite", String(rewriteUrl));
+            }
+        }
+        /**
+     * When the request is a data request we must show if there was a rewrite
+     * with an internal header so the client knows which component to load
+     * from the data request.
+     */ const relativizedRewrite = relativizeURL(String(rewriteUrl), String(requestUrl));
+        if (isDataReq && // if the rewrite is external and external rewrite
+        // resolving config is enabled don't add this header
+        // so the upstream app can set it instead
+        !(undefined && 0)) {
+            response.headers.set("x-nextjs-rewrite", relativizedRewrite);
+        }
+    }
+    /**
+   * For redirects we will not include the locale in case when it is the
+   * default and we must also make sure the outgoing URL is a data one if
+   * the incoming request was a data request.
+   */ const redirect = response == null ? void 0 : response.headers.get("Location");
+    if (response && redirect && !isEdgeRendering) {
+        const redirectURL = new NextURL(redirect, {
+            forceLocale: false,
+            headers: params.request.headers,
+            nextConfig: params.request.nextConfig
+        });
+        /**
+     * Responses created from redirects have immutable headers so we have
+     * to clone the response to be able to modify it.
+     */ response = new Response(response.body, response);
+        if (true) {
+            if (redirectURL.host === request.nextUrl.host) {
+                redirectURL.buildId = buildId || redirectURL.buildId;
+                response.headers.set("Location", String(redirectURL));
+            }
+        }
+        /**
+     * When the request is a data request we can't use the location header as
+     * it may end up with CORS error. Instead we map to an internal header so
+     * the client knows the destination.
+     */ if (isDataReq) {
+            response.headers.delete("Location");
+            response.headers.set("x-nextjs-redirect", relativizeURL(String(redirectURL), String(requestUrl)));
+        }
+    }
+    const finalResponse = response ? response : NextResponse.next();
+    // Flight headers are not overridable / removable so they are applied at the end.
+    const middlewareOverrideHeaders = finalResponse.headers.get("x-middleware-override-headers");
+    const overwrittenHeaders = [];
+    if (middlewareOverrideHeaders) {
+        for (const [key, value] of flightHeaders){
+            finalResponse.headers.set(`x-middleware-request-${key}`, value);
+            overwrittenHeaders.push(key);
+        }
+        if (overwrittenHeaders.length > 0) {
+            finalResponse.headers.set("x-middleware-override-headers", middlewareOverrideHeaders + "," + overwrittenHeaders.join(","));
+        }
+    }
+    return {
+        response: finalResponse,
+        waitUntil: Promise.all(event[waitUntilSymbol]),
+        fetchMetrics: request.fetchMetrics
+    };
+} //# sourceMappingURL=adapter.js.map
+
+;// CONCATENATED MODULE: ./node_modules/next/dist/esm/server/web/exports/next-response.js
+// This file is for modularized imports for next/server to get fully-treeshaking.
+ //# sourceMappingURL=next-response.js.map
+
+;// CONCATENATED MODULE: ./i18n-config.ts
+const i18n = {
+    defaultLocale: "en",
+    locales: [
+        "en"
+    ]
+};
+
+;// CONCATENATED MODULE: ./node_modules/@formatjs/intl-localematcher/lib/abstract/CanonicalizeLocaleList.js
+/**
+ * http://ecma-international.org/ecma-402/7.0/index.html#sec-canonicalizelocalelist
+ * @param locales
+ */ function CanonicalizeLocaleList(locales) {
+    // TODO
+    return Intl.getCanonicalLocales(locales);
+}
+
+;// CONCATENATED MODULE: ./node_modules/tslib/tslib.es6.js
+/******************************************************************************
+Copyright (c) Microsoft Corporation.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
+***************************************************************************** */ /* global Reflect, Promise */ var extendStatics = function(d, b) {
+    extendStatics = Object.setPrototypeOf || ({
+        __proto__: []
+    }) instanceof Array && function(d, b) {
+        d.__proto__ = b;
+    } || function(d, b) {
+        for(var p in b)if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p];
+    };
+    return extendStatics(d, b);
+};
+function __extends(d, b) {
+    if (typeof b !== "function" && b !== null) throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+    extendStatics(d, b);
+    function __() {
+        this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+}
+var __assign = function() {
+    __assign = Object.assign || function __assign(t) {
+        for(var s, i = 1, n = arguments.length; i < n; i++){
+            s = arguments[i];
+            for(var p in s)if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+function __rest(s, e) {
+    var t = {};
+    for(var p in s)if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function") for(var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++){
+        if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i])) t[p[i]] = s[p[i]];
+    }
+    return t;
+}
+function __decorate(decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for(var i = decorators.length - 1; i >= 0; i--)if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+}
+function __param(paramIndex, decorator) {
+    return function(target, key) {
+        decorator(target, key, paramIndex);
+    };
+}
+function __esDecorate(ctor, descriptorIn, decorators, contextIn, initializers, extraInitializers) {
+    function accept(f) {
+        if (f !== void 0 && typeof f !== "function") throw new TypeError("Function expected");
+        return f;
+    }
+    var kind = contextIn.kind, key = kind === "getter" ? "get" : kind === "setter" ? "set" : "value";
+    var target = !descriptorIn && ctor ? contextIn["static"] ? ctor : ctor.prototype : null;
+    var descriptor = descriptorIn || (target ? Object.getOwnPropertyDescriptor(target, contextIn.name) : {});
+    var _, done = false;
+    for(var i = decorators.length - 1; i >= 0; i--){
+        var context = {};
+        for(var p in contextIn)context[p] = p === "access" ? {} : contextIn[p];
+        for(var p in contextIn.access)context.access[p] = contextIn.access[p];
+        context.addInitializer = function(f) {
+            if (done) throw new TypeError("Cannot add initializers after decoration has completed");
+            extraInitializers.push(accept(f || null));
+        };
+        var result = (0, decorators[i])(kind === "accessor" ? {
+            get: descriptor.get,
+            set: descriptor.set
+        } : descriptor[key], context);
+        if (kind === "accessor") {
+            if (result === void 0) continue;
+            if (result === null || typeof result !== "object") throw new TypeError("Object expected");
+            if (_ = accept(result.get)) descriptor.get = _;
+            if (_ = accept(result.set)) descriptor.set = _;
+            if (_ = accept(result.init)) initializers.push(_);
+        } else if (_ = accept(result)) {
+            if (kind === "field") initializers.push(_);
+            else descriptor[key] = _;
+        }
+    }
+    if (target) Object.defineProperty(target, contextIn.name, descriptor);
+    done = true;
+}
+;
+function __runInitializers(thisArg, initializers, value) {
+    var useValue = arguments.length > 2;
+    for(var i = 0; i < initializers.length; i++){
+        value = useValue ? initializers[i].call(thisArg, value) : initializers[i].call(thisArg);
+    }
+    return useValue ? value : void 0;
+}
+;
+function __propKey(x) {
+    return typeof x === "symbol" ? x : "".concat(x);
+}
+;
+function __setFunctionName(f, name, prefix) {
+    if (typeof name === "symbol") name = name.description ? "[".concat(name.description, "]") : "";
+    return Object.defineProperty(f, "name", {
+        configurable: true,
+        value: prefix ? "".concat(prefix, " ", name) : name
+    });
+}
+;
+function __metadata(metadataKey, metadataValue) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
+}
+function __awaiter(thisArg, _arguments, P, generator) {
+    function adopt(value) {
+        return value instanceof P ? value : new P(function(resolve) {
+            resolve(value);
+        });
+    }
+    return new (P || (P = Promise))(function(resolve, reject) {
+        function fulfilled(value) {
+            try {
+                step(generator.next(value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+        function rejected(value) {
+            try {
+                step(generator["throw"](value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+        function step(result) {
+            result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+        }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+}
+function __generator(thisArg, body) {
+    var _ = {
+        label: 0,
+        sent: function() {
+            if (t[0] & 1) throw t[1];
+            return t[1];
+        },
+        trys: [],
+        ops: []
+    }, f, y, t, g;
+    return g = {
+        next: verb(0),
+        "throw": verb(1),
+        "return": verb(2)
+    }, typeof Symbol === "function" && (g[Symbol.iterator] = function() {
+        return this;
+    }), g;
+    function verb(n) {
+        return function(v) {
+            return step([
+                n,
+                v
+            ]);
+        };
+    }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while(g && (g = 0, op[0] && (_ = 0)), _)try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [
+                op[0] & 2,
+                t.value
+            ];
+            switch(op[0]){
+                case 0:
+                case 1:
+                    t = op;
+                    break;
+                case 4:
+                    _.label++;
+                    return {
+                        value: op[1],
+                        done: false
+                    };
+                case 5:
+                    _.label++;
+                    y = op[1];
+                    op = [
+                        0
+                    ];
+                    continue;
+                case 7:
+                    op = _.ops.pop();
+                    _.trys.pop();
+                    continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
+                        _ = 0;
+                        continue;
+                    }
+                    if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
+                        _.label = op[1];
+                        break;
+                    }
+                    if (op[0] === 6 && _.label < t[1]) {
+                        _.label = t[1];
+                        t = op;
+                        break;
+                    }
+                    if (t && _.label < t[2]) {
+                        _.label = t[2];
+                        _.ops.push(op);
+                        break;
+                    }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop();
+                    continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) {
+            op = [
+                6,
+                e
+            ];
+            y = 0;
+        } finally{
+            f = t = 0;
+        }
+        if (op[0] & 5) throw op[1];
+        return {
+            value: op[0] ? op[1] : void 0,
+            done: true
+        };
+    }
+}
+var __createBinding = Object.create ? function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+        desc = {
+            enumerable: true,
+            get: function() {
+                return m[k];
+            }
+        };
+    }
+    Object.defineProperty(o, k2, desc);
+} : function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+};
+function __exportStar(m, o) {
+    for(var p in m)if (p !== "default" && !Object.prototype.hasOwnProperty.call(o, p)) __createBinding(o, m, p);
+}
+function __values(o) {
+    var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
+    if (m) return m.call(o);
+    if (o && typeof o.length === "number") return {
+        next: function() {
+            if (o && i >= o.length) o = void 0;
+            return {
+                value: o && o[i++],
+                done: !o
+            };
+        }
+    };
+    throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
+}
+function __read(o, n) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator];
+    if (!m) return o;
+    var i = m.call(o), r, ar = [], e;
+    try {
+        while((n === void 0 || n-- > 0) && !(r = i.next()).done)ar.push(r.value);
+    } catch (error) {
+        e = {
+            error: error
+        };
+    } finally{
+        try {
+            if (r && !r.done && (m = i["return"])) m.call(i);
+        } finally{
+            if (e) throw e.error;
+        }
+    }
+    return ar;
+}
+/** @deprecated */ function __spread() {
+    for(var ar = [], i = 0; i < arguments.length; i++)ar = ar.concat(__read(arguments[i]));
+    return ar;
+}
+/** @deprecated */ function __spreadArrays() {
+    for(var s = 0, i = 0, il = arguments.length; i < il; i++)s += arguments[i].length;
+    for(var r = Array(s), k = 0, i = 0; i < il; i++)for(var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)r[k] = a[j];
+    return r;
+}
+function __spreadArray(to, from, pack) {
+    if (pack || arguments.length === 2) for(var i = 0, l = from.length, ar; i < l; i++){
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+}
+function __await(v) {
+    return this instanceof __await ? (this.v = v, this) : new __await(v);
+}
+function __asyncGenerator(thisArg, _arguments, generator) {
+    if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+    var g = generator.apply(thisArg, _arguments || []), i, q = [];
+    return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function() {
+        return this;
+    }, i;
+    function verb(n) {
+        if (g[n]) i[n] = function(v) {
+            return new Promise(function(a, b) {
+                q.push([
+                    n,
+                    v,
+                    a,
+                    b
+                ]) > 1 || resume(n, v);
+            });
+        };
+    }
+    function resume(n, v) {
+        try {
+            step(g[n](v));
+        } catch (e) {
+            settle(q[0][3], e);
+        }
+    }
+    function step(r) {
+        r.value instanceof __await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r);
+    }
+    function fulfill(value) {
+        resume("next", value);
+    }
+    function reject(value) {
+        resume("throw", value);
+    }
+    function settle(f, v) {
+        if (f(v), q.shift(), q.length) resume(q[0][0], q[0][1]);
+    }
+}
+function __asyncDelegator(o) {
+    var i, p;
+    return i = {}, verb("next"), verb("throw", function(e) {
+        throw e;
+    }), verb("return"), i[Symbol.iterator] = function() {
+        return this;
+    }, i;
+    function verb(n, f) {
+        i[n] = o[n] ? function(v) {
+            return (p = !p) ? {
+                value: __await(o[n](v)),
+                done: false
+            } : f ? f(v) : v;
+        } : f;
+    }
+}
+function __asyncValues(o) {
+    if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+    var m = o[Symbol.asyncIterator], i;
+    return m ? m.call(o) : (o = typeof __values === "function" ? __values(o) : o[Symbol.iterator](), i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function() {
+        return this;
+    }, i);
+    function verb(n) {
+        i[n] = o[n] && function(v) {
+            return new Promise(function(resolve, reject) {
+                v = o[n](v), settle(resolve, reject, v.done, v.value);
+            });
+        };
+    }
+    function settle(resolve, reject, d, v) {
+        Promise.resolve(v).then(function(v) {
+            resolve({
+                value: v,
+                done: d
+            });
+        }, reject);
+    }
+}
+function __makeTemplateObject(cooked, raw) {
+    if (Object.defineProperty) {
+        Object.defineProperty(cooked, "raw", {
+            value: raw
+        });
+    } else {
+        cooked.raw = raw;
+    }
+    return cooked;
+}
+;
+var __setModuleDefault = Object.create ? function(o, v) {
+    Object.defineProperty(o, "default", {
+        enumerable: true,
+        value: v
+    });
+} : function(o, v) {
+    o["default"] = v;
+};
+function __importStar(mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) {
+        for(var k in mod)if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    }
+    __setModuleDefault(result, mod);
+    return result;
+}
+function __importDefault(mod) {
+    return mod && mod.__esModule ? mod : {
+        default: mod
+    };
+}
+function __classPrivateFieldGet(receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+}
+function __classPrivateFieldSet(receiver, state, value, kind, f) {
+    if (kind === "m") throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value), value;
+}
+function __classPrivateFieldIn(state, receiver) {
+    if (receiver === null || typeof receiver !== "object" && typeof receiver !== "function") throw new TypeError("Cannot use 'in' operator on non-object");
+    return typeof state === "function" ? receiver === state : state.has(receiver);
+}
+
+;// CONCATENATED MODULE: ./node_modules/@formatjs/intl-localematcher/lib/abstract/languageMatching.js
+var languageMatching_data = {
+    supplemental: {
+        languageMatching: {
+            "written-new": [
+                {
+                    paradigmLocales: {
+                        _locales: "en en_GB es es_419 pt_BR pt_PT"
+                    }
+                },
+                {
+                    $enUS: {
+                        _value: "AS+CA+GU+MH+MP+PH+PR+UM+US+VI"
+                    }
+                },
+                {
+                    $cnsar: {
+                        _value: "HK+MO"
+                    }
+                },
+                {
+                    $americas: {
+                        _value: "019"
+                    }
+                },
+                {
+                    $maghreb: {
+                        _value: "MA+DZ+TN+LY+MR+EH"
+                    }
+                },
+                {
+                    no: {
+                        _desired: "nb",
+                        _distance: "1"
+                    }
+                },
+                {
+                    bs: {
+                        _desired: "hr",
+                        _distance: "4"
+                    }
+                },
+                {
+                    bs: {
+                        _desired: "sh",
+                        _distance: "4"
+                    }
+                },
+                {
+                    hr: {
+                        _desired: "sh",
+                        _distance: "4"
+                    }
+                },
+                {
+                    sr: {
+                        _desired: "sh",
+                        _distance: "4"
+                    }
+                },
+                {
+                    aa: {
+                        _desired: "ssy",
+                        _distance: "4"
+                    }
+                },
+                {
+                    de: {
+                        _desired: "gsw",
+                        _distance: "4",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    de: {
+                        _desired: "lb",
+                        _distance: "4",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    no: {
+                        _desired: "da",
+                        _distance: "8"
+                    }
+                },
+                {
+                    nb: {
+                        _desired: "da",
+                        _distance: "8"
+                    }
+                },
+                {
+                    ru: {
+                        _desired: "ab",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "ach",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    nl: {
+                        _desired: "af",
+                        _distance: "20",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "ak",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "am",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    es: {
+                        _desired: "ay",
+                        _distance: "20",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ru: {
+                        _desired: "az",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ur: {
+                        _desired: "bal",
+                        _distance: "20",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ru: {
+                        _desired: "be",
+                        _distance: "20",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "bem",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    hi: {
+                        _desired: "bh",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "bn",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    zh: {
+                        _desired: "bo",
+                        _distance: "20",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    fr: {
+                        _desired: "br",
+                        _distance: "20",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    es: {
+                        _desired: "ca",
+                        _distance: "20",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    fil: {
+                        _desired: "ceb",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "chr",
+                        _distance: "20",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ar: {
+                        _desired: "ckb",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    fr: {
+                        _desired: "co",
+                        _distance: "20",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    fr: {
+                        _desired: "crs",
+                        _distance: "20",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    sk: {
+                        _desired: "cs",
+                        _distance: "20"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "cy",
+                        _distance: "20",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "ee",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "eo",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    es: {
+                        _desired: "eu",
+                        _distance: "20",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    da: {
+                        _desired: "fo",
+                        _distance: "20",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    nl: {
+                        _desired: "fy",
+                        _distance: "20",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "ga",
+                        _distance: "20",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "gaa",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "gd",
+                        _distance: "20",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    es: {
+                        _desired: "gl",
+                        _distance: "20",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    es: {
+                        _desired: "gn",
+                        _distance: "20",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    hi: {
+                        _desired: "gu",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "ha",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "haw",
+                        _distance: "20",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    fr: {
+                        _desired: "ht",
+                        _distance: "20",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ru: {
+                        _desired: "hy",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "ia",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "ig",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "is",
+                        _distance: "20",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    id: {
+                        _desired: "jv",
+                        _distance: "20",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "ka",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    fr: {
+                        _desired: "kg",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ru: {
+                        _desired: "kk",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "km",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "kn",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "kri",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    tr: {
+                        _desired: "ku",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ru: {
+                        _desired: "ky",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    it: {
+                        _desired: "la",
+                        _distance: "20",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "lg",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    fr: {
+                        _desired: "ln",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "lo",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "loz",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    fr: {
+                        _desired: "lua",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    hi: {
+                        _desired: "mai",
+                        _distance: "20",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "mfe",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    fr: {
+                        _desired: "mg",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "mi",
+                        _distance: "20",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "ml",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ru: {
+                        _desired: "mn",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    hi: {
+                        _desired: "mr",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    id: {
+                        _desired: "ms",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "mt",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "my",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "ne",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    nb: {
+                        _desired: "nn",
+                        _distance: "20"
+                    }
+                },
+                {
+                    no: {
+                        _desired: "nn",
+                        _distance: "20"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "nso",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "ny",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "nyn",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    fr: {
+                        _desired: "oc",
+                        _distance: "20",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "om",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "or",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "pa",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "pcm",
+                        _distance: "20",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "ps",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    es: {
+                        _desired: "qu",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    de: {
+                        _desired: "rm",
+                        _distance: "20",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "rn",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    fr: {
+                        _desired: "rw",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    hi: {
+                        _desired: "sa",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "sd",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "si",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "sn",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "so",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "sq",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "st",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    id: {
+                        _desired: "su",
+                        _distance: "20",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "sw",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "ta",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "te",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ru: {
+                        _desired: "tg",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "ti",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ru: {
+                        _desired: "tk",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "tlh",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "tn",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "to",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ru: {
+                        _desired: "tt",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "tum",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    zh: {
+                        _desired: "ug",
+                        _distance: "20",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ru: {
+                        _desired: "uk",
+                        _distance: "20",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "ur",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ru: {
+                        _desired: "uz",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    fr: {
+                        _desired: "wo",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "xh",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "yi",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "yo",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    zh: {
+                        _desired: "za",
+                        _distance: "20",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    en: {
+                        _desired: "zu",
+                        _distance: "30",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ar: {
+                        _desired: "aao",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ar: {
+                        _desired: "abh",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ar: {
+                        _desired: "abv",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ar: {
+                        _desired: "acm",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ar: {
+                        _desired: "acq",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ar: {
+                        _desired: "acw",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ar: {
+                        _desired: "acx",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ar: {
+                        _desired: "acy",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ar: {
+                        _desired: "adf",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ar: {
+                        _desired: "aeb",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ar: {
+                        _desired: "aec",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ar: {
+                        _desired: "afb",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ar: {
+                        _desired: "ajp",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ar: {
+                        _desired: "apc",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ar: {
+                        _desired: "apd",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ar: {
+                        _desired: "arq",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ar: {
+                        _desired: "ars",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ar: {
+                        _desired: "ary",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ar: {
+                        _desired: "arz",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ar: {
+                        _desired: "auz",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ar: {
+                        _desired: "avl",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ar: {
+                        _desired: "ayh",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ar: {
+                        _desired: "ayl",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ar: {
+                        _desired: "ayn",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ar: {
+                        _desired: "ayp",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ar: {
+                        _desired: "bbz",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ar: {
+                        _desired: "pga",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ar: {
+                        _desired: "shu",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ar: {
+                        _desired: "ssh",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    az: {
+                        _desired: "azb",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    et: {
+                        _desired: "vro",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ff: {
+                        _desired: "ffm",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ff: {
+                        _desired: "fub",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ff: {
+                        _desired: "fue",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ff: {
+                        _desired: "fuf",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ff: {
+                        _desired: "fuh",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ff: {
+                        _desired: "fui",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ff: {
+                        _desired: "fuq",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ff: {
+                        _desired: "fuv",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    gn: {
+                        _desired: "gnw",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    gn: {
+                        _desired: "gui",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    gn: {
+                        _desired: "gun",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    gn: {
+                        _desired: "nhd",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    iu: {
+                        _desired: "ikt",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    kln: {
+                        _desired: "enb",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    kln: {
+                        _desired: "eyo",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    kln: {
+                        _desired: "niq",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    kln: {
+                        _desired: "oki",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    kln: {
+                        _desired: "pko",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    kln: {
+                        _desired: "sgc",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    kln: {
+                        _desired: "tec",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    kln: {
+                        _desired: "tuy",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    kok: {
+                        _desired: "gom",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    kpe: {
+                        _desired: "gkp",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    luy: {
+                        _desired: "ida",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    luy: {
+                        _desired: "lkb",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    luy: {
+                        _desired: "lko",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    luy: {
+                        _desired: "lks",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    luy: {
+                        _desired: "lri",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    luy: {
+                        _desired: "lrm",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    luy: {
+                        _desired: "lsm",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    luy: {
+                        _desired: "lto",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    luy: {
+                        _desired: "lts",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    luy: {
+                        _desired: "lwg",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    luy: {
+                        _desired: "nle",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    luy: {
+                        _desired: "nyd",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    luy: {
+                        _desired: "rag",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    lv: {
+                        _desired: "ltg",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    mg: {
+                        _desired: "bhr",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    mg: {
+                        _desired: "bjq",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    mg: {
+                        _desired: "bmm",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    mg: {
+                        _desired: "bzc",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    mg: {
+                        _desired: "msh",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    mg: {
+                        _desired: "skg",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    mg: {
+                        _desired: "tdx",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    mg: {
+                        _desired: "tkg",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    mg: {
+                        _desired: "txy",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    mg: {
+                        _desired: "xmv",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    mg: {
+                        _desired: "xmw",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    mn: {
+                        _desired: "mvf",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ms: {
+                        _desired: "bjn",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ms: {
+                        _desired: "btj",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ms: {
+                        _desired: "bve",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ms: {
+                        _desired: "bvu",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ms: {
+                        _desired: "coa",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ms: {
+                        _desired: "dup",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ms: {
+                        _desired: "hji",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ms: {
+                        _desired: "id",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ms: {
+                        _desired: "jak",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ms: {
+                        _desired: "jax",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ms: {
+                        _desired: "kvb",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ms: {
+                        _desired: "kvr",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ms: {
+                        _desired: "kxd",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ms: {
+                        _desired: "lce",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ms: {
+                        _desired: "lcf",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ms: {
+                        _desired: "liw",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ms: {
+                        _desired: "max",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ms: {
+                        _desired: "meo",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ms: {
+                        _desired: "mfa",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ms: {
+                        _desired: "mfb",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ms: {
+                        _desired: "min",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ms: {
+                        _desired: "mqg",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ms: {
+                        _desired: "msi",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ms: {
+                        _desired: "mui",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ms: {
+                        _desired: "orn",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ms: {
+                        _desired: "ors",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ms: {
+                        _desired: "pel",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ms: {
+                        _desired: "pse",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ms: {
+                        _desired: "tmw",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ms: {
+                        _desired: "urk",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ms: {
+                        _desired: "vkk",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ms: {
+                        _desired: "vkt",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ms: {
+                        _desired: "xmm",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ms: {
+                        _desired: "zlm",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ms: {
+                        _desired: "zmi",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ne: {
+                        _desired: "dty",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    om: {
+                        _desired: "gax",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    om: {
+                        _desired: "hae",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    om: {
+                        _desired: "orc",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    or: {
+                        _desired: "spv",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ps: {
+                        _desired: "pbt",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    ps: {
+                        _desired: "pst",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    qu: {
+                        _desired: "qub",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    qu: {
+                        _desired: "qud",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    qu: {
+                        _desired: "quf",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    qu: {
+                        _desired: "qug",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    qu: {
+                        _desired: "quh",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    qu: {
+                        _desired: "quk",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    qu: {
+                        _desired: "qul",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    qu: {
+                        _desired: "qup",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    qu: {
+                        _desired: "qur",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    qu: {
+                        _desired: "qus",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    qu: {
+                        _desired: "quw",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    qu: {
+                        _desired: "qux",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    qu: {
+                        _desired: "quy",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    qu: {
+                        _desired: "qva",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    qu: {
+                        _desired: "qvc",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    qu: {
+                        _desired: "qve",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    qu: {
+                        _desired: "qvh",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    qu: {
+                        _desired: "qvi",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    qu: {
+                        _desired: "qvj",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    qu: {
+                        _desired: "qvl",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    qu: {
+                        _desired: "qvm",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    qu: {
+                        _desired: "qvn",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    qu: {
+                        _desired: "qvo",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    qu: {
+                        _desired: "qvp",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    qu: {
+                        _desired: "qvs",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    qu: {
+                        _desired: "qvw",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    qu: {
+                        _desired: "qvz",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    qu: {
+                        _desired: "qwa",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    qu: {
+                        _desired: "qwc",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    qu: {
+                        _desired: "qwh",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    qu: {
+                        _desired: "qws",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    qu: {
+                        _desired: "qxa",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    qu: {
+                        _desired: "qxc",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    qu: {
+                        _desired: "qxh",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    qu: {
+                        _desired: "qxl",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    qu: {
+                        _desired: "qxn",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    qu: {
+                        _desired: "qxo",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    qu: {
+                        _desired: "qxp",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    qu: {
+                        _desired: "qxr",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    qu: {
+                        _desired: "qxt",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    qu: {
+                        _desired: "qxu",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    qu: {
+                        _desired: "qxw",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    sc: {
+                        _desired: "sdc",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    sc: {
+                        _desired: "sdn",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    sc: {
+                        _desired: "sro",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    sq: {
+                        _desired: "aae",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    sq: {
+                        _desired: "aat",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    sq: {
+                        _desired: "aln",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    syr: {
+                        _desired: "aii",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    uz: {
+                        _desired: "uzs",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    yi: {
+                        _desired: "yih",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    zh: {
+                        _desired: "cdo",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    zh: {
+                        _desired: "cjy",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    zh: {
+                        _desired: "cpx",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    zh: {
+                        _desired: "czh",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    zh: {
+                        _desired: "czo",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    zh: {
+                        _desired: "gan",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    zh: {
+                        _desired: "hak",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    zh: {
+                        _desired: "hsn",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    zh: {
+                        _desired: "lzh",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    zh: {
+                        _desired: "mnp",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    zh: {
+                        _desired: "nan",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    zh: {
+                        _desired: "wuu",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    zh: {
+                        _desired: "yue",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    "*": {
+                        _desired: "*",
+                        _distance: "80"
+                    }
+                },
+                {
+                    "en-Latn": {
+                        _desired: "am-Ethi",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    "ru-Cyrl": {
+                        _desired: "az-Latn",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    "en-Latn": {
+                        _desired: "bn-Beng",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    "zh-Hans": {
+                        _desired: "bo-Tibt",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    "ru-Cyrl": {
+                        _desired: "hy-Armn",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    "en-Latn": {
+                        _desired: "ka-Geor",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    "en-Latn": {
+                        _desired: "km-Khmr",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    "en-Latn": {
+                        _desired: "kn-Knda",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    "en-Latn": {
+                        _desired: "lo-Laoo",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    "en-Latn": {
+                        _desired: "ml-Mlym",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    "en-Latn": {
+                        _desired: "my-Mymr",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    "en-Latn": {
+                        _desired: "ne-Deva",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    "en-Latn": {
+                        _desired: "or-Orya",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    "en-Latn": {
+                        _desired: "pa-Guru",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    "en-Latn": {
+                        _desired: "ps-Arab",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    "en-Latn": {
+                        _desired: "sd-Arab",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    "en-Latn": {
+                        _desired: "si-Sinh",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    "en-Latn": {
+                        _desired: "ta-Taml",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    "en-Latn": {
+                        _desired: "te-Telu",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    "en-Latn": {
+                        _desired: "ti-Ethi",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    "ru-Cyrl": {
+                        _desired: "tk-Latn",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    "en-Latn": {
+                        _desired: "ur-Arab",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    "ru-Cyrl": {
+                        _desired: "uz-Latn",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    "en-Latn": {
+                        _desired: "yi-Hebr",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    "sr-Cyrl": {
+                        _desired: "sr-Latn",
+                        _distance: "5"
+                    }
+                },
+                {
+                    "zh-Hans": {
+                        _desired: "za-Latn",
+                        _distance: "10",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    "zh-Hans": {
+                        _desired: "zh-Hani",
+                        _distance: "20",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    "zh-Hant": {
+                        _desired: "zh-Hani",
+                        _distance: "20",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    "ar-Arab": {
+                        _desired: "ar-Latn",
+                        _distance: "20",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    "bn-Beng": {
+                        _desired: "bn-Latn",
+                        _distance: "20",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    "gu-Gujr": {
+                        _desired: "gu-Latn",
+                        _distance: "20",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    "hi-Deva": {
+                        _desired: "hi-Latn",
+                        _distance: "20",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    "kn-Knda": {
+                        _desired: "kn-Latn",
+                        _distance: "20",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    "ml-Mlym": {
+                        _desired: "ml-Latn",
+                        _distance: "20",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    "mr-Deva": {
+                        _desired: "mr-Latn",
+                        _distance: "20",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    "ta-Taml": {
+                        _desired: "ta-Latn",
+                        _distance: "20",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    "te-Telu": {
+                        _desired: "te-Latn",
+                        _distance: "20",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    "zh-Hans": {
+                        _desired: "zh-Latn",
+                        _distance: "20",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    "ja-Jpan": {
+                        _desired: "ja-Latn",
+                        _distance: "5",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    "ja-Jpan": {
+                        _desired: "ja-Hani",
+                        _distance: "5",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    "ja-Jpan": {
+                        _desired: "ja-Hira",
+                        _distance: "5",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    "ja-Jpan": {
+                        _desired: "ja-Kana",
+                        _distance: "5",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    "ja-Jpan": {
+                        _desired: "ja-Hrkt",
+                        _distance: "5",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    "ja-Hrkt": {
+                        _desired: "ja-Hira",
+                        _distance: "5",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    "ja-Hrkt": {
+                        _desired: "ja-Kana",
+                        _distance: "5",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    "ko-Kore": {
+                        _desired: "ko-Hani",
+                        _distance: "5",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    "ko-Kore": {
+                        _desired: "ko-Hang",
+                        _distance: "5",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    "ko-Kore": {
+                        _desired: "ko-Jamo",
+                        _distance: "5",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    "ko-Hang": {
+                        _desired: "ko-Jamo",
+                        _distance: "5",
+                        _oneway: "true"
+                    }
+                },
+                {
+                    "*-*": {
+                        _desired: "*-*",
+                        _distance: "50"
+                    }
+                },
+                {
+                    "ar-*-$maghreb": {
+                        _desired: "ar-*-$maghreb",
+                        _distance: "4"
+                    }
+                },
+                {
+                    "ar-*-$!maghreb": {
+                        _desired: "ar-*-$!maghreb",
+                        _distance: "4"
+                    }
+                },
+                {
+                    "ar-*-*": {
+                        _desired: "ar-*-*",
+                        _distance: "5"
+                    }
+                },
+                {
+                    "en-*-$enUS": {
+                        _desired: "en-*-$enUS",
+                        _distance: "4"
+                    }
+                },
+                {
+                    "en-*-GB": {
+                        _desired: "en-*-$!enUS",
+                        _distance: "3"
+                    }
+                },
+                {
+                    "en-*-$!enUS": {
+                        _desired: "en-*-$!enUS",
+                        _distance: "4"
+                    }
+                },
+                {
+                    "en-*-*": {
+                        _desired: "en-*-*",
+                        _distance: "5"
+                    }
+                },
+                {
+                    "es-*-$americas": {
+                        _desired: "es-*-$americas",
+                        _distance: "4"
+                    }
+                },
+                {
+                    "es-*-$!americas": {
+                        _desired: "es-*-$!americas",
+                        _distance: "4"
+                    }
+                },
+                {
+                    "es-*-*": {
+                        _desired: "es-*-*",
+                        _distance: "5"
+                    }
+                },
+                {
+                    "pt-*-$americas": {
+                        _desired: "pt-*-$americas",
+                        _distance: "4"
+                    }
+                },
+                {
+                    "pt-*-$!americas": {
+                        _desired: "pt-*-$!americas",
+                        _distance: "4"
+                    }
+                },
+                {
+                    "pt-*-*": {
+                        _desired: "pt-*-*",
+                        _distance: "5"
+                    }
+                },
+                {
+                    "zh-Hant-$cnsar": {
+                        _desired: "zh-Hant-$cnsar",
+                        _distance: "4"
+                    }
+                },
+                {
+                    "zh-Hant-$!cnsar": {
+                        _desired: "zh-Hant-$!cnsar",
+                        _distance: "4"
+                    }
+                },
+                {
+                    "zh-Hant-*": {
+                        _desired: "zh-Hant-*",
+                        _distance: "5"
+                    }
+                },
+                {
+                    "*-*-*": {
+                        _desired: "*-*-*",
+                        _distance: "4"
+                    }
+                }
+            ]
+        }
+    }
+};
+
+;// CONCATENATED MODULE: ./node_modules/@formatjs/intl-localematcher/lib/abstract/regions.generated.js
+// This file is generated from regions-gen.ts
+var regions = {
+    "001": [
+        "001",
+        "001-status-grouping",
+        "002",
+        "005",
+        "009",
+        "011",
+        "013",
+        "014",
+        "015",
+        "017",
+        "018",
+        "019",
+        "021",
+        "029",
+        "030",
+        "034",
+        "035",
+        "039",
+        "053",
+        "054",
+        "057",
+        "061",
+        "142",
+        "143",
+        "145",
+        "150",
+        "151",
+        "154",
+        "155",
+        "AC",
+        "AD",
+        "AE",
+        "AF",
+        "AG",
+        "AI",
+        "AL",
+        "AM",
+        "AO",
+        "AQ",
+        "AR",
+        "AS",
+        "AT",
+        "AU",
+        "AW",
+        "AX",
+        "AZ",
+        "BA",
+        "BB",
+        "BD",
+        "BE",
+        "BF",
+        "BG",
+        "BH",
+        "BI",
+        "BJ",
+        "BL",
+        "BM",
+        "BN",
+        "BO",
+        "BQ",
+        "BR",
+        "BS",
+        "BT",
+        "BV",
+        "BW",
+        "BY",
+        "BZ",
+        "CA",
+        "CC",
+        "CD",
+        "CF",
+        "CG",
+        "CH",
+        "CI",
+        "CK",
+        "CL",
+        "CM",
+        "CN",
+        "CO",
+        "CP",
+        "CQ",
+        "CR",
+        "CU",
+        "CV",
+        "CW",
+        "CX",
+        "CY",
+        "CZ",
+        "DE",
+        "DG",
+        "DJ",
+        "DK",
+        "DM",
+        "DO",
+        "DZ",
+        "EA",
+        "EC",
+        "EE",
+        "EG",
+        "EH",
+        "ER",
+        "ES",
+        "ET",
+        "EU",
+        "EZ",
+        "FI",
+        "FJ",
+        "FK",
+        "FM",
+        "FO",
+        "FR",
+        "GA",
+        "GB",
+        "GD",
+        "GE",
+        "GF",
+        "GG",
+        "GH",
+        "GI",
+        "GL",
+        "GM",
+        "GN",
+        "GP",
+        "GQ",
+        "GR",
+        "GS",
+        "GT",
+        "GU",
+        "GW",
+        "GY",
+        "HK",
+        "HM",
+        "HN",
+        "HR",
+        "HT",
+        "HU",
+        "IC",
+        "ID",
+        "IE",
+        "IL",
+        "IM",
+        "IN",
+        "IO",
+        "IQ",
+        "IR",
+        "IS",
+        "IT",
+        "JE",
+        "JM",
+        "JO",
+        "JP",
+        "KE",
+        "KG",
+        "KH",
+        "KI",
+        "KM",
+        "KN",
+        "KP",
+        "KR",
+        "KW",
+        "KY",
+        "KZ",
+        "LA",
+        "LB",
+        "LC",
+        "LI",
+        "LK",
+        "LR",
+        "LS",
+        "LT",
+        "LU",
+        "LV",
+        "LY",
+        "MA",
+        "MC",
+        "MD",
+        "ME",
+        "MF",
+        "MG",
+        "MH",
+        "MK",
+        "ML",
+        "MM",
+        "MN",
+        "MO",
+        "MP",
+        "MQ",
+        "MR",
+        "MS",
+        "MT",
+        "MU",
+        "MV",
+        "MW",
+        "MX",
+        "MY",
+        "MZ",
+        "NA",
+        "NC",
+        "NE",
+        "NF",
+        "NG",
+        "NI",
+        "NL",
+        "NO",
+        "NP",
+        "NR",
+        "NU",
+        "NZ",
+        "OM",
+        "PA",
+        "PE",
+        "PF",
+        "PG",
+        "PH",
+        "PK",
+        "PL",
+        "PM",
+        "PN",
+        "PR",
+        "PS",
+        "PT",
+        "PW",
+        "PY",
+        "QA",
+        "QO",
+        "RE",
+        "RO",
+        "RS",
+        "RU",
+        "RW",
+        "SA",
+        "SB",
+        "SC",
+        "SD",
+        "SE",
+        "SG",
+        "SH",
+        "SI",
+        "SJ",
+        "SK",
+        "SL",
+        "SM",
+        "SN",
+        "SO",
+        "SR",
+        "SS",
+        "ST",
+        "SV",
+        "SX",
+        "SY",
+        "SZ",
+        "TA",
+        "TC",
+        "TD",
+        "TF",
+        "TG",
+        "TH",
+        "TJ",
+        "TK",
+        "TL",
+        "TM",
+        "TN",
+        "TO",
+        "TR",
+        "TT",
+        "TV",
+        "TW",
+        "TZ",
+        "UA",
+        "UG",
+        "UM",
+        "UN",
+        "US",
+        "UY",
+        "UZ",
+        "VA",
+        "VC",
+        "VE",
+        "VG",
+        "VI",
+        "VN",
+        "VU",
+        "WF",
+        "WS",
+        "XK",
+        "YE",
+        "YT",
+        "ZA",
+        "ZM",
+        "ZW"
+    ],
+    "002": [
+        "002",
+        "002-status-grouping",
+        "011",
+        "014",
+        "015",
+        "017",
+        "018",
+        "202",
+        "AO",
+        "BF",
+        "BI",
+        "BJ",
+        "BW",
+        "CD",
+        "CF",
+        "CG",
+        "CI",
+        "CM",
+        "CV",
+        "DJ",
+        "DZ",
+        "EA",
+        "EG",
+        "EH",
+        "ER",
+        "ET",
+        "GA",
+        "GH",
+        "GM",
+        "GN",
+        "GQ",
+        "GW",
+        "IC",
+        "IO",
+        "KE",
+        "KM",
+        "LR",
+        "LS",
+        "LY",
+        "MA",
+        "MG",
+        "ML",
+        "MR",
+        "MU",
+        "MW",
+        "MZ",
+        "NA",
+        "NE",
+        "NG",
+        "RE",
+        "RW",
+        "SC",
+        "SD",
+        "SH",
+        "SL",
+        "SN",
+        "SO",
+        "SS",
+        "ST",
+        "SZ",
+        "TD",
+        "TF",
+        "TG",
+        "TN",
+        "TZ",
+        "UG",
+        "YT",
+        "ZA",
+        "ZM",
+        "ZW"
+    ],
+    "003": [
+        "003",
+        "013",
+        "021",
+        "029",
+        "AG",
+        "AI",
+        "AW",
+        "BB",
+        "BL",
+        "BM",
+        "BQ",
+        "BS",
+        "BZ",
+        "CA",
+        "CR",
+        "CU",
+        "CW",
+        "DM",
+        "DO",
+        "GD",
+        "GL",
+        "GP",
+        "GT",
+        "HN",
+        "HT",
+        "JM",
+        "KN",
+        "KY",
+        "LC",
+        "MF",
+        "MQ",
+        "MS",
+        "MX",
+        "NI",
+        "PA",
+        "PM",
+        "PR",
+        "SV",
+        "SX",
+        "TC",
+        "TT",
+        "US",
+        "VC",
+        "VG",
+        "VI"
+    ],
+    "005": [
+        "005",
+        "AR",
+        "BO",
+        "BR",
+        "BV",
+        "CL",
+        "CO",
+        "EC",
+        "FK",
+        "GF",
+        "GS",
+        "GY",
+        "PE",
+        "PY",
+        "SR",
+        "UY",
+        "VE"
+    ],
+    "009": [
+        "009",
+        "053",
+        "054",
+        "057",
+        "061",
+        "AC",
+        "AQ",
+        "AS",
+        "AU",
+        "CC",
+        "CK",
+        "CP",
+        "CX",
+        "DG",
+        "FJ",
+        "FM",
+        "GU",
+        "HM",
+        "KI",
+        "MH",
+        "MP",
+        "NC",
+        "NF",
+        "NR",
+        "NU",
+        "NZ",
+        "PF",
+        "PG",
+        "PN",
+        "PW",
+        "QO",
+        "SB",
+        "TA",
+        "TK",
+        "TO",
+        "TV",
+        "UM",
+        "VU",
+        "WF",
+        "WS"
+    ],
+    "011": [
+        "011",
+        "BF",
+        "BJ",
+        "CI",
+        "CV",
+        "GH",
+        "GM",
+        "GN",
+        "GW",
+        "LR",
+        "ML",
+        "MR",
+        "NE",
+        "NG",
+        "SH",
+        "SL",
+        "SN",
+        "TG"
+    ],
+    "013": [
+        "013",
+        "BZ",
+        "CR",
+        "GT",
+        "HN",
+        "MX",
+        "NI",
+        "PA",
+        "SV"
+    ],
+    "014": [
+        "014",
+        "BI",
+        "DJ",
+        "ER",
+        "ET",
+        "IO",
+        "KE",
+        "KM",
+        "MG",
+        "MU",
+        "MW",
+        "MZ",
+        "RE",
+        "RW",
+        "SC",
+        "SO",
+        "SS",
+        "TF",
+        "TZ",
+        "UG",
+        "YT",
+        "ZM",
+        "ZW"
+    ],
+    "015": [
+        "015",
+        "DZ",
+        "EA",
+        "EG",
+        "EH",
+        "IC",
+        "LY",
+        "MA",
+        "SD",
+        "TN"
+    ],
+    "017": [
+        "017",
+        "AO",
+        "CD",
+        "CF",
+        "CG",
+        "CM",
+        "GA",
+        "GQ",
+        "ST",
+        "TD"
+    ],
+    "018": [
+        "018",
+        "BW",
+        "LS",
+        "NA",
+        "SZ",
+        "ZA"
+    ],
+    "019": [
+        "003",
+        "005",
+        "013",
+        "019",
+        "019-status-grouping",
+        "021",
+        "029",
+        "419",
+        "AG",
+        "AI",
+        "AR",
+        "AW",
+        "BB",
+        "BL",
+        "BM",
+        "BO",
+        "BQ",
+        "BR",
+        "BS",
+        "BV",
+        "BZ",
+        "CA",
+        "CL",
+        "CO",
+        "CR",
+        "CU",
+        "CW",
+        "DM",
+        "DO",
+        "EC",
+        "FK",
+        "GD",
+        "GF",
+        "GL",
+        "GP",
+        "GS",
+        "GT",
+        "GY",
+        "HN",
+        "HT",
+        "JM",
+        "KN",
+        "KY",
+        "LC",
+        "MF",
+        "MQ",
+        "MS",
+        "MX",
+        "NI",
+        "PA",
+        "PE",
+        "PM",
+        "PR",
+        "PY",
+        "SR",
+        "SV",
+        "SX",
+        "TC",
+        "TT",
+        "US",
+        "UY",
+        "VC",
+        "VE",
+        "VG",
+        "VI"
+    ],
+    "021": [
+        "021",
+        "BM",
+        "CA",
+        "GL",
+        "PM",
+        "US"
+    ],
+    "029": [
+        "029",
+        "AG",
+        "AI",
+        "AW",
+        "BB",
+        "BL",
+        "BQ",
+        "BS",
+        "CU",
+        "CW",
+        "DM",
+        "DO",
+        "GD",
+        "GP",
+        "HT",
+        "JM",
+        "KN",
+        "KY",
+        "LC",
+        "MF",
+        "MQ",
+        "MS",
+        "PR",
+        "SX",
+        "TC",
+        "TT",
+        "VC",
+        "VG",
+        "VI"
+    ],
+    "030": [
+        "030",
+        "CN",
+        "HK",
+        "JP",
+        "KP",
+        "KR",
+        "MN",
+        "MO",
+        "TW"
+    ],
+    "034": [
+        "034",
+        "AF",
+        "BD",
+        "BT",
+        "IN",
+        "IR",
+        "LK",
+        "MV",
+        "NP",
+        "PK"
+    ],
+    "035": [
+        "035",
+        "BN",
+        "ID",
+        "KH",
+        "LA",
+        "MM",
+        "MY",
+        "PH",
+        "SG",
+        "TH",
+        "TL",
+        "VN"
+    ],
+    "039": [
+        "039",
+        "AD",
+        "AL",
+        "BA",
+        "ES",
+        "GI",
+        "GR",
+        "HR",
+        "IT",
+        "ME",
+        "MK",
+        "MT",
+        "PT",
+        "RS",
+        "SI",
+        "SM",
+        "VA",
+        "XK"
+    ],
+    "053": [
+        "053",
+        "AU",
+        "CC",
+        "CX",
+        "HM",
+        "NF",
+        "NZ"
+    ],
+    "054": [
+        "054",
+        "FJ",
+        "NC",
+        "PG",
+        "SB",
+        "VU"
+    ],
+    "057": [
+        "057",
+        "FM",
+        "GU",
+        "KI",
+        "MH",
+        "MP",
+        "NR",
+        "PW",
+        "UM"
+    ],
+    "061": [
+        "061",
+        "AS",
+        "CK",
+        "NU",
+        "PF",
+        "PN",
+        "TK",
+        "TO",
+        "TV",
+        "WF",
+        "WS"
+    ],
+    "142": [
+        "030",
+        "034",
+        "035",
+        "142",
+        "143",
+        "145",
+        "AE",
+        "AF",
+        "AM",
+        "AZ",
+        "BD",
+        "BH",
+        "BN",
+        "BT",
+        "CN",
+        "CY",
+        "GE",
+        "HK",
+        "ID",
+        "IL",
+        "IN",
+        "IQ",
+        "IR",
+        "JO",
+        "JP",
+        "KG",
+        "KH",
+        "KP",
+        "KR",
+        "KW",
+        "KZ",
+        "LA",
+        "LB",
+        "LK",
+        "MM",
+        "MN",
+        "MO",
+        "MV",
+        "MY",
+        "NP",
+        "OM",
+        "PH",
+        "PK",
+        "PS",
+        "QA",
+        "SA",
+        "SG",
+        "SY",
+        "TH",
+        "TJ",
+        "TL",
+        "TM",
+        "TR",
+        "TW",
+        "UZ",
+        "VN",
+        "YE"
+    ],
+    "143": [
+        "143",
+        "KG",
+        "KZ",
+        "TJ",
+        "TM",
+        "UZ"
+    ],
+    "145": [
+        "145",
+        "AE",
+        "AM",
+        "AZ",
+        "BH",
+        "CY",
+        "GE",
+        "IL",
+        "IQ",
+        "JO",
+        "KW",
+        "LB",
+        "OM",
+        "PS",
+        "QA",
+        "SA",
+        "SY",
+        "TR",
+        "YE"
+    ],
+    "150": [
+        "039",
+        "150",
+        "151",
+        "154",
+        "155",
+        "AD",
+        "AL",
+        "AT",
+        "AX",
+        "BA",
+        "BE",
+        "BG",
+        "BY",
+        "CH",
+        "CQ",
+        "CZ",
+        "DE",
+        "DK",
+        "EE",
+        "ES",
+        "FI",
+        "FO",
+        "FR",
+        "GB",
+        "GG",
+        "GI",
+        "GR",
+        "HR",
+        "HU",
+        "IE",
+        "IM",
+        "IS",
+        "IT",
+        "JE",
+        "LI",
+        "LT",
+        "LU",
+        "LV",
+        "MC",
+        "MD",
+        "ME",
+        "MK",
+        "MT",
+        "NL",
+        "NO",
+        "PL",
+        "PT",
+        "RO",
+        "RS",
+        "RU",
+        "SE",
+        "SI",
+        "SJ",
+        "SK",
+        "SM",
+        "UA",
+        "VA",
+        "XK"
+    ],
+    "151": [
+        "151",
+        "BG",
+        "BY",
+        "CZ",
+        "HU",
+        "MD",
+        "PL",
+        "RO",
+        "RU",
+        "SK",
+        "UA"
+    ],
+    "154": [
+        "154",
+        "AX",
+        "CQ",
+        "DK",
+        "EE",
+        "FI",
+        "FO",
+        "GB",
+        "GG",
+        "IE",
+        "IM",
+        "IS",
+        "JE",
+        "LT",
+        "LV",
+        "NO",
+        "SE",
+        "SJ"
+    ],
+    "155": [
+        "155",
+        "AT",
+        "BE",
+        "CH",
+        "DE",
+        "FR",
+        "LI",
+        "LU",
+        "MC",
+        "NL"
+    ],
+    "202": [
+        "011",
+        "014",
+        "017",
+        "018",
+        "202",
+        "AO",
+        "BF",
+        "BI",
+        "BJ",
+        "BW",
+        "CD",
+        "CF",
+        "CG",
+        "CI",
+        "CM",
+        "CV",
+        "DJ",
+        "ER",
+        "ET",
+        "GA",
+        "GH",
+        "GM",
+        "GN",
+        "GQ",
+        "GW",
+        "IO",
+        "KE",
+        "KM",
+        "LR",
+        "LS",
+        "MG",
+        "ML",
+        "MR",
+        "MU",
+        "MW",
+        "MZ",
+        "NA",
+        "NE",
+        "NG",
+        "RE",
+        "RW",
+        "SC",
+        "SH",
+        "SL",
+        "SN",
+        "SO",
+        "SS",
+        "ST",
+        "SZ",
+        "TD",
+        "TF",
+        "TG",
+        "TZ",
+        "UG",
+        "YT",
+        "ZA",
+        "ZM",
+        "ZW"
+    ],
+    "419": [
+        "005",
+        "013",
+        "029",
+        "419",
+        "AG",
+        "AI",
+        "AR",
+        "AW",
+        "BB",
+        "BL",
+        "BO",
+        "BQ",
+        "BR",
+        "BS",
+        "BV",
+        "BZ",
+        "CL",
+        "CO",
+        "CR",
+        "CU",
+        "CW",
+        "DM",
+        "DO",
+        "EC",
+        "FK",
+        "GD",
+        "GF",
+        "GP",
+        "GS",
+        "GT",
+        "GY",
+        "HN",
+        "HT",
+        "JM",
+        "KN",
+        "KY",
+        "LC",
+        "MF",
+        "MQ",
+        "MS",
+        "MX",
+        "NI",
+        "PA",
+        "PE",
+        "PR",
+        "PY",
+        "SR",
+        "SV",
+        "SX",
+        "TC",
+        "TT",
+        "UY",
+        "VC",
+        "VE",
+        "VG",
+        "VI"
+    ],
+    "EU": [
+        "AT",
+        "BE",
+        "BG",
+        "CY",
+        "CZ",
+        "DE",
+        "DK",
+        "EE",
+        "ES",
+        "EU",
+        "FI",
+        "FR",
+        "GR",
+        "HR",
+        "HU",
+        "IE",
+        "IT",
+        "LT",
+        "LU",
+        "LV",
+        "MT",
+        "NL",
+        "PL",
+        "PT",
+        "RO",
+        "SE",
+        "SI",
+        "SK"
+    ],
+    "EZ": [
+        "AT",
+        "BE",
+        "CY",
+        "DE",
+        "EE",
+        "ES",
+        "EZ",
+        "FI",
+        "FR",
+        "GR",
+        "IE",
+        "IT",
+        "LT",
+        "LU",
+        "LV",
+        "MT",
+        "NL",
+        "PT",
+        "SI",
+        "SK"
+    ],
+    "QO": [
+        "AC",
+        "AQ",
+        "CP",
+        "DG",
+        "QO",
+        "TA"
+    ],
+    "UN": [
+        "AD",
+        "AE",
+        "AF",
+        "AG",
+        "AL",
+        "AM",
+        "AO",
+        "AR",
+        "AT",
+        "AU",
+        "AZ",
+        "BA",
+        "BB",
+        "BD",
+        "BE",
+        "BF",
+        "BG",
+        "BH",
+        "BI",
+        "BJ",
+        "BN",
+        "BO",
+        "BR",
+        "BS",
+        "BT",
+        "BW",
+        "BY",
+        "BZ",
+        "CA",
+        "CD",
+        "CF",
+        "CG",
+        "CH",
+        "CI",
+        "CL",
+        "CM",
+        "CN",
+        "CO",
+        "CR",
+        "CU",
+        "CV",
+        "CY",
+        "CZ",
+        "DE",
+        "DJ",
+        "DK",
+        "DM",
+        "DO",
+        "DZ",
+        "EC",
+        "EE",
+        "EG",
+        "ER",
+        "ES",
+        "ET",
+        "FI",
+        "FJ",
+        "FM",
+        "FR",
+        "GA",
+        "GB",
+        "GD",
+        "GE",
+        "GH",
+        "GM",
+        "GN",
+        "GQ",
+        "GR",
+        "GT",
+        "GW",
+        "GY",
+        "HN",
+        "HR",
+        "HT",
+        "HU",
+        "ID",
+        "IE",
+        "IL",
+        "IN",
+        "IQ",
+        "IR",
+        "IS",
+        "IT",
+        "JM",
+        "JO",
+        "JP",
+        "KE",
+        "KG",
+        "KH",
+        "KI",
+        "KM",
+        "KN",
+        "KP",
+        "KR",
+        "KW",
+        "KZ",
+        "LA",
+        "LB",
+        "LC",
+        "LI",
+        "LK",
+        "LR",
+        "LS",
+        "LT",
+        "LU",
+        "LV",
+        "LY",
+        "MA",
+        "MC",
+        "MD",
+        "ME",
+        "MG",
+        "MH",
+        "MK",
+        "ML",
+        "MM",
+        "MN",
+        "MR",
+        "MT",
+        "MU",
+        "MV",
+        "MW",
+        "MX",
+        "MY",
+        "MZ",
+        "NA",
+        "NE",
+        "NG",
+        "NI",
+        "NL",
+        "NO",
+        "NP",
+        "NR",
+        "NZ",
+        "OM",
+        "PA",
+        "PE",
+        "PG",
+        "PH",
+        "PK",
+        "PL",
+        "PT",
+        "PW",
+        "PY",
+        "QA",
+        "RO",
+        "RS",
+        "RU",
+        "RW",
+        "SA",
+        "SB",
+        "SC",
+        "SD",
+        "SE",
+        "SG",
+        "SI",
+        "SK",
+        "SL",
+        "SM",
+        "SN",
+        "SO",
+        "SR",
+        "SS",
+        "ST",
+        "SV",
+        "SY",
+        "SZ",
+        "TD",
+        "TG",
+        "TH",
+        "TJ",
+        "TL",
+        "TM",
+        "TN",
+        "TO",
+        "TR",
+        "TT",
+        "TV",
+        "TZ",
+        "UA",
+        "UG",
+        "UN",
+        "US",
+        "UY",
+        "UZ",
+        "VC",
+        "VE",
+        "VN",
+        "VU",
+        "WS",
+        "YE",
+        "ZA",
+        "ZM",
+        "ZW"
+    ]
+};
+
+;// CONCATENATED MODULE: ./node_modules/@formatjs/intl-localematcher/lib/abstract/utils.js
+
+
+
+var utils_UNICODE_EXTENSION_SEQUENCE_REGEX = /-u(?:-[0-9a-z]{2,8})+/gi;
+function invariant(condition, message, Err) {
+    if (Err === void 0) {
+        Err = Error;
+    }
+    if (!condition) {
+        throw new Err(message);
+    }
+}
+// This is effectively 2 languages in 2 different regions in the same cluster
+var DEFAULT_MATCHING_THRESHOLD = 838;
+var PROCESSED_DATA;
+function processData() {
+    var _a, _b;
+    if (!PROCESSED_DATA) {
+        var paradigmLocales = (_b = (_a = languageMatching_data.supplemental.languageMatching["written-new"][0]) === null || _a === void 0 ? void 0 : _a.paradigmLocales) === null || _b === void 0 ? void 0 : _b._locales.split(" ");
+        var matchVariables = languageMatching_data.supplemental.languageMatching["written-new"].slice(1, 5);
+        var data = languageMatching_data.supplemental.languageMatching["written-new"].slice(5);
+        var matches = data.map(function(d) {
+            var key = Object.keys(d)[0];
+            var value = d[key];
+            return {
+                supported: key,
+                desired: value._desired,
+                distance: +value._distance,
+                oneway: value.oneway === "true" ? true : false
+            };
+        }, {});
+        PROCESSED_DATA = {
+            matches: matches,
+            matchVariables: matchVariables.reduce(function(all, d) {
+                var key = Object.keys(d)[0];
+                var value = d[key];
+                all[key.slice(1)] = value._value.split("+");
+                return all;
+            }, {}),
+            paradigmLocales: __spreadArray(__spreadArray([], paradigmLocales, true), paradigmLocales.map(function(l) {
+                return new Intl.Locale(l.replace(/_/g, "-")).maximize().toString();
+            }), true)
+        };
+    }
+    return PROCESSED_DATA;
+}
+function isMatched(locale, languageMatchInfoLocale, matchVariables) {
+    var _a = languageMatchInfoLocale.split("-"), language = _a[0], script = _a[1], region = _a[2];
+    var matches = true;
+    if (region && region[0] === "$") {
+        var shouldInclude = region[1] !== "!";
+        var matchRegions = shouldInclude ? matchVariables[region.slice(1)] : matchVariables[region.slice(2)];
+        var expandedMatchedRegions = matchRegions.map(function(r) {
+            return regions[r] || [
+                r
+            ];
+        }).reduce(function(all, list) {
+            return __spreadArray(__spreadArray([], all, true), list, true);
+        }, []);
+        matches && (matches = !(expandedMatchedRegions.indexOf(locale.region || "") > 1 != shouldInclude));
+    } else {
+        matches && (matches = locale.region ? region === "*" || region === locale.region : true);
+    }
+    matches && (matches = locale.script ? script === "*" || script === locale.script : true);
+    matches && (matches = locale.language ? language === "*" || language === locale.language : true);
+    return matches;
+}
+function serializeLSR(lsr) {
+    return [
+        lsr.language,
+        lsr.script,
+        lsr.region
+    ].filter(Boolean).join("-");
+}
+function findMatchingDistanceForLSR(desired, supported, data) {
+    for(var _i = 0, _a = data.matches; _i < _a.length; _i++){
+        var d = _a[_i];
+        var matches = isMatched(desired, d.desired, data.matchVariables) && isMatched(supported, d.supported, data.matchVariables);
+        if (!d.oneway && !matches) {
+            matches = isMatched(desired, d.supported, data.matchVariables) && isMatched(supported, d.desired, data.matchVariables);
+        }
+        if (matches) {
+            var distance = d.distance * 10;
+            if (data.paradigmLocales.indexOf(serializeLSR(desired)) > -1 != data.paradigmLocales.indexOf(serializeLSR(supported)) > -1) {
+                return distance - 1;
+            }
+            return distance;
+        }
+    }
+    throw new Error("No matching distance found");
+}
+function findMatchingDistance(desired, supported) {
+    var desiredLocale = new Intl.Locale(desired).maximize();
+    var supportedLocale = new Intl.Locale(supported).maximize();
+    var desiredLSR = {
+        language: desiredLocale.language,
+        script: desiredLocale.script || "",
+        region: desiredLocale.region || ""
+    };
+    var supportedLSR = {
+        language: supportedLocale.language,
+        script: supportedLocale.script || "",
+        region: supportedLocale.region || ""
+    };
+    var matchingDistance = 0;
+    var data = processData();
+    if (desiredLSR.language !== supportedLSR.language) {
+        matchingDistance += findMatchingDistanceForLSR({
+            language: desiredLocale.language,
+            script: "",
+            region: ""
+        }, {
+            language: supportedLocale.language,
+            script: "",
+            region: ""
+        }, data);
+    }
+    if (desiredLSR.script !== supportedLSR.script) {
+        matchingDistance += findMatchingDistanceForLSR({
+            language: desiredLocale.language,
+            script: desiredLSR.script,
+            region: ""
+        }, {
+            language: supportedLocale.language,
+            script: desiredLSR.script,
+            region: ""
+        }, data);
+    }
+    if (desiredLSR.region !== supportedLSR.region) {
+        matchingDistance += findMatchingDistanceForLSR(desiredLSR, supportedLSR, data);
+    }
+    return matchingDistance;
+}
+function findBestMatch(requestedLocales, supportedLocales, threshold) {
+    if (threshold === void 0) {
+        threshold = DEFAULT_MATCHING_THRESHOLD;
+    }
+    var lowestDistance = Infinity;
+    var result = {
+        matchedDesiredLocale: "",
+        distances: {}
+    };
+    requestedLocales.forEach(function(desired, i) {
+        if (!result.distances[desired]) {
+            result.distances[desired] = {};
+        }
+        supportedLocales.forEach(function(supported) {
+            // Add some weight to the distance based on the order of the supported locales
+            // Add penalty for the order of the requested locales, which currently is 0 since ECMA-402
+            // doesn't really have room for weighted locales like `en; q=0.1`
+            var distance = findMatchingDistance(desired, supported) + 0 + i * 40;
+            result.distances[desired][supported] = distance;
+            if (distance < lowestDistance) {
+                lowestDistance = distance;
+                result.matchedDesiredLocale = desired;
+                result.matchedSupportedLocale = supported;
+            }
+        });
+    });
+    if (lowestDistance >= threshold) {
+        result.matchedDesiredLocale = undefined;
+        result.matchedSupportedLocale = undefined;
+    }
+    return result;
+}
+
+;// CONCATENATED MODULE: ./node_modules/@formatjs/intl-localematcher/lib/abstract/BestFitMatcher.js
+
+/**
+ * https://tc39.es/ecma402/#sec-bestfitmatcher
+ * @param availableLocales
+ * @param requestedLocales
+ * @param getDefaultLocale
+ */ function BestFitMatcher(availableLocales, requestedLocales, getDefaultLocale) {
+    var foundLocale;
+    var extension;
+    var noExtensionLocales = [];
+    var noExtensionLocaleMap = requestedLocales.reduce(function(all, l) {
+        var noExtensionLocale = l.replace(utils_UNICODE_EXTENSION_SEQUENCE_REGEX, "");
+        noExtensionLocales.push(noExtensionLocale);
+        all[noExtensionLocale] = l;
+        return all;
+    }, {});
+    var result = findBestMatch(noExtensionLocales, availableLocales);
+    if (result.matchedSupportedLocale && result.matchedDesiredLocale) {
+        foundLocale = result.matchedSupportedLocale;
+        extension = noExtensionLocaleMap[result.matchedDesiredLocale].slice(result.matchedDesiredLocale.length) || undefined;
+    }
+    if (!foundLocale) {
+        return {
+            locale: getDefaultLocale()
+        };
+    }
+    return {
+        locale: foundLocale,
+        extension: extension
+    };
+}
+
+;// CONCATENATED MODULE: ./node_modules/@formatjs/intl-localematcher/lib/abstract/BestAvailableLocale.js
+/**
+ * https://tc39.es/ecma402/#sec-bestavailablelocale
+ * @param availableLocales
+ * @param locale
+ */ function BestAvailableLocale_BestAvailableLocale(availableLocales, locale) {
+    var candidate = locale;
+    while(true){
+        if (availableLocales.indexOf(candidate) > -1) {
+            return candidate;
+        }
+        var pos = candidate.lastIndexOf("-");
+        if (!~pos) {
+            return undefined;
+        }
+        if (pos >= 2 && candidate[pos - 2] === "-") {
+            pos -= 2;
+        }
+        candidate = candidate.slice(0, pos);
+    }
+}
+
+;// CONCATENATED MODULE: ./node_modules/@formatjs/intl-localematcher/lib/abstract/LookupMatcher.js
+
+
+/**
+ * https://tc39.es/ecma402/#sec-lookupmatcher
+ * @param availableLocales
+ * @param requestedLocales
+ * @param getDefaultLocale
+ */ function LookupMatcher(availableLocales, requestedLocales, getDefaultLocale) {
+    var result = {
+        locale: ""
+    };
+    for(var _i = 0, requestedLocales_1 = requestedLocales; _i < requestedLocales_1.length; _i++){
+        var locale = requestedLocales_1[_i];
+        var noExtensionLocale = locale.replace(utils_UNICODE_EXTENSION_SEQUENCE_REGEX, "");
+        var availableLocale = BestAvailableLocale_BestAvailableLocale(availableLocales, noExtensionLocale);
+        if (availableLocale) {
+            result.locale = availableLocale;
+            if (locale !== noExtensionLocale) {
+                result.extension = locale.slice(noExtensionLocale.length, locale.length);
+            }
+            return result;
+        }
+    }
+    result.locale = getDefaultLocale();
+    return result;
+}
+
+;// CONCATENATED MODULE: ./node_modules/@formatjs/intl-localematcher/lib/abstract/UnicodeExtensionValue.js
+
+/**
+ * https://tc39.es/ecma402/#sec-unicodeextensionvalue
+ * @param extension
+ * @param key
+ */ function UnicodeExtensionValue(extension, key) {
+    invariant(key.length === 2, "key must have 2 elements");
+    var size = extension.length;
+    var searchValue = "-".concat(key, "-");
+    var pos = extension.indexOf(searchValue);
+    if (pos !== -1) {
+        var start = pos + 4;
+        var end = start;
+        var k = start;
+        var done = false;
+        while(!done){
+            var e = extension.indexOf("-", k);
+            var len = void 0;
+            if (e === -1) {
+                len = size - k;
+            } else {
+                len = e - k;
+            }
+            if (len === 2) {
+                done = true;
+            } else if (e === -1) {
+                end = size;
+                done = true;
+            } else {
+                end = e;
+                k = e + 1;
+            }
+        }
+        return extension.slice(start, end);
+    }
+    searchValue = "-".concat(key);
+    pos = extension.indexOf(searchValue);
+    if (pos !== -1 && pos + 3 === size) {
+        return "";
+    }
+    return undefined;
+}
+
+;// CONCATENATED MODULE: ./node_modules/@formatjs/intl-localematcher/lib/abstract/ResolveLocale.js
+
+
+
+
+/**
+ * https://tc39.es/ecma402/#sec-resolvelocale
+ */ function ResolveLocale(availableLocales, requestedLocales, options, relevantExtensionKeys, localeData, getDefaultLocale) {
+    var matcher = options.localeMatcher;
+    var r;
+    if (matcher === "lookup") {
+        r = LookupMatcher(Array.from(availableLocales), requestedLocales, getDefaultLocale);
+    } else {
+        r = BestFitMatcher(Array.from(availableLocales), requestedLocales, getDefaultLocale);
+    }
+    var foundLocale = r.locale;
+    var result = {
+        locale: "",
+        dataLocale: foundLocale
+    };
+    var supportedExtension = "-u";
+    for(var _i = 0, relevantExtensionKeys_1 = relevantExtensionKeys; _i < relevantExtensionKeys_1.length; _i++){
+        var key = relevantExtensionKeys_1[_i];
+        invariant(foundLocale in localeData, "Missing locale data for ".concat(foundLocale));
+        var foundLocaleData = localeData[foundLocale];
+        invariant(typeof foundLocaleData === "object" && foundLocaleData !== null, "locale data ".concat(key, " must be an object"));
+        var keyLocaleData = foundLocaleData[key];
+        invariant(Array.isArray(keyLocaleData), "keyLocaleData for ".concat(key, " must be an array"));
+        var value = keyLocaleData[0];
+        invariant(typeof value === "string" || value === null, "value must be string or null but got ".concat(typeof value, " in key ").concat(key));
+        var supportedExtensionAddition = "";
+        if (r.extension) {
+            var requestedValue = UnicodeExtensionValue(r.extension, key);
+            if (requestedValue !== undefined) {
+                if (requestedValue !== "") {
+                    if (~keyLocaleData.indexOf(requestedValue)) {
+                        value = requestedValue;
+                        supportedExtensionAddition = "-".concat(key, "-").concat(value);
+                    }
+                } else if (~requestedValue.indexOf("true")) {
+                    value = "true";
+                    supportedExtensionAddition = "-".concat(key);
+                }
+            }
+        }
+        if (key in options) {
+            var optionsValue = options[key];
+            invariant(typeof optionsValue === "string" || typeof optionsValue === "undefined" || optionsValue === null, "optionsValue must be String, Undefined or Null");
+            if (~keyLocaleData.indexOf(optionsValue)) {
+                if (optionsValue !== value) {
+                    value = optionsValue;
+                    supportedExtensionAddition = "";
+                }
+            }
+        }
+        result[key] = value;
+        supportedExtension += supportedExtensionAddition;
+    }
+    if (supportedExtension.length > 2) {
+        var privateIndex = foundLocale.indexOf("-x-");
+        if (privateIndex === -1) {
+            foundLocale = foundLocale + supportedExtension;
+        } else {
+            var preExtension = foundLocale.slice(0, privateIndex);
+            var postExtension = foundLocale.slice(privateIndex, foundLocale.length);
+            foundLocale = preExtension + supportedExtension + postExtension;
+        }
+        foundLocale = Intl.getCanonicalLocales(foundLocale)[0];
+    }
+    result.locale = foundLocale;
+    return result;
+}
+
+;// CONCATENATED MODULE: ./node_modules/@formatjs/intl-localematcher/lib/abstract/LookupSupportedLocales.js
+
+
+/**
+ * https://tc39.es/ecma402/#sec-lookupsupportedlocales
+ * @param availableLocales
+ * @param requestedLocales
+ */ function LookupSupportedLocales(availableLocales, requestedLocales) {
+    var subset = [];
+    for(var _i = 0, requestedLocales_1 = requestedLocales; _i < requestedLocales_1.length; _i++){
+        var locale = requestedLocales_1[_i];
+        var noExtensionLocale = locale.replace(UNICODE_EXTENSION_SEQUENCE_REGEX, "");
+        var availableLocale = BestAvailableLocale(availableLocales, noExtensionLocale);
+        if (availableLocale) {
+            subset.push(availableLocale);
+        }
+    }
+    return subset;
+}
+
+;// CONCATENATED MODULE: ./node_modules/@formatjs/intl-localematcher/lib/index.js
+
+
+function match(requestedLocales, availableLocales, defaultLocale, opts) {
+    return ResolveLocale(availableLocales, CanonicalizeLocaleList(requestedLocales), {
+        localeMatcher: (opts === null || opts === void 0 ? void 0 : opts.algorithm) || "best fit"
+    }, [], {}, function() {
+        return defaultLocale;
+    }).locale;
+}
+
+
+
+// EXTERNAL MODULE: ./node_modules/negotiator/index.js
+var negotiator = __webpack_require__(230);
+var negotiator_default = /*#__PURE__*/__webpack_require__.n(negotiator);
+;// CONCATENATED MODULE: ./src/middleware.ts
+
+
+
+
+function getLocale(request) {
+    // Negotiator expects plain object so we need to transform headers
+    const negotiatorHeaders = {};
+    request.headers.forEach((value, key)=>negotiatorHeaders[key] = value);
+    // Use negotiator and intl-localematcher to get best locale
+    let languages = new (negotiator_default())({
+        headers: negotiatorHeaders
+    }).languages();
+    // @ts-ignore locales are readonly
+    const locales = i18n.locales;
+    return match(languages, locales, i18n.defaultLocale);
+}
+function middleware(request) {
+    const pathname = request.nextUrl.pathname;
+    // // `/_next/` and `/api/` are ignored by the watcher, but we need to ignore files in `public` manually.
+    // // If you have one
+    if ([
+        "/manifest.json",
+        "/favicon.ico"
+    ].includes(pathname)) return;
+    // Check if there is any supported locale in the pathname
+    const pathnameIsMissingLocale = i18n.locales.every((locale)=>!pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`);
+    // Redirect if there is no locale
+    if (pathnameIsMissingLocale) {
+        const locale = getLocale(request);
+        const redirectPath = pathname.charAt(0) === "/" ? `/${locale}${pathname}` : `/${locale}/${pathname}`;
+        // e.g. incoming request is /products
+        // The new URL is now /en-US/products
+        return NextResponse.redirect(new URL(redirectPath, request.url));
+    }
+}
+const config = {
+    // Matcher ignoring `/_next/` and `/api/`
+    matcher: [
+        "/((?!_next).*)"
+    ]
+};
+
+;// CONCATENATED MODULE: ./node_modules/next/dist/build/webpack/loaders/next-middleware-loader.js?absolutePagePath=private-next-root-dir%2Fsrc%2Fmiddleware.ts&page=%2Fsrc%2Fmiddleware&rootDir=%2FUsers%2Fruangguru%2Fgo%2Fsrc%2Fgithub.com%2Fsamsoec%2Ftalamalama%2Ffrontend&matchers=W3sicmVnZXhwIjoiXig%2FOlxcLyhfbmV4dFxcL2RhdGFcXC9bXi9dezEsfSkpPyg%2FOlxcLygoPyFfbmV4dCkuKikpKC5qc29uKT9bXFwvI1xcP10%2FJCIsIm9yaWdpbmFsU291cmNlIjoiLygoPyFfbmV4dCkuKikifV0%3D&preferredRegion=&middlewareConfig=eyJtYXRjaGVycyI6W3sicmVnZXhwIjoiXig%2FOlxcLyhfbmV4dFxcL2RhdGFcXC9bXi9dezEsfSkpPyg%2FOlxcLygoPyFfbmV4dCkuKikpKC5qc29uKT9bXFwvI1xcP10%2FJCIsIm9yaWdpbmFsU291cmNlIjoiLygoPyFfbmV4dCkuKikifV19!
+
+
+// Import the userland code.
+
+const mod = {
+    ...middleware_namespaceObject
+};
+const handler = mod.middleware || mod.default;
+const page = "/src/middleware";
+if (typeof handler !== "function") {
+    throw new Error(`The Middleware "${page}" must export a \`middleware\` or a \`default\` function`);
+}
+function nHandler(opts) {
+    return adapter({
+        ...opts,
+        page,
+        handler
+    });
+}
+
+//# sourceMappingURL=middleware.js.map
+
+/***/ }),
+
+/***/ 230:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+/*!
  * negotiator
  * Copyright(c) 2012 Federico Romero
  * Copyright(c) 2012-2014 Isaac Z. Schlueter
  * Copyright(c) 2015 Douglas Christopher Wilson
  * MIT Licensed
- */var n=r(946),a=r(206),i=r(771),s=r(777);function o(e){if(!(this instanceof o))return new o(e);this.request=e}e.exports=o,e.exports.Negotiator=o,o.prototype.charset=function(e){var t=this.charsets(e);return t&&t[0]},o.prototype.charsets=function(e){return n(this.request.headers["accept-charset"],e)},o.prototype.encoding=function(e){var t=this.encodings(e);return t&&t[0]},o.prototype.encodings=function(e){return a(this.request.headers["accept-encoding"],e)},o.prototype.language=function(e){var t=this.languages(e);return t&&t[0]},o.prototype.languages=function(e){return i(this.request.headers["accept-language"],e)},o.prototype.mediaType=function(e){var t=this.mediaTypes(e);return t&&t[0]},o.prototype.mediaTypes=function(e){return s(this.request.headers.accept,e)},o.prototype.preferredCharset=o.prototype.charset,o.prototype.preferredCharsets=o.prototype.charsets,o.prototype.preferredEncoding=o.prototype.encoding,o.prototype.preferredEncodings=o.prototype.encodings,o.prototype.preferredLanguage=o.prototype.language,o.prototype.preferredLanguages=o.prototype.languages,o.prototype.preferredMediaType=o.prototype.mediaType,o.prototype.preferredMediaTypes=o.prototype.mediaTypes},946:e=>{"use strict";e.exports=r,e.exports.preferredCharsets=r;var t=/^\s*([^\s;]+)\s*(?:;(.*))?$/;function r(e,r){var s=function(e){for(var r=e.split(","),n=0,a=0;n<r.length;n++){var i=function(e,r){var n=t.exec(e);if(!n)return null;var a=n[1],i=1;if(n[2])for(var s=n[2].split(";"),o=0;o<s.length;o++){var d=s[o].trim().split("=");if("q"===d[0]){i=parseFloat(d[1]);break}}return{charset:a,q:i,i:r}}(r[n].trim(),n);i&&(r[a++]=i)}return r.length=a,r}(void 0===e?"*":e||"");if(!r)return s.filter(i).sort(n).map(a);var o=r.map(function(e,t){return function(e,t,r){for(var n={o:-1,q:0,s:0},a=0;a<t.length;a++){var i=function(e,t,r){var n=0;if(t.charset.toLowerCase()===e.toLowerCase())n|=1;else if("*"!==t.charset)return null;return{i:r,o:t.i,q:t.q,s:n}}(e,t[a],r);i&&0>(n.s-i.s||n.q-i.q||n.o-i.o)&&(n=i)}return n}(e,s,t)});return o.filter(i).sort(n).map(function(e){return r[o.indexOf(e)]})}function n(e,t){return t.q-e.q||t.s-e.s||e.o-t.o||e.i-t.i||0}function a(e){return e.charset}function i(e){return e.q>0}},206:e=>{"use strict";e.exports=n,e.exports.preferredEncodings=n;var t=/^\s*([^\s;]+)\s*(?:;(.*))?$/;function r(e,t,r){var n=0;if(t.encoding.toLowerCase()===e.toLowerCase())n|=1;else if("*"!==t.encoding)return null;return{i:r,o:t.i,q:t.q,s:n}}function n(e,n){var o=function(e){for(var n=e.split(","),a=!1,i=1,s=0,o=0;s<n.length;s++){var d=function(e,r){var n=t.exec(e);if(!n)return null;var a=n[1],i=1;if(n[2])for(var s=n[2].split(";"),o=0;o<s.length;o++){var d=s[o].trim().split("=");if("q"===d[0]){i=parseFloat(d[1]);break}}return{encoding:a,q:i,i:r}}(n[s].trim(),s);d&&(n[o++]=d,a=a||r("identity",d),i=Math.min(i,d.q||1))}return a||(n[o++]={encoding:"identity",q:i,i:s}),n.length=o,n}(e||"");if(!n)return o.filter(s).sort(a).map(i);var d=n.map(function(e,t){return function(e,t,n){for(var a={o:-1,q:0,s:0},i=0;i<t.length;i++){var s=r(e,t[i],n);s&&0>(a.s-s.s||a.q-s.q||a.o-s.o)&&(a=s)}return a}(e,o,t)});return d.filter(s).sort(a).map(function(e){return n[d.indexOf(e)]})}function a(e,t){return t.q-e.q||t.s-e.s||e.o-t.o||e.i-t.i||0}function i(e){return e.encoding}function s(e){return e.q>0}},771:e=>{"use strict";e.exports=n,e.exports.preferredLanguages=n;var t=/^\s*([^\s\-;]+)(?:-([^\s;]+))?\s*(?:;(.*))?$/;function r(e,r){var n=t.exec(e);if(!n)return null;var a=n[1],i=n[2],s=a;i&&(s+="-"+i);var o=1;if(n[3])for(var d=n[3].split(";"),u=0;u<d.length;u++){var l=d[u].split("=");"q"===l[0]&&(o=parseFloat(l[1]))}return{prefix:a,suffix:i,q:o,i:r,full:s}}function n(e,t){var n=function(e){for(var t=e.split(","),n=0,a=0;n<t.length;n++){var i=r(t[n].trim(),n);i&&(t[a++]=i)}return t.length=a,t}(void 0===e?"*":e||"");if(!t)return n.filter(s).sort(a).map(i);var o=t.map(function(e,t){return function(e,t,n){for(var a={o:-1,q:0,s:0},i=0;i<t.length;i++){var s=function(e,t,n){var a=r(e);if(!a)return null;var i=0;if(t.full.toLowerCase()===a.full.toLowerCase())i|=4;else if(t.prefix.toLowerCase()===a.full.toLowerCase())i|=2;else if(t.full.toLowerCase()===a.prefix.toLowerCase())i|=1;else if("*"!==t.full)return null;return{i:n,o:t.i,q:t.q,s:i}}(e,t[i],n);s&&0>(a.s-s.s||a.q-s.q||a.o-s.o)&&(a=s)}return a}(e,n,t)});return o.filter(s).sort(a).map(function(e){return t[o.indexOf(e)]})}function a(e,t){return t.q-e.q||t.s-e.s||e.o-t.o||e.i-t.i||0}function i(e){return e.full}function s(e){return e.q>0}},777:e=>{"use strict";e.exports=n,e.exports.preferredMediaTypes=n;var t=/^\s*([^\s\/;]+)\/([^;\s]+)\s*(?:;(.*))?$/;function r(e,r){var n=t.exec(e);if(!n)return null;var a=Object.create(null),i=1,s=n[2],u=n[1];if(n[3])for(var l=(function(e){for(var t=e.split(";"),r=1,n=0;r<t.length;r++)o(t[n])%2==0?t[++n]=t[r]:t[n]+=";"+t[r];t.length=n+1;for(var r=0;r<t.length;r++)t[r]=t[r].trim();return t})(n[3]).map(d),c=0;c<l.length;c++){var _=l[c],p=_[0].toLowerCase(),g=_[1],h=g&&'"'===g[0]&&'"'===g[g.length-1]?g.substr(1,g.length-2):g;if("q"===p){i=parseFloat(h);break}a[p]=h}return{type:u,subtype:s,params:a,q:i,i:r}}function n(e,t){var n=function(e){for(var t=function(e){for(var t=e.split(","),r=1,n=0;r<t.length;r++)o(t[n])%2==0?t[++n]=t[r]:t[n]+=","+t[r];return t.length=n+1,t}(e),n=0,a=0;n<t.length;n++){var i=r(t[n].trim(),n);i&&(t[a++]=i)}return t.length=a,t}(void 0===e?"*/*":e||"");if(!t)return n.filter(s).sort(a).map(i);var d=t.map(function(e,t){return function(e,t,n){for(var a={o:-1,q:0,s:0},i=0;i<t.length;i++){var s=function(e,t,n){var a=r(e),i=0;if(!a)return null;if(t.type.toLowerCase()==a.type.toLowerCase())i|=4;else if("*"!=t.type)return null;if(t.subtype.toLowerCase()==a.subtype.toLowerCase())i|=2;else if("*"!=t.subtype)return null;var s=Object.keys(t.params);if(s.length>0){if(!s.every(function(e){return"*"==t.params[e]||(t.params[e]||"").toLowerCase()==(a.params[e]||"").toLowerCase()}))return null;i|=1}return{i:n,o:t.i,q:t.q,s:i}}(e,t[i],n);s&&0>(a.s-s.s||a.q-s.q||a.o-s.o)&&(a=s)}return a}(e,n,t)});return d.filter(s).sort(a).map(function(e){return t[d.indexOf(e)]})}function a(e,t){return t.q-e.q||t.s-e.s||e.o-t.o||e.i-t.i||0}function i(e){return e.type+"/"+e.subtype}function s(e){return e.q>0}function o(e){for(var t=0,r=0;-1!==(r=e.indexOf('"',r));)t++,r++;return t}function d(e){var t,r,n=e.indexOf("=");return -1===n?t=e:(t=e.substr(0,n),r=e.substr(n+1)),[t,r]}},283:e=>{"use strict";var t=Object.defineProperty,r=Object.getOwnPropertyDescriptor,n=Object.getOwnPropertyNames,a=Object.prototype.hasOwnProperty,i={};function s(e){var t;let r=["path"in e&&e.path&&`Path=${e.path}`,"expires"in e&&(e.expires||0===e.expires)&&`Expires=${("number"==typeof e.expires?new Date(e.expires):e.expires).toUTCString()}`,"maxAge"in e&&"number"==typeof e.maxAge&&`Max-Age=${e.maxAge}`,"domain"in e&&e.domain&&`Domain=${e.domain}`,"secure"in e&&e.secure&&"Secure","httpOnly"in e&&e.httpOnly&&"HttpOnly","sameSite"in e&&e.sameSite&&`SameSite=${e.sameSite}`,"partitioned"in e&&e.partitioned&&"Partitioned","priority"in e&&e.priority&&`Priority=${e.priority}`].filter(Boolean);return`${e.name}=${encodeURIComponent(null!=(t=e.value)?t:"")}; ${r.join("; ")}`}function o(e){let t=new Map;for(let r of e.split(/; */)){if(!r)continue;let e=r.indexOf("=");if(-1===e){t.set(r,"true");continue}let[n,a]=[r.slice(0,e),r.slice(e+1)];try{t.set(n,decodeURIComponent(null!=a?a:"true"))}catch{}}return t}function d(e){var t,r;if(!e)return;let[[n,a],...i]=o(e),{domain:s,expires:d,httponly:c,maxage:_,path:p,samesite:g,secure:h,partitioned:f,priority:w}=Object.fromEntries(i.map(([e,t])=>[e.toLowerCase(),t]));return function(e){let t={};for(let r in e)e[r]&&(t[r]=e[r]);return t}({name:n,value:decodeURIComponent(a),domain:s,...d&&{expires:new Date(d)},...c&&{httpOnly:!0},..."string"==typeof _&&{maxAge:Number(_)},path:p,...g&&{sameSite:u.includes(t=(t=g).toLowerCase())?t:void 0},...h&&{secure:!0},...w&&{priority:l.includes(r=(r=w).toLowerCase())?r:void 0},...f&&{partitioned:!0}})}((e,r)=>{for(var n in r)t(e,n,{get:r[n],enumerable:!0})})(i,{RequestCookies:()=>c,ResponseCookies:()=>_,parseCookie:()=>o,parseSetCookie:()=>d,stringifyCookie:()=>s}),e.exports=((e,i,s,o)=>{if(i&&"object"==typeof i||"function"==typeof i)for(let s of n(i))a.call(e,s)||void 0===s||t(e,s,{get:()=>i[s],enumerable:!(o=r(i,s))||o.enumerable});return e})(t({},"__esModule",{value:!0}),i);var u=["strict","lax","none"],l=["low","medium","high"],c=class{constructor(e){this._parsed=new Map,this._headers=e;let t=e.get("cookie");if(t)for(let[e,r]of o(t))this._parsed.set(e,{name:e,value:r})}[Symbol.iterator](){return this._parsed[Symbol.iterator]()}get size(){return this._parsed.size}get(...e){let t="string"==typeof e[0]?e[0]:e[0].name;return this._parsed.get(t)}getAll(...e){var t;let r=Array.from(this._parsed);if(!e.length)return r.map(([e,t])=>t);let n="string"==typeof e[0]?e[0]:null==(t=e[0])?void 0:t.name;return r.filter(([e])=>e===n).map(([e,t])=>t)}has(e){return this._parsed.has(e)}set(...e){let[t,r]=1===e.length?[e[0].name,e[0].value]:e,n=this._parsed;return n.set(t,{name:t,value:r}),this._headers.set("cookie",Array.from(n).map(([e,t])=>s(t)).join("; ")),this}delete(e){let t=this._parsed,r=Array.isArray(e)?e.map(e=>t.delete(e)):t.delete(e);return this._headers.set("cookie",Array.from(t).map(([e,t])=>s(t)).join("; ")),r}clear(){return this.delete(Array.from(this._parsed.keys())),this}[Symbol.for("edge-runtime.inspect.custom")](){return`RequestCookies ${JSON.stringify(Object.fromEntries(this._parsed))}`}toString(){return[...this._parsed.values()].map(e=>`${e.name}=${encodeURIComponent(e.value)}`).join("; ")}},_=class{constructor(e){var t,r,n;this._parsed=new Map,this._headers=e;let a=null!=(n=null!=(r=null==(t=e.getSetCookie)?void 0:t.call(e))?r:e.get("set-cookie"))?n:[];for(let e of Array.isArray(a)?a:function(e){if(!e)return[];var t,r,n,a,i,s=[],o=0;function d(){for(;o<e.length&&/\s/.test(e.charAt(o));)o+=1;return o<e.length}for(;o<e.length;){for(t=o,i=!1;d();)if(","===(r=e.charAt(o))){for(n=o,o+=1,d(),a=o;o<e.length&&"="!==(r=e.charAt(o))&&";"!==r&&","!==r;)o+=1;o<e.length&&"="===e.charAt(o)?(i=!0,o=a,s.push(e.substring(t,n)),t=o):o=n+1}else o+=1;(!i||o>=e.length)&&s.push(e.substring(t,e.length))}return s}(a)){let t=d(e);t&&this._parsed.set(t.name,t)}}get(...e){let t="string"==typeof e[0]?e[0]:e[0].name;return this._parsed.get(t)}getAll(...e){var t;let r=Array.from(this._parsed.values());if(!e.length)return r;let n="string"==typeof e[0]?e[0]:null==(t=e[0])?void 0:t.name;return r.filter(e=>e.name===n)}has(e){return this._parsed.has(e)}set(...e){let[t,r,n]=1===e.length?[e[0].name,e[0].value,e[0]]:e,a=this._parsed;return a.set(t,function(e={name:"",value:""}){return"number"==typeof e.expires&&(e.expires=new Date(e.expires)),e.maxAge&&(e.expires=new Date(Date.now()+1e3*e.maxAge)),(null===e.path||void 0===e.path)&&(e.path="/"),e}({name:t,value:r,...n})),function(e,t){for(let[,r]of(t.delete("set-cookie"),e)){let e=s(r);t.append("set-cookie",e)}}(a,this._headers),this}delete(...e){let[t,r,n]="string"==typeof e[0]?[e[0]]:[e[0].name,e[0].path,e[0].domain];return this.set({name:t,path:r,domain:n,value:"",expires:new Date(0)})}[Symbol.for("edge-runtime.inspect.custom")](){return`ResponseCookies ${JSON.stringify(Object.fromEntries(this._parsed))}`}toString(){return[...this._parsed.values()].map(s).join("; ")}}},38:(e,t,r)=>{(()=>{"use strict";var t={491:(e,t,r)=>{Object.defineProperty(t,"__esModule",{value:!0}),t.ContextAPI=void 0;let n=r(223),a=r(172),i=r(930),s="context",o=new n.NoopContextManager;class d{constructor(){}static getInstance(){return this._instance||(this._instance=new d),this._instance}setGlobalContextManager(e){return(0,a.registerGlobal)(s,e,i.DiagAPI.instance())}active(){return this._getContextManager().active()}with(e,t,r,...n){return this._getContextManager().with(e,t,r,...n)}bind(e,t){return this._getContextManager().bind(e,t)}_getContextManager(){return(0,a.getGlobal)(s)||o}disable(){this._getContextManager().disable(),(0,a.unregisterGlobal)(s,i.DiagAPI.instance())}}t.ContextAPI=d},930:(e,t,r)=>{Object.defineProperty(t,"__esModule",{value:!0}),t.DiagAPI=void 0;let n=r(56),a=r(912),i=r(957),s=r(172);class o{constructor(){function e(e){return function(...t){let r=(0,s.getGlobal)("diag");if(r)return r[e](...t)}}let t=this;t.setLogger=(e,r={logLevel:i.DiagLogLevel.INFO})=>{var n,o,d;if(e===t){let e=Error("Cannot use diag as the logger for itself. Please use a DiagLogger implementation like ConsoleDiagLogger or a custom implementation");return t.error(null!==(n=e.stack)&&void 0!==n?n:e.message),!1}"number"==typeof r&&(r={logLevel:r});let u=(0,s.getGlobal)("diag"),l=(0,a.createLogLevelDiagLogger)(null!==(o=r.logLevel)&&void 0!==o?o:i.DiagLogLevel.INFO,e);if(u&&!r.suppressOverrideMessage){let e=null!==(d=Error().stack)&&void 0!==d?d:"<failed to generate stacktrace>";u.warn(`Current logger will be overwritten from ${e}`),l.warn(`Current logger will overwrite one already registered from ${e}`)}return(0,s.registerGlobal)("diag",l,t,!0)},t.disable=()=>{(0,s.unregisterGlobal)("diag",t)},t.createComponentLogger=e=>new n.DiagComponentLogger(e),t.verbose=e("verbose"),t.debug=e("debug"),t.info=e("info"),t.warn=e("warn"),t.error=e("error")}static instance(){return this._instance||(this._instance=new o),this._instance}}t.DiagAPI=o},653:(e,t,r)=>{Object.defineProperty(t,"__esModule",{value:!0}),t.MetricsAPI=void 0;let n=r(660),a=r(172),i=r(930),s="metrics";class o{constructor(){}static getInstance(){return this._instance||(this._instance=new o),this._instance}setGlobalMeterProvider(e){return(0,a.registerGlobal)(s,e,i.DiagAPI.instance())}getMeterProvider(){return(0,a.getGlobal)(s)||n.NOOP_METER_PROVIDER}getMeter(e,t,r){return this.getMeterProvider().getMeter(e,t,r)}disable(){(0,a.unregisterGlobal)(s,i.DiagAPI.instance())}}t.MetricsAPI=o},181:(e,t,r)=>{Object.defineProperty(t,"__esModule",{value:!0}),t.PropagationAPI=void 0;let n=r(172),a=r(874),i=r(194),s=r(277),o=r(369),d=r(930),u="propagation",l=new a.NoopTextMapPropagator;class c{constructor(){this.createBaggage=o.createBaggage,this.getBaggage=s.getBaggage,this.getActiveBaggage=s.getActiveBaggage,this.setBaggage=s.setBaggage,this.deleteBaggage=s.deleteBaggage}static getInstance(){return this._instance||(this._instance=new c),this._instance}setGlobalPropagator(e){return(0,n.registerGlobal)(u,e,d.DiagAPI.instance())}inject(e,t,r=i.defaultTextMapSetter){return this._getGlobalPropagator().inject(e,t,r)}extract(e,t,r=i.defaultTextMapGetter){return this._getGlobalPropagator().extract(e,t,r)}fields(){return this._getGlobalPropagator().fields()}disable(){(0,n.unregisterGlobal)(u,d.DiagAPI.instance())}_getGlobalPropagator(){return(0,n.getGlobal)(u)||l}}t.PropagationAPI=c},997:(e,t,r)=>{Object.defineProperty(t,"__esModule",{value:!0}),t.TraceAPI=void 0;let n=r(172),a=r(846),i=r(139),s=r(607),o=r(930),d="trace";class u{constructor(){this._proxyTracerProvider=new a.ProxyTracerProvider,this.wrapSpanContext=i.wrapSpanContext,this.isSpanContextValid=i.isSpanContextValid,this.deleteSpan=s.deleteSpan,this.getSpan=s.getSpan,this.getActiveSpan=s.getActiveSpan,this.getSpanContext=s.getSpanContext,this.setSpan=s.setSpan,this.setSpanContext=s.setSpanContext}static getInstance(){return this._instance||(this._instance=new u),this._instance}setGlobalTracerProvider(e){let t=(0,n.registerGlobal)(d,this._proxyTracerProvider,o.DiagAPI.instance());return t&&this._proxyTracerProvider.setDelegate(e),t}getTracerProvider(){return(0,n.getGlobal)(d)||this._proxyTracerProvider}getTracer(e,t){return this.getTracerProvider().getTracer(e,t)}disable(){(0,n.unregisterGlobal)(d,o.DiagAPI.instance()),this._proxyTracerProvider=new a.ProxyTracerProvider}}t.TraceAPI=u},277:(e,t,r)=>{Object.defineProperty(t,"__esModule",{value:!0}),t.deleteBaggage=t.setBaggage=t.getActiveBaggage=t.getBaggage=void 0;let n=r(491),a=(0,r(780).createContextKey)("OpenTelemetry Baggage Key");function i(e){return e.getValue(a)||void 0}t.getBaggage=i,t.getActiveBaggage=function(){return i(n.ContextAPI.getInstance().active())},t.setBaggage=function(e,t){return e.setValue(a,t)},t.deleteBaggage=function(e){return e.deleteValue(a)}},993:(e,t)=>{Object.defineProperty(t,"__esModule",{value:!0}),t.BaggageImpl=void 0;class r{constructor(e){this._entries=e?new Map(e):new Map}getEntry(e){let t=this._entries.get(e);if(t)return Object.assign({},t)}getAllEntries(){return Array.from(this._entries.entries()).map(([e,t])=>[e,t])}setEntry(e,t){let n=new r(this._entries);return n._entries.set(e,t),n}removeEntry(e){let t=new r(this._entries);return t._entries.delete(e),t}removeEntries(...e){let t=new r(this._entries);for(let r of e)t._entries.delete(r);return t}clear(){return new r}}t.BaggageImpl=r},830:(e,t)=>{Object.defineProperty(t,"__esModule",{value:!0}),t.baggageEntryMetadataSymbol=void 0,t.baggageEntryMetadataSymbol=Symbol("BaggageEntryMetadata")},369:(e,t,r)=>{Object.defineProperty(t,"__esModule",{value:!0}),t.baggageEntryMetadataFromString=t.createBaggage=void 0;let n=r(930),a=r(993),i=r(830),s=n.DiagAPI.instance();t.createBaggage=function(e={}){return new a.BaggageImpl(new Map(Object.entries(e)))},t.baggageEntryMetadataFromString=function(e){return"string"!=typeof e&&(s.error(`Cannot create baggage metadata from unknown type: ${typeof e}`),e=""),{__TYPE__:i.baggageEntryMetadataSymbol,toString:()=>e}}},67:(e,t,r)=>{Object.defineProperty(t,"__esModule",{value:!0}),t.context=void 0;let n=r(491);t.context=n.ContextAPI.getInstance()},223:(e,t,r)=>{Object.defineProperty(t,"__esModule",{value:!0}),t.NoopContextManager=void 0;let n=r(780);class a{active(){return n.ROOT_CONTEXT}with(e,t,r,...n){return t.call(r,...n)}bind(e,t){return t}enable(){return this}disable(){return this}}t.NoopContextManager=a},780:(e,t)=>{Object.defineProperty(t,"__esModule",{value:!0}),t.ROOT_CONTEXT=t.createContextKey=void 0,t.createContextKey=function(e){return Symbol.for(e)};class r{constructor(e){let t=this;t._currentContext=e?new Map(e):new Map,t.getValue=e=>t._currentContext.get(e),t.setValue=(e,n)=>{let a=new r(t._currentContext);return a._currentContext.set(e,n),a},t.deleteValue=e=>{let n=new r(t._currentContext);return n._currentContext.delete(e),n}}}t.ROOT_CONTEXT=new r},506:(e,t,r)=>{Object.defineProperty(t,"__esModule",{value:!0}),t.diag=void 0;let n=r(930);t.diag=n.DiagAPI.instance()},56:(e,t,r)=>{Object.defineProperty(t,"__esModule",{value:!0}),t.DiagComponentLogger=void 0;let n=r(172);class a{constructor(e){this._namespace=e.namespace||"DiagComponentLogger"}debug(...e){return i("debug",this._namespace,e)}error(...e){return i("error",this._namespace,e)}info(...e){return i("info",this._namespace,e)}warn(...e){return i("warn",this._namespace,e)}verbose(...e){return i("verbose",this._namespace,e)}}function i(e,t,r){let a=(0,n.getGlobal)("diag");if(a)return r.unshift(t),a[e](...r)}t.DiagComponentLogger=a},972:(e,t)=>{Object.defineProperty(t,"__esModule",{value:!0}),t.DiagConsoleLogger=void 0;let r=[{n:"error",c:"error"},{n:"warn",c:"warn"},{n:"info",c:"info"},{n:"debug",c:"debug"},{n:"verbose",c:"trace"}];class n{constructor(){for(let e=0;e<r.length;e++)this[r[e].n]=function(e){return function(...t){if(console){let r=console[e];if("function"!=typeof r&&(r=console.log),"function"==typeof r)return r.apply(console,t)}}}(r[e].c)}}t.DiagConsoleLogger=n},912:(e,t,r)=>{Object.defineProperty(t,"__esModule",{value:!0}),t.createLogLevelDiagLogger=void 0;let n=r(957);t.createLogLevelDiagLogger=function(e,t){function r(r,n){let a=t[r];return"function"==typeof a&&e>=n?a.bind(t):function(){}}return e<n.DiagLogLevel.NONE?e=n.DiagLogLevel.NONE:e>n.DiagLogLevel.ALL&&(e=n.DiagLogLevel.ALL),t=t||{},{error:r("error",n.DiagLogLevel.ERROR),warn:r("warn",n.DiagLogLevel.WARN),info:r("info",n.DiagLogLevel.INFO),debug:r("debug",n.DiagLogLevel.DEBUG),verbose:r("verbose",n.DiagLogLevel.VERBOSE)}}},957:(e,t)=>{Object.defineProperty(t,"__esModule",{value:!0}),t.DiagLogLevel=void 0,function(e){e[e.NONE=0]="NONE",e[e.ERROR=30]="ERROR",e[e.WARN=50]="WARN",e[e.INFO=60]="INFO",e[e.DEBUG=70]="DEBUG",e[e.VERBOSE=80]="VERBOSE",e[e.ALL=9999]="ALL"}(t.DiagLogLevel||(t.DiagLogLevel={}))},172:(e,t,r)=>{Object.defineProperty(t,"__esModule",{value:!0}),t.unregisterGlobal=t.getGlobal=t.registerGlobal=void 0;let n=r(200),a=r(521),i=r(130),s=a.VERSION.split(".")[0],o=Symbol.for(`opentelemetry.js.api.${s}`),d=n._globalThis;t.registerGlobal=function(e,t,r,n=!1){var i;let s=d[o]=null!==(i=d[o])&&void 0!==i?i:{version:a.VERSION};if(!n&&s[e]){let t=Error(`@opentelemetry/api: Attempted duplicate registration of API: ${e}`);return r.error(t.stack||t.message),!1}if(s.version!==a.VERSION){let t=Error(`@opentelemetry/api: Registration of version v${s.version} for ${e} does not match previously registered API v${a.VERSION}`);return r.error(t.stack||t.message),!1}return s[e]=t,r.debug(`@opentelemetry/api: Registered a global for ${e} v${a.VERSION}.`),!0},t.getGlobal=function(e){var t,r;let n=null===(t=d[o])||void 0===t?void 0:t.version;if(n&&(0,i.isCompatible)(n))return null===(r=d[o])||void 0===r?void 0:r[e]},t.unregisterGlobal=function(e,t){t.debug(`@opentelemetry/api: Unregistering a global for ${e} v${a.VERSION}.`);let r=d[o];r&&delete r[e]}},130:(e,t,r)=>{Object.defineProperty(t,"__esModule",{value:!0}),t.isCompatible=t._makeCompatibilityCheck=void 0;let n=r(521),a=/^(\d+)\.(\d+)\.(\d+)(-(.+))?$/;function i(e){let t=new Set([e]),r=new Set,n=e.match(a);if(!n)return()=>!1;let i={major:+n[1],minor:+n[2],patch:+n[3],prerelease:n[4]};if(null!=i.prerelease)return function(t){return t===e};function s(e){return r.add(e),!1}return function(e){if(t.has(e))return!0;if(r.has(e))return!1;let n=e.match(a);if(!n)return s(e);let o={major:+n[1],minor:+n[2],patch:+n[3],prerelease:n[4]};return null!=o.prerelease||i.major!==o.major?s(e):0===i.major?i.minor===o.minor&&i.patch<=o.patch?(t.add(e),!0):s(e):i.minor<=o.minor?(t.add(e),!0):s(e)}}t._makeCompatibilityCheck=i,t.isCompatible=i(n.VERSION)},886:(e,t,r)=>{Object.defineProperty(t,"__esModule",{value:!0}),t.metrics=void 0;let n=r(653);t.metrics=n.MetricsAPI.getInstance()},901:(e,t)=>{Object.defineProperty(t,"__esModule",{value:!0}),t.ValueType=void 0,function(e){e[e.INT=0]="INT",e[e.DOUBLE=1]="DOUBLE"}(t.ValueType||(t.ValueType={}))},102:(e,t)=>{Object.defineProperty(t,"__esModule",{value:!0}),t.createNoopMeter=t.NOOP_OBSERVABLE_UP_DOWN_COUNTER_METRIC=t.NOOP_OBSERVABLE_GAUGE_METRIC=t.NOOP_OBSERVABLE_COUNTER_METRIC=t.NOOP_UP_DOWN_COUNTER_METRIC=t.NOOP_HISTOGRAM_METRIC=t.NOOP_COUNTER_METRIC=t.NOOP_METER=t.NoopObservableUpDownCounterMetric=t.NoopObservableGaugeMetric=t.NoopObservableCounterMetric=t.NoopObservableMetric=t.NoopHistogramMetric=t.NoopUpDownCounterMetric=t.NoopCounterMetric=t.NoopMetric=t.NoopMeter=void 0;class r{constructor(){}createHistogram(e,r){return t.NOOP_HISTOGRAM_METRIC}createCounter(e,r){return t.NOOP_COUNTER_METRIC}createUpDownCounter(e,r){return t.NOOP_UP_DOWN_COUNTER_METRIC}createObservableGauge(e,r){return t.NOOP_OBSERVABLE_GAUGE_METRIC}createObservableCounter(e,r){return t.NOOP_OBSERVABLE_COUNTER_METRIC}createObservableUpDownCounter(e,r){return t.NOOP_OBSERVABLE_UP_DOWN_COUNTER_METRIC}addBatchObservableCallback(e,t){}removeBatchObservableCallback(e){}}t.NoopMeter=r;class n{}t.NoopMetric=n;class a extends n{add(e,t){}}t.NoopCounterMetric=a;class i extends n{add(e,t){}}t.NoopUpDownCounterMetric=i;class s extends n{record(e,t){}}t.NoopHistogramMetric=s;class o{addCallback(e){}removeCallback(e){}}t.NoopObservableMetric=o;class d extends o{}t.NoopObservableCounterMetric=d;class u extends o{}t.NoopObservableGaugeMetric=u;class l extends o{}t.NoopObservableUpDownCounterMetric=l,t.NOOP_METER=new r,t.NOOP_COUNTER_METRIC=new a,t.NOOP_HISTOGRAM_METRIC=new s,t.NOOP_UP_DOWN_COUNTER_METRIC=new i,t.NOOP_OBSERVABLE_COUNTER_METRIC=new d,t.NOOP_OBSERVABLE_GAUGE_METRIC=new u,t.NOOP_OBSERVABLE_UP_DOWN_COUNTER_METRIC=new l,t.createNoopMeter=function(){return t.NOOP_METER}},660:(e,t,r)=>{Object.defineProperty(t,"__esModule",{value:!0}),t.NOOP_METER_PROVIDER=t.NoopMeterProvider=void 0;let n=r(102);class a{getMeter(e,t,r){return n.NOOP_METER}}t.NoopMeterProvider=a,t.NOOP_METER_PROVIDER=new a},200:function(e,t,r){var n=this&&this.__createBinding||(Object.create?function(e,t,r,n){void 0===n&&(n=r),Object.defineProperty(e,n,{enumerable:!0,get:function(){return t[r]}})}:function(e,t,r,n){void 0===n&&(n=r),e[n]=t[r]}),a=this&&this.__exportStar||function(e,t){for(var r in e)"default"===r||Object.prototype.hasOwnProperty.call(t,r)||n(t,e,r)};Object.defineProperty(t,"__esModule",{value:!0}),a(r(46),t)},651:(e,t)=>{Object.defineProperty(t,"__esModule",{value:!0}),t._globalThis=void 0,t._globalThis="object"==typeof globalThis?globalThis:r.g},46:function(e,t,r){var n=this&&this.__createBinding||(Object.create?function(e,t,r,n){void 0===n&&(n=r),Object.defineProperty(e,n,{enumerable:!0,get:function(){return t[r]}})}:function(e,t,r,n){void 0===n&&(n=r),e[n]=t[r]}),a=this&&this.__exportStar||function(e,t){for(var r in e)"default"===r||Object.prototype.hasOwnProperty.call(t,r)||n(t,e,r)};Object.defineProperty(t,"__esModule",{value:!0}),a(r(651),t)},939:(e,t,r)=>{Object.defineProperty(t,"__esModule",{value:!0}),t.propagation=void 0;let n=r(181);t.propagation=n.PropagationAPI.getInstance()},874:(e,t)=>{Object.defineProperty(t,"__esModule",{value:!0}),t.NoopTextMapPropagator=void 0;class r{inject(e,t){}extract(e,t){return e}fields(){return[]}}t.NoopTextMapPropagator=r},194:(e,t)=>{Object.defineProperty(t,"__esModule",{value:!0}),t.defaultTextMapSetter=t.defaultTextMapGetter=void 0,t.defaultTextMapGetter={get(e,t){if(null!=e)return e[t]},keys:e=>null==e?[]:Object.keys(e)},t.defaultTextMapSetter={set(e,t,r){null!=e&&(e[t]=r)}}},845:(e,t,r)=>{Object.defineProperty(t,"__esModule",{value:!0}),t.trace=void 0;let n=r(997);t.trace=n.TraceAPI.getInstance()},403:(e,t,r)=>{Object.defineProperty(t,"__esModule",{value:!0}),t.NonRecordingSpan=void 0;let n=r(476);class a{constructor(e=n.INVALID_SPAN_CONTEXT){this._spanContext=e}spanContext(){return this._spanContext}setAttribute(e,t){return this}setAttributes(e){return this}addEvent(e,t){return this}setStatus(e){return this}updateName(e){return this}end(e){}isRecording(){return!1}recordException(e,t){}}t.NonRecordingSpan=a},614:(e,t,r)=>{Object.defineProperty(t,"__esModule",{value:!0}),t.NoopTracer=void 0;let n=r(491),a=r(607),i=r(403),s=r(139),o=n.ContextAPI.getInstance();class d{startSpan(e,t,r=o.active()){if(null==t?void 0:t.root)return new i.NonRecordingSpan;let n=r&&(0,a.getSpanContext)(r);return"object"==typeof n&&"string"==typeof n.spanId&&"string"==typeof n.traceId&&"number"==typeof n.traceFlags&&(0,s.isSpanContextValid)(n)?new i.NonRecordingSpan(n):new i.NonRecordingSpan}startActiveSpan(e,t,r,n){let i,s,d;if(arguments.length<2)return;2==arguments.length?d=t:3==arguments.length?(i=t,d=r):(i=t,s=r,d=n);let u=null!=s?s:o.active(),l=this.startSpan(e,i,u),c=(0,a.setSpan)(u,l);return o.with(c,d,void 0,l)}}t.NoopTracer=d},124:(e,t,r)=>{Object.defineProperty(t,"__esModule",{value:!0}),t.NoopTracerProvider=void 0;let n=r(614);class a{getTracer(e,t,r){return new n.NoopTracer}}t.NoopTracerProvider=a},125:(e,t,r)=>{Object.defineProperty(t,"__esModule",{value:!0}),t.ProxyTracer=void 0;let n=new(r(614)).NoopTracer;class a{constructor(e,t,r,n){this._provider=e,this.name=t,this.version=r,this.options=n}startSpan(e,t,r){return this._getTracer().startSpan(e,t,r)}startActiveSpan(e,t,r,n){let a=this._getTracer();return Reflect.apply(a.startActiveSpan,a,arguments)}_getTracer(){if(this._delegate)return this._delegate;let e=this._provider.getDelegateTracer(this.name,this.version,this.options);return e?(this._delegate=e,this._delegate):n}}t.ProxyTracer=a},846:(e,t,r)=>{Object.defineProperty(t,"__esModule",{value:!0}),t.ProxyTracerProvider=void 0;let n=r(125),a=new(r(124)).NoopTracerProvider;class i{getTracer(e,t,r){var a;return null!==(a=this.getDelegateTracer(e,t,r))&&void 0!==a?a:new n.ProxyTracer(this,e,t,r)}getDelegate(){var e;return null!==(e=this._delegate)&&void 0!==e?e:a}setDelegate(e){this._delegate=e}getDelegateTracer(e,t,r){var n;return null===(n=this._delegate)||void 0===n?void 0:n.getTracer(e,t,r)}}t.ProxyTracerProvider=i},996:(e,t)=>{Object.defineProperty(t,"__esModule",{value:!0}),t.SamplingDecision=void 0,function(e){e[e.NOT_RECORD=0]="NOT_RECORD",e[e.RECORD=1]="RECORD",e[e.RECORD_AND_SAMPLED=2]="RECORD_AND_SAMPLED"}(t.SamplingDecision||(t.SamplingDecision={}))},607:(e,t,r)=>{Object.defineProperty(t,"__esModule",{value:!0}),t.getSpanContext=t.setSpanContext=t.deleteSpan=t.setSpan=t.getActiveSpan=t.getSpan=void 0;let n=r(780),a=r(403),i=r(491),s=(0,n.createContextKey)("OpenTelemetry Context Key SPAN");function o(e){return e.getValue(s)||void 0}function d(e,t){return e.setValue(s,t)}t.getSpan=o,t.getActiveSpan=function(){return o(i.ContextAPI.getInstance().active())},t.setSpan=d,t.deleteSpan=function(e){return e.deleteValue(s)},t.setSpanContext=function(e,t){return d(e,new a.NonRecordingSpan(t))},t.getSpanContext=function(e){var t;return null===(t=o(e))||void 0===t?void 0:t.spanContext()}},325:(e,t,r)=>{Object.defineProperty(t,"__esModule",{value:!0}),t.TraceStateImpl=void 0;let n=r(564);class a{constructor(e){this._internalState=new Map,e&&this._parse(e)}set(e,t){let r=this._clone();return r._internalState.has(e)&&r._internalState.delete(e),r._internalState.set(e,t),r}unset(e){let t=this._clone();return t._internalState.delete(e),t}get(e){return this._internalState.get(e)}serialize(){return this._keys().reduce((e,t)=>(e.push(t+"="+this.get(t)),e),[]).join(",")}_parse(e){!(e.length>512)&&(this._internalState=e.split(",").reverse().reduce((e,t)=>{let r=t.trim(),a=r.indexOf("=");if(-1!==a){let i=r.slice(0,a),s=r.slice(a+1,t.length);(0,n.validateKey)(i)&&(0,n.validateValue)(s)&&e.set(i,s)}return e},new Map),this._internalState.size>32&&(this._internalState=new Map(Array.from(this._internalState.entries()).reverse().slice(0,32))))}_keys(){return Array.from(this._internalState.keys()).reverse()}_clone(){let e=new a;return e._internalState=new Map(this._internalState),e}}t.TraceStateImpl=a},564:(e,t)=>{Object.defineProperty(t,"__esModule",{value:!0}),t.validateValue=t.validateKey=void 0;let r="[_0-9a-z-*/]",n=`[a-z]${r}{0,255}`,a=`[a-z0-9]${r}{0,240}@[a-z]${r}{0,13}`,i=RegExp(`^(?:${n}|${a})$`),s=/^[ -~]{0,255}[!-~]$/,o=/,|=/;t.validateKey=function(e){return i.test(e)},t.validateValue=function(e){return s.test(e)&&!o.test(e)}},98:(e,t,r)=>{Object.defineProperty(t,"__esModule",{value:!0}),t.createTraceState=void 0;let n=r(325);t.createTraceState=function(e){return new n.TraceStateImpl(e)}},476:(e,t,r)=>{Object.defineProperty(t,"__esModule",{value:!0}),t.INVALID_SPAN_CONTEXT=t.INVALID_TRACEID=t.INVALID_SPANID=void 0;let n=r(475);t.INVALID_SPANID="0000000000000000",t.INVALID_TRACEID="00000000000000000000000000000000",t.INVALID_SPAN_CONTEXT={traceId:t.INVALID_TRACEID,spanId:t.INVALID_SPANID,traceFlags:n.TraceFlags.NONE}},357:(e,t)=>{Object.defineProperty(t,"__esModule",{value:!0}),t.SpanKind=void 0,function(e){e[e.INTERNAL=0]="INTERNAL",e[e.SERVER=1]="SERVER",e[e.CLIENT=2]="CLIENT",e[e.PRODUCER=3]="PRODUCER",e[e.CONSUMER=4]="CONSUMER"}(t.SpanKind||(t.SpanKind={}))},139:(e,t,r)=>{Object.defineProperty(t,"__esModule",{value:!0}),t.wrapSpanContext=t.isSpanContextValid=t.isValidSpanId=t.isValidTraceId=void 0;let n=r(476),a=r(403),i=/^([0-9a-f]{32})$/i,s=/^[0-9a-f]{16}$/i;function o(e){return i.test(e)&&e!==n.INVALID_TRACEID}function d(e){return s.test(e)&&e!==n.INVALID_SPANID}t.isValidTraceId=o,t.isValidSpanId=d,t.isSpanContextValid=function(e){return o(e.traceId)&&d(e.spanId)},t.wrapSpanContext=function(e){return new a.NonRecordingSpan(e)}},847:(e,t)=>{Object.defineProperty(t,"__esModule",{value:!0}),t.SpanStatusCode=void 0,function(e){e[e.UNSET=0]="UNSET",e[e.OK=1]="OK",e[e.ERROR=2]="ERROR"}(t.SpanStatusCode||(t.SpanStatusCode={}))},475:(e,t)=>{Object.defineProperty(t,"__esModule",{value:!0}),t.TraceFlags=void 0,function(e){e[e.NONE=0]="NONE",e[e.SAMPLED=1]="SAMPLED"}(t.TraceFlags||(t.TraceFlags={}))},521:(e,t)=>{Object.defineProperty(t,"__esModule",{value:!0}),t.VERSION=void 0,t.VERSION="1.6.0"}},n={};function a(e){var r=n[e];if(void 0!==r)return r.exports;var i=n[e]={exports:{}},s=!0;try{t[e].call(i.exports,i,i.exports,a),s=!1}finally{s&&delete n[e]}return i.exports}a.ab="//";var i={};(()=>{Object.defineProperty(i,"__esModule",{value:!0}),i.trace=i.propagation=i.metrics=i.diag=i.context=i.INVALID_SPAN_CONTEXT=i.INVALID_TRACEID=i.INVALID_SPANID=i.isValidSpanId=i.isValidTraceId=i.isSpanContextValid=i.createTraceState=i.TraceFlags=i.SpanStatusCode=i.SpanKind=i.SamplingDecision=i.ProxyTracerProvider=i.ProxyTracer=i.defaultTextMapSetter=i.defaultTextMapGetter=i.ValueType=i.createNoopMeter=i.DiagLogLevel=i.DiagConsoleLogger=i.ROOT_CONTEXT=i.createContextKey=i.baggageEntryMetadataFromString=void 0;var e=a(369);Object.defineProperty(i,"baggageEntryMetadataFromString",{enumerable:!0,get:function(){return e.baggageEntryMetadataFromString}});var t=a(780);Object.defineProperty(i,"createContextKey",{enumerable:!0,get:function(){return t.createContextKey}}),Object.defineProperty(i,"ROOT_CONTEXT",{enumerable:!0,get:function(){return t.ROOT_CONTEXT}});var r=a(972);Object.defineProperty(i,"DiagConsoleLogger",{enumerable:!0,get:function(){return r.DiagConsoleLogger}});var n=a(957);Object.defineProperty(i,"DiagLogLevel",{enumerable:!0,get:function(){return n.DiagLogLevel}});var s=a(102);Object.defineProperty(i,"createNoopMeter",{enumerable:!0,get:function(){return s.createNoopMeter}});var o=a(901);Object.defineProperty(i,"ValueType",{enumerable:!0,get:function(){return o.ValueType}});var d=a(194);Object.defineProperty(i,"defaultTextMapGetter",{enumerable:!0,get:function(){return d.defaultTextMapGetter}}),Object.defineProperty(i,"defaultTextMapSetter",{enumerable:!0,get:function(){return d.defaultTextMapSetter}});var u=a(125);Object.defineProperty(i,"ProxyTracer",{enumerable:!0,get:function(){return u.ProxyTracer}});var l=a(846);Object.defineProperty(i,"ProxyTracerProvider",{enumerable:!0,get:function(){return l.ProxyTracerProvider}});var c=a(996);Object.defineProperty(i,"SamplingDecision",{enumerable:!0,get:function(){return c.SamplingDecision}});var _=a(357);Object.defineProperty(i,"SpanKind",{enumerable:!0,get:function(){return _.SpanKind}});var p=a(847);Object.defineProperty(i,"SpanStatusCode",{enumerable:!0,get:function(){return p.SpanStatusCode}});var g=a(475);Object.defineProperty(i,"TraceFlags",{enumerable:!0,get:function(){return g.TraceFlags}});var h=a(98);Object.defineProperty(i,"createTraceState",{enumerable:!0,get:function(){return h.createTraceState}});var f=a(139);Object.defineProperty(i,"isSpanContextValid",{enumerable:!0,get:function(){return f.isSpanContextValid}}),Object.defineProperty(i,"isValidTraceId",{enumerable:!0,get:function(){return f.isValidTraceId}}),Object.defineProperty(i,"isValidSpanId",{enumerable:!0,get:function(){return f.isValidSpanId}});var w=a(476);Object.defineProperty(i,"INVALID_SPANID",{enumerable:!0,get:function(){return w.INVALID_SPANID}}),Object.defineProperty(i,"INVALID_TRACEID",{enumerable:!0,get:function(){return w.INVALID_TRACEID}}),Object.defineProperty(i,"INVALID_SPAN_CONTEXT",{enumerable:!0,get:function(){return w.INVALID_SPAN_CONTEXT}});let y=a(67);Object.defineProperty(i,"context",{enumerable:!0,get:function(){return y.context}});let m=a(506);Object.defineProperty(i,"diag",{enumerable:!0,get:function(){return m.diag}});let b=a(886);Object.defineProperty(i,"metrics",{enumerable:!0,get:function(){return b.metrics}});let v=a(939);Object.defineProperty(i,"propagation",{enumerable:!0,get:function(){return v.propagation}});let S=a(845);Object.defineProperty(i,"trace",{enumerable:!0,get:function(){return S.trace}}),i.default={context:y.context,diag:m.diag,metrics:b.metrics,propagation:v.propagation,trace:S.trace}})(),e.exports=i})()},578:e=>{(()=>{"use strict";"undefined"!=typeof __nccwpck_require__&&(__nccwpck_require__.ab="//");var t={};(()=>{/*!
+ */ 
+var preferredCharsets = __webpack_require__(212);
+var preferredEncodings = __webpack_require__(238);
+var preferredLanguages = __webpack_require__(997);
+var preferredMediaTypes = __webpack_require__(162);
+/**
+ * Module exports.
+ * @public
+ */ module.exports = Negotiator;
+module.exports.Negotiator = Negotiator;
+/**
+ * Create a Negotiator instance from a request.
+ * @param {object} request
+ * @public
+ */ function Negotiator(request) {
+    if (!(this instanceof Negotiator)) {
+        return new Negotiator(request);
+    }
+    this.request = request;
+}
+Negotiator.prototype.charset = function charset(available) {
+    var set = this.charsets(available);
+    return set && set[0];
+};
+Negotiator.prototype.charsets = function charsets(available) {
+    return preferredCharsets(this.request.headers["accept-charset"], available);
+};
+Negotiator.prototype.encoding = function encoding(available) {
+    var set = this.encodings(available);
+    return set && set[0];
+};
+Negotiator.prototype.encodings = function encodings(available) {
+    return preferredEncodings(this.request.headers["accept-encoding"], available);
+};
+Negotiator.prototype.language = function language(available) {
+    var set = this.languages(available);
+    return set && set[0];
+};
+Negotiator.prototype.languages = function languages(available) {
+    return preferredLanguages(this.request.headers["accept-language"], available);
+};
+Negotiator.prototype.mediaType = function mediaType(available) {
+    var set = this.mediaTypes(available);
+    return set && set[0];
+};
+Negotiator.prototype.mediaTypes = function mediaTypes(available) {
+    return preferredMediaTypes(this.request.headers.accept, available);
+};
+// Backwards compatibility
+Negotiator.prototype.preferredCharset = Negotiator.prototype.charset;
+Negotiator.prototype.preferredCharsets = Negotiator.prototype.charsets;
+Negotiator.prototype.preferredEncoding = Negotiator.prototype.encoding;
+Negotiator.prototype.preferredEncodings = Negotiator.prototype.encodings;
+Negotiator.prototype.preferredLanguage = Negotiator.prototype.language;
+Negotiator.prototype.preferredLanguages = Negotiator.prototype.languages;
+Negotiator.prototype.preferredMediaType = Negotiator.prototype.mediaType;
+Negotiator.prototype.preferredMediaTypes = Negotiator.prototype.mediaTypes;
+
+
+/***/ }),
+
+/***/ 212:
+/***/ ((module) => {
+
+"use strict";
+/**
+ * negotiator
+ * Copyright(c) 2012 Isaac Z. Schlueter
+ * Copyright(c) 2014 Federico Romero
+ * Copyright(c) 2014-2015 Douglas Christopher Wilson
+ * MIT Licensed
+ */ 
+/**
+ * Module exports.
+ * @public
+ */ module.exports = preferredCharsets;
+module.exports.preferredCharsets = preferredCharsets;
+/**
+ * Module variables.
+ * @private
+ */ var simpleCharsetRegExp = /^\s*([^\s;]+)\s*(?:;(.*))?$/;
+/**
+ * Parse the Accept-Charset header.
+ * @private
+ */ function parseAcceptCharset(accept) {
+    var accepts = accept.split(",");
+    for(var i = 0, j = 0; i < accepts.length; i++){
+        var charset = parseCharset(accepts[i].trim(), i);
+        if (charset) {
+            accepts[j++] = charset;
+        }
+    }
+    // trim accepts
+    accepts.length = j;
+    return accepts;
+}
+/**
+ * Parse a charset from the Accept-Charset header.
+ * @private
+ */ function parseCharset(str, i) {
+    var match = simpleCharsetRegExp.exec(str);
+    if (!match) return null;
+    var charset = match[1];
+    var q = 1;
+    if (match[2]) {
+        var params = match[2].split(";");
+        for(var j = 0; j < params.length; j++){
+            var p = params[j].trim().split("=");
+            if (p[0] === "q") {
+                q = parseFloat(p[1]);
+                break;
+            }
+        }
+    }
+    return {
+        charset: charset,
+        q: q,
+        i: i
+    };
+}
+/**
+ * Get the priority of a charset.
+ * @private
+ */ function getCharsetPriority(charset, accepted, index) {
+    var priority = {
+        o: -1,
+        q: 0,
+        s: 0
+    };
+    for(var i = 0; i < accepted.length; i++){
+        var spec = specify(charset, accepted[i], index);
+        if (spec && (priority.s - spec.s || priority.q - spec.q || priority.o - spec.o) < 0) {
+            priority = spec;
+        }
+    }
+    return priority;
+}
+/**
+ * Get the specificity of the charset.
+ * @private
+ */ function specify(charset, spec, index) {
+    var s = 0;
+    if (spec.charset.toLowerCase() === charset.toLowerCase()) {
+        s |= 1;
+    } else if (spec.charset !== "*") {
+        return null;
+    }
+    return {
+        i: index,
+        o: spec.i,
+        q: spec.q,
+        s: s
+    };
+}
+/**
+ * Get the preferred charsets from an Accept-Charset header.
+ * @public
+ */ function preferredCharsets(accept, provided) {
+    // RFC 2616 sec 14.2: no header = *
+    var accepts = parseAcceptCharset(accept === undefined ? "*" : accept || "");
+    if (!provided) {
+        // sorted list of all charsets
+        return accepts.filter(isQuality).sort(compareSpecs).map(getFullCharset);
+    }
+    var priorities = provided.map(function getPriority(type, index) {
+        return getCharsetPriority(type, accepts, index);
+    });
+    // sorted list of accepted charsets
+    return priorities.filter(isQuality).sort(compareSpecs).map(function getCharset(priority) {
+        return provided[priorities.indexOf(priority)];
+    });
+}
+/**
+ * Compare two specs.
+ * @private
+ */ function compareSpecs(a, b) {
+    return b.q - a.q || b.s - a.s || a.o - b.o || a.i - b.i || 0;
+}
+/**
+ * Get full charset string.
+ * @private
+ */ function getFullCharset(spec) {
+    return spec.charset;
+}
+/**
+ * Check if a spec has any quality.
+ * @private
+ */ function isQuality(spec) {
+    return spec.q > 0;
+}
+
+
+/***/ }),
+
+/***/ 238:
+/***/ ((module) => {
+
+"use strict";
+/**
+ * negotiator
+ * Copyright(c) 2012 Isaac Z. Schlueter
+ * Copyright(c) 2014 Federico Romero
+ * Copyright(c) 2014-2015 Douglas Christopher Wilson
+ * MIT Licensed
+ */ 
+/**
+ * Module exports.
+ * @public
+ */ module.exports = preferredEncodings;
+module.exports.preferredEncodings = preferredEncodings;
+/**
+ * Module variables.
+ * @private
+ */ var simpleEncodingRegExp = /^\s*([^\s;]+)\s*(?:;(.*))?$/;
+/**
+ * Parse the Accept-Encoding header.
+ * @private
+ */ function parseAcceptEncoding(accept) {
+    var accepts = accept.split(",");
+    var hasIdentity = false;
+    var minQuality = 1;
+    for(var i = 0, j = 0; i < accepts.length; i++){
+        var encoding = parseEncoding(accepts[i].trim(), i);
+        if (encoding) {
+            accepts[j++] = encoding;
+            hasIdentity = hasIdentity || specify("identity", encoding);
+            minQuality = Math.min(minQuality, encoding.q || 1);
+        }
+    }
+    if (!hasIdentity) {
+        /*
+     * If identity doesn't explicitly appear in the accept-encoding header,
+     * it's added to the list of acceptable encoding with the lowest q
+     */ accepts[j++] = {
+            encoding: "identity",
+            q: minQuality,
+            i: i
+        };
+    }
+    // trim accepts
+    accepts.length = j;
+    return accepts;
+}
+/**
+ * Parse an encoding from the Accept-Encoding header.
+ * @private
+ */ function parseEncoding(str, i) {
+    var match = simpleEncodingRegExp.exec(str);
+    if (!match) return null;
+    var encoding = match[1];
+    var q = 1;
+    if (match[2]) {
+        var params = match[2].split(";");
+        for(var j = 0; j < params.length; j++){
+            var p = params[j].trim().split("=");
+            if (p[0] === "q") {
+                q = parseFloat(p[1]);
+                break;
+            }
+        }
+    }
+    return {
+        encoding: encoding,
+        q: q,
+        i: i
+    };
+}
+/**
+ * Get the priority of an encoding.
+ * @private
+ */ function getEncodingPriority(encoding, accepted, index) {
+    var priority = {
+        o: -1,
+        q: 0,
+        s: 0
+    };
+    for(var i = 0; i < accepted.length; i++){
+        var spec = specify(encoding, accepted[i], index);
+        if (spec && (priority.s - spec.s || priority.q - spec.q || priority.o - spec.o) < 0) {
+            priority = spec;
+        }
+    }
+    return priority;
+}
+/**
+ * Get the specificity of the encoding.
+ * @private
+ */ function specify(encoding, spec, index) {
+    var s = 0;
+    if (spec.encoding.toLowerCase() === encoding.toLowerCase()) {
+        s |= 1;
+    } else if (spec.encoding !== "*") {
+        return null;
+    }
+    return {
+        i: index,
+        o: spec.i,
+        q: spec.q,
+        s: s
+    };
+}
+;
+/**
+ * Get the preferred encodings from an Accept-Encoding header.
+ * @public
+ */ function preferredEncodings(accept, provided) {
+    var accepts = parseAcceptEncoding(accept || "");
+    if (!provided) {
+        // sorted list of all encodings
+        return accepts.filter(isQuality).sort(compareSpecs).map(getFullEncoding);
+    }
+    var priorities = provided.map(function getPriority(type, index) {
+        return getEncodingPriority(type, accepts, index);
+    });
+    // sorted list of accepted encodings
+    return priorities.filter(isQuality).sort(compareSpecs).map(function getEncoding(priority) {
+        return provided[priorities.indexOf(priority)];
+    });
+}
+/**
+ * Compare two specs.
+ * @private
+ */ function compareSpecs(a, b) {
+    return b.q - a.q || b.s - a.s || a.o - b.o || a.i - b.i || 0;
+}
+/**
+ * Get full encoding string.
+ * @private
+ */ function getFullEncoding(spec) {
+    return spec.encoding;
+}
+/**
+ * Check if a spec has any quality.
+ * @private
+ */ function isQuality(spec) {
+    return spec.q > 0;
+}
+
+
+/***/ }),
+
+/***/ 997:
+/***/ ((module) => {
+
+"use strict";
+/**
+ * negotiator
+ * Copyright(c) 2012 Isaac Z. Schlueter
+ * Copyright(c) 2014 Federico Romero
+ * Copyright(c) 2014-2015 Douglas Christopher Wilson
+ * MIT Licensed
+ */ 
+/**
+ * Module exports.
+ * @public
+ */ module.exports = preferredLanguages;
+module.exports.preferredLanguages = preferredLanguages;
+/**
+ * Module variables.
+ * @private
+ */ var simpleLanguageRegExp = /^\s*([^\s\-;]+)(?:-([^\s;]+))?\s*(?:;(.*))?$/;
+/**
+ * Parse the Accept-Language header.
+ * @private
+ */ function parseAcceptLanguage(accept) {
+    var accepts = accept.split(",");
+    for(var i = 0, j = 0; i < accepts.length; i++){
+        var language = parseLanguage(accepts[i].trim(), i);
+        if (language) {
+            accepts[j++] = language;
+        }
+    }
+    // trim accepts
+    accepts.length = j;
+    return accepts;
+}
+/**
+ * Parse a language from the Accept-Language header.
+ * @private
+ */ function parseLanguage(str, i) {
+    var match = simpleLanguageRegExp.exec(str);
+    if (!match) return null;
+    var prefix = match[1];
+    var suffix = match[2];
+    var full = prefix;
+    if (suffix) full += "-" + suffix;
+    var q = 1;
+    if (match[3]) {
+        var params = match[3].split(";");
+        for(var j = 0; j < params.length; j++){
+            var p = params[j].split("=");
+            if (p[0] === "q") q = parseFloat(p[1]);
+        }
+    }
+    return {
+        prefix: prefix,
+        suffix: suffix,
+        q: q,
+        i: i,
+        full: full
+    };
+}
+/**
+ * Get the priority of a language.
+ * @private
+ */ function getLanguagePriority(language, accepted, index) {
+    var priority = {
+        o: -1,
+        q: 0,
+        s: 0
+    };
+    for(var i = 0; i < accepted.length; i++){
+        var spec = specify(language, accepted[i], index);
+        if (spec && (priority.s - spec.s || priority.q - spec.q || priority.o - spec.o) < 0) {
+            priority = spec;
+        }
+    }
+    return priority;
+}
+/**
+ * Get the specificity of the language.
+ * @private
+ */ function specify(language, spec, index) {
+    var p = parseLanguage(language);
+    if (!p) return null;
+    var s = 0;
+    if (spec.full.toLowerCase() === p.full.toLowerCase()) {
+        s |= 4;
+    } else if (spec.prefix.toLowerCase() === p.full.toLowerCase()) {
+        s |= 2;
+    } else if (spec.full.toLowerCase() === p.prefix.toLowerCase()) {
+        s |= 1;
+    } else if (spec.full !== "*") {
+        return null;
+    }
+    return {
+        i: index,
+        o: spec.i,
+        q: spec.q,
+        s: s
+    };
+}
+;
+/**
+ * Get the preferred languages from an Accept-Language header.
+ * @public
+ */ function preferredLanguages(accept, provided) {
+    // RFC 2616 sec 14.4: no header = *
+    var accepts = parseAcceptLanguage(accept === undefined ? "*" : accept || "");
+    if (!provided) {
+        // sorted list of all languages
+        return accepts.filter(isQuality).sort(compareSpecs).map(getFullLanguage);
+    }
+    var priorities = provided.map(function getPriority(type, index) {
+        return getLanguagePriority(type, accepts, index);
+    });
+    // sorted list of accepted languages
+    return priorities.filter(isQuality).sort(compareSpecs).map(function getLanguage(priority) {
+        return provided[priorities.indexOf(priority)];
+    });
+}
+/**
+ * Compare two specs.
+ * @private
+ */ function compareSpecs(a, b) {
+    return b.q - a.q || b.s - a.s || a.o - b.o || a.i - b.i || 0;
+}
+/**
+ * Get full language string.
+ * @private
+ */ function getFullLanguage(spec) {
+    return spec.full;
+}
+/**
+ * Check if a spec has any quality.
+ * @private
+ */ function isQuality(spec) {
+    return spec.q > 0;
+}
+
+
+/***/ }),
+
+/***/ 162:
+/***/ ((module) => {
+
+"use strict";
+/**
+ * negotiator
+ * Copyright(c) 2012 Isaac Z. Schlueter
+ * Copyright(c) 2014 Federico Romero
+ * Copyright(c) 2014-2015 Douglas Christopher Wilson
+ * MIT Licensed
+ */ 
+/**
+ * Module exports.
+ * @public
+ */ module.exports = preferredMediaTypes;
+module.exports.preferredMediaTypes = preferredMediaTypes;
+/**
+ * Module variables.
+ * @private
+ */ var simpleMediaTypeRegExp = /^\s*([^\s\/;]+)\/([^;\s]+)\s*(?:;(.*))?$/;
+/**
+ * Parse the Accept header.
+ * @private
+ */ function parseAccept(accept) {
+    var accepts = splitMediaTypes(accept);
+    for(var i = 0, j = 0; i < accepts.length; i++){
+        var mediaType = parseMediaType(accepts[i].trim(), i);
+        if (mediaType) {
+            accepts[j++] = mediaType;
+        }
+    }
+    // trim accepts
+    accepts.length = j;
+    return accepts;
+}
+/**
+ * Parse a media type from the Accept header.
+ * @private
+ */ function parseMediaType(str, i) {
+    var match = simpleMediaTypeRegExp.exec(str);
+    if (!match) return null;
+    var params = Object.create(null);
+    var q = 1;
+    var subtype = match[2];
+    var type = match[1];
+    if (match[3]) {
+        var kvps = splitParameters(match[3]).map(splitKeyValuePair);
+        for(var j = 0; j < kvps.length; j++){
+            var pair = kvps[j];
+            var key = pair[0].toLowerCase();
+            var val = pair[1];
+            // get the value, unwrapping quotes
+            var value = val && val[0] === '"' && val[val.length - 1] === '"' ? val.substr(1, val.length - 2) : val;
+            if (key === "q") {
+                q = parseFloat(value);
+                break;
+            }
+            // store parameter
+            params[key] = value;
+        }
+    }
+    return {
+        type: type,
+        subtype: subtype,
+        params: params,
+        q: q,
+        i: i
+    };
+}
+/**
+ * Get the priority of a media type.
+ * @private
+ */ function getMediaTypePriority(type, accepted, index) {
+    var priority = {
+        o: -1,
+        q: 0,
+        s: 0
+    };
+    for(var i = 0; i < accepted.length; i++){
+        var spec = specify(type, accepted[i], index);
+        if (spec && (priority.s - spec.s || priority.q - spec.q || priority.o - spec.o) < 0) {
+            priority = spec;
+        }
+    }
+    return priority;
+}
+/**
+ * Get the specificity of the media type.
+ * @private
+ */ function specify(type, spec, index) {
+    var p = parseMediaType(type);
+    var s = 0;
+    if (!p) {
+        return null;
+    }
+    if (spec.type.toLowerCase() == p.type.toLowerCase()) {
+        s |= 4;
+    } else if (spec.type != "*") {
+        return null;
+    }
+    if (spec.subtype.toLowerCase() == p.subtype.toLowerCase()) {
+        s |= 2;
+    } else if (spec.subtype != "*") {
+        return null;
+    }
+    var keys = Object.keys(spec.params);
+    if (keys.length > 0) {
+        if (keys.every(function(k) {
+            return spec.params[k] == "*" || (spec.params[k] || "").toLowerCase() == (p.params[k] || "").toLowerCase();
+        })) {
+            s |= 1;
+        } else {
+            return null;
+        }
+    }
+    return {
+        i: index,
+        o: spec.i,
+        q: spec.q,
+        s: s
+    };
+}
+/**
+ * Get the preferred media types from an Accept header.
+ * @public
+ */ function preferredMediaTypes(accept, provided) {
+    // RFC 2616 sec 14.2: no header = */*
+    var accepts = parseAccept(accept === undefined ? "*/*" : accept || "");
+    if (!provided) {
+        // sorted list of all types
+        return accepts.filter(isQuality).sort(compareSpecs).map(getFullType);
+    }
+    var priorities = provided.map(function getPriority(type, index) {
+        return getMediaTypePriority(type, accepts, index);
+    });
+    // sorted list of accepted types
+    return priorities.filter(isQuality).sort(compareSpecs).map(function getType(priority) {
+        return provided[priorities.indexOf(priority)];
+    });
+}
+/**
+ * Compare two specs.
+ * @private
+ */ function compareSpecs(a, b) {
+    return b.q - a.q || b.s - a.s || a.o - b.o || a.i - b.i || 0;
+}
+/**
+ * Get full type string.
+ * @private
+ */ function getFullType(spec) {
+    return spec.type + "/" + spec.subtype;
+}
+/**
+ * Check if a spec has any quality.
+ * @private
+ */ function isQuality(spec) {
+    return spec.q > 0;
+}
+/**
+ * Count the number of quotes in a string.
+ * @private
+ */ function quoteCount(string) {
+    var count = 0;
+    var index = 0;
+    while((index = string.indexOf('"', index)) !== -1){
+        count++;
+        index++;
+    }
+    return count;
+}
+/**
+ * Split a key value pair.
+ * @private
+ */ function splitKeyValuePair(str) {
+    var index = str.indexOf("=");
+    var key;
+    var val;
+    if (index === -1) {
+        key = str;
+    } else {
+        key = str.substr(0, index);
+        val = str.substr(index + 1);
+    }
+    return [
+        key,
+        val
+    ];
+}
+/**
+ * Split an Accept header into media types.
+ * @private
+ */ function splitMediaTypes(accept) {
+    var accepts = accept.split(",");
+    for(var i = 1, j = 0; i < accepts.length; i++){
+        if (quoteCount(accepts[j]) % 2 == 0) {
+            accepts[++j] = accepts[i];
+        } else {
+            accepts[j] += "," + accepts[i];
+        }
+    }
+    // trim accepts
+    accepts.length = j + 1;
+    return accepts;
+}
+/**
+ * Split a string of parameters.
+ * @private
+ */ function splitParameters(str) {
+    var parameters = str.split(";");
+    for(var i = 1, j = 0; i < parameters.length; i++){
+        if (quoteCount(parameters[j]) % 2 == 0) {
+            parameters[++j] = parameters[i];
+        } else {
+            parameters[j] += ";" + parameters[i];
+        }
+    }
+    // trim parameters
+    parameters.length = j + 1;
+    for(var i = 0; i < parameters.length; i++){
+        parameters[i] = parameters[i].trim();
+    }
+    return parameters;
+}
+
+
+/***/ }),
+
+/***/ 492:
+/***/ ((module) => {
+
+"use strict";
+
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all)=>{
+    for(var name in all)__defProp(target, name, {
+        get: all[name],
+        enumerable: true
+    });
+};
+var __copyProps = (to, from, except, desc)=>{
+    if (from && typeof from === "object" || typeof from === "function") {
+        for (let key of __getOwnPropNames(from))if (!__hasOwnProp.call(to, key) && key !== except) __defProp(to, key, {
+            get: ()=>from[key],
+            enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable
+        });
+    }
+    return to;
+};
+var __toCommonJS = (mod)=>__copyProps(__defProp({}, "__esModule", {
+        value: true
+    }), mod);
+// src/index.ts
+var src_exports = {};
+__export(src_exports, {
+    RequestCookies: ()=>RequestCookies,
+    ResponseCookies: ()=>ResponseCookies,
+    parseCookie: ()=>parseCookie,
+    parseSetCookie: ()=>parseSetCookie,
+    stringifyCookie: ()=>stringifyCookie
+});
+module.exports = __toCommonJS(src_exports);
+// src/serialize.ts
+function stringifyCookie(c) {
+    var _a;
+    const attrs = [
+        "path" in c && c.path && `Path=${c.path}`,
+        "expires" in c && (c.expires || c.expires === 0) && `Expires=${(typeof c.expires === "number" ? new Date(c.expires) : c.expires).toUTCString()}`,
+        "maxAge" in c && typeof c.maxAge === "number" && `Max-Age=${c.maxAge}`,
+        "domain" in c && c.domain && `Domain=${c.domain}`,
+        "secure" in c && c.secure && "Secure",
+        "httpOnly" in c && c.httpOnly && "HttpOnly",
+        "sameSite" in c && c.sameSite && `SameSite=${c.sameSite}`,
+        "priority" in c && c.priority && `Priority=${c.priority}`
+    ].filter(Boolean);
+    return `${c.name}=${encodeURIComponent((_a = c.value) != null ? _a : "")}; ${attrs.join("; ")}`;
+}
+function parseCookie(cookie) {
+    const map = /* @__PURE__ */ new Map();
+    for (const pair of cookie.split(/; */)){
+        if (!pair) continue;
+        const splitAt = pair.indexOf("=");
+        if (splitAt === -1) {
+            map.set(pair, "true");
+            continue;
+        }
+        const [key, value] = [
+            pair.slice(0, splitAt),
+            pair.slice(splitAt + 1)
+        ];
+        try {
+            map.set(key, decodeURIComponent(value != null ? value : "true"));
+        } catch  {}
+    }
+    return map;
+}
+function parseSetCookie(setCookie) {
+    if (!setCookie) {
+        return void 0;
+    }
+    const [[name, value], ...attributes] = parseCookie(setCookie);
+    const { domain, expires, httponly, maxage, path, samesite, secure, priority } = Object.fromEntries(attributes.map(([key, value2])=>[
+            key.toLowerCase(),
+            value2
+        ]));
+    const cookie = {
+        name,
+        value: decodeURIComponent(value),
+        domain,
+        ...expires && {
+            expires: new Date(expires)
+        },
+        ...httponly && {
+            httpOnly: true
+        },
+        ...typeof maxage === "string" && {
+            maxAge: Number(maxage)
+        },
+        path,
+        ...samesite && {
+            sameSite: parseSameSite(samesite)
+        },
+        ...secure && {
+            secure: true
+        },
+        ...priority && {
+            priority: parsePriority(priority)
+        }
+    };
+    return compact(cookie);
+}
+function compact(t) {
+    const newT = {};
+    for(const key in t){
+        if (t[key]) {
+            newT[key] = t[key];
+        }
+    }
+    return newT;
+}
+var SAME_SITE = [
+    "strict",
+    "lax",
+    "none"
+];
+function parseSameSite(string) {
+    string = string.toLowerCase();
+    return SAME_SITE.includes(string) ? string : void 0;
+}
+var PRIORITY = [
+    "low",
+    "medium",
+    "high"
+];
+function parsePriority(string) {
+    string = string.toLowerCase();
+    return PRIORITY.includes(string) ? string : void 0;
+}
+function splitCookiesString(cookiesString) {
+    if (!cookiesString) return [];
+    var cookiesStrings = [];
+    var pos = 0;
+    var start;
+    var ch;
+    var lastComma;
+    var nextStart;
+    var cookiesSeparatorFound;
+    function skipWhitespace() {
+        while(pos < cookiesString.length && /\s/.test(cookiesString.charAt(pos))){
+            pos += 1;
+        }
+        return pos < cookiesString.length;
+    }
+    function notSpecialChar() {
+        ch = cookiesString.charAt(pos);
+        return ch !== "=" && ch !== ";" && ch !== ",";
+    }
+    while(pos < cookiesString.length){
+        start = pos;
+        cookiesSeparatorFound = false;
+        while(skipWhitespace()){
+            ch = cookiesString.charAt(pos);
+            if (ch === ",") {
+                lastComma = pos;
+                pos += 1;
+                skipWhitespace();
+                nextStart = pos;
+                while(pos < cookiesString.length && notSpecialChar()){
+                    pos += 1;
+                }
+                if (pos < cookiesString.length && cookiesString.charAt(pos) === "=") {
+                    cookiesSeparatorFound = true;
+                    pos = nextStart;
+                    cookiesStrings.push(cookiesString.substring(start, lastComma));
+                    start = pos;
+                } else {
+                    pos = lastComma + 1;
+                }
+            } else {
+                pos += 1;
+            }
+        }
+        if (!cookiesSeparatorFound || pos >= cookiesString.length) {
+            cookiesStrings.push(cookiesString.substring(start, cookiesString.length));
+        }
+    }
+    return cookiesStrings;
+}
+// src/request-cookies.ts
+var RequestCookies = class {
+    constructor(requestHeaders){
+        /** @internal */ this._parsed = /* @__PURE__ */ new Map();
+        this._headers = requestHeaders;
+        const header = requestHeaders.get("cookie");
+        if (header) {
+            const parsed = parseCookie(header);
+            for (const [name, value] of parsed){
+                this._parsed.set(name, {
+                    name,
+                    value
+                });
+            }
+        }
+    }
+    [Symbol.iterator]() {
+        return this._parsed[Symbol.iterator]();
+    }
+    /**
+   * The amount of cookies received from the client
+   */ get size() {
+        return this._parsed.size;
+    }
+    get(...args) {
+        const name = typeof args[0] === "string" ? args[0] : args[0].name;
+        return this._parsed.get(name);
+    }
+    getAll(...args) {
+        var _a;
+        const all = Array.from(this._parsed);
+        if (!args.length) {
+            return all.map(([_, value])=>value);
+        }
+        const name = typeof args[0] === "string" ? args[0] : (_a = args[0]) == null ? void 0 : _a.name;
+        return all.filter(([n])=>n === name).map(([_, value])=>value);
+    }
+    has(name) {
+        return this._parsed.has(name);
+    }
+    set(...args) {
+        const [name, value] = args.length === 1 ? [
+            args[0].name,
+            args[0].value
+        ] : args;
+        const map = this._parsed;
+        map.set(name, {
+            name,
+            value
+        });
+        this._headers.set("cookie", Array.from(map).map(([_, value2])=>stringifyCookie(value2)).join("; "));
+        return this;
+    }
+    /**
+   * Delete the cookies matching the passed name or names in the request.
+   */ delete(names) {
+        const map = this._parsed;
+        const result = !Array.isArray(names) ? map.delete(names) : names.map((name)=>map.delete(name));
+        this._headers.set("cookie", Array.from(map).map(([_, value])=>stringifyCookie(value)).join("; "));
+        return result;
+    }
+    /**
+   * Delete all the cookies in the cookies in the request.
+   */ clear() {
+        this.delete(Array.from(this._parsed.keys()));
+        return this;
+    }
+    /**
+   * Format the cookies in the request as a string for logging
+   */ [Symbol.for("edge-runtime.inspect.custom")]() {
+        return `RequestCookies ${JSON.stringify(Object.fromEntries(this._parsed))}`;
+    }
+    toString() {
+        return [
+            ...this._parsed.values()
+        ].map((v)=>`${v.name}=${encodeURIComponent(v.value)}`).join("; ");
+    }
+};
+// src/response-cookies.ts
+var ResponseCookies = class {
+    constructor(responseHeaders){
+        /** @internal */ this._parsed = /* @__PURE__ */ new Map();
+        var _a, _b, _c;
+        this._headers = responseHeaders;
+        const setCookie = (_c = (_b = (_a = responseHeaders.getSetCookie) == null ? void 0 : _a.call(responseHeaders)) != null ? _b : responseHeaders.get("set-cookie")) != null ? _c : [];
+        const cookieStrings = Array.isArray(setCookie) ? setCookie : splitCookiesString(setCookie);
+        for (const cookieString of cookieStrings){
+            const parsed = parseSetCookie(cookieString);
+            if (parsed) this._parsed.set(parsed.name, parsed);
+        }
+    }
+    /**
+   * {@link https://wicg.github.io/cookie-store/#CookieStore-get CookieStore#get} without the Promise.
+   */ get(...args) {
+        const key = typeof args[0] === "string" ? args[0] : args[0].name;
+        return this._parsed.get(key);
+    }
+    /**
+   * {@link https://wicg.github.io/cookie-store/#CookieStore-getAll CookieStore#getAll} without the Promise.
+   */ getAll(...args) {
+        var _a;
+        const all = Array.from(this._parsed.values());
+        if (!args.length) {
+            return all;
+        }
+        const key = typeof args[0] === "string" ? args[0] : (_a = args[0]) == null ? void 0 : _a.name;
+        return all.filter((c)=>c.name === key);
+    }
+    has(name) {
+        return this._parsed.has(name);
+    }
+    /**
+   * {@link https://wicg.github.io/cookie-store/#CookieStore-set CookieStore#set} without the Promise.
+   */ set(...args) {
+        const [name, value, cookie] = args.length === 1 ? [
+            args[0].name,
+            args[0].value,
+            args[0]
+        ] : args;
+        const map = this._parsed;
+        map.set(name, normalizeCookie({
+            name,
+            value,
+            ...cookie
+        }));
+        replace(map, this._headers);
+        return this;
+    }
+    /**
+   * {@link https://wicg.github.io/cookie-store/#CookieStore-delete CookieStore#delete} without the Promise.
+   */ delete(...args) {
+        const [name, path, domain] = typeof args[0] === "string" ? [
+            args[0]
+        ] : [
+            args[0].name,
+            args[0].path,
+            args[0].domain
+        ];
+        return this.set({
+            name,
+            path,
+            domain,
+            value: "",
+            expires: /* @__PURE__ */ new Date(0)
+        });
+    }
+    [Symbol.for("edge-runtime.inspect.custom")]() {
+        return `ResponseCookies ${JSON.stringify(Object.fromEntries(this._parsed))}`;
+    }
+    toString() {
+        return [
+            ...this._parsed.values()
+        ].map(stringifyCookie).join("; ");
+    }
+};
+function replace(bag, headers) {
+    headers.delete("set-cookie");
+    for (const [, value] of bag){
+        const serialized = stringifyCookie(value);
+        headers.append("set-cookie", serialized);
+    }
+}
+function normalizeCookie(cookie = {
+    name: "",
+    value: ""
+}) {
+    if (typeof cookie.expires === "number") {
+        cookie.expires = new Date(cookie.expires);
+    }
+    if (cookie.maxAge) {
+        cookie.expires = new Date(Date.now() + cookie.maxAge * 1e3);
+    }
+    if (cookie.path === null || cookie.path === void 0) {
+        cookie.path = "/";
+    }
+    return cookie;
+}
+// Annotate the CommonJS export names for ESM import in node:
+0 && (0);
+
+
+/***/ }),
+
+/***/ 842:
+/***/ ((module) => {
+
+"use strict";
+var __dirname = "/";
+
+(()=>{
+    "use strict";
+    if (typeof __nccwpck_require__ !== "undefined") __nccwpck_require__.ab = __dirname + "/";
+    var e = {};
+    (()=>{
+        var r = e;
+        /*!
  * cookie
  * Copyright(c) 2012-2014 Roman Shtylman
  * Copyright(c) 2015 Douglas Christopher Wilson
  * MIT Licensed
- */t.parse=function(t,r){if("string"!=typeof t)throw TypeError("argument str must be a string");for(var a={},i=t.split(n),s=(r||{}).decode||e,o=0;o<i.length;o++){var d=i[o],u=d.indexOf("=");if(!(u<0)){var l=d.substr(0,u).trim(),c=d.substr(++u,d.length).trim();'"'==c[0]&&(c=c.slice(1,-1)),void 0==a[l]&&(a[l]=function(e,t){try{return t(e)}catch(t){return e}}(c,s))}}return a},t.serialize=function(e,t,n){var i=n||{},s=i.encode||r;if("function"!=typeof s)throw TypeError("option encode is invalid");if(!a.test(e))throw TypeError("argument name is invalid");var o=s(t);if(o&&!a.test(o))throw TypeError("argument val is invalid");var d=e+"="+o;if(null!=i.maxAge){var u=i.maxAge-0;if(isNaN(u)||!isFinite(u))throw TypeError("option maxAge is invalid");d+="; Max-Age="+Math.floor(u)}if(i.domain){if(!a.test(i.domain))throw TypeError("option domain is invalid");d+="; Domain="+i.domain}if(i.path){if(!a.test(i.path))throw TypeError("option path is invalid");d+="; Path="+i.path}if(i.expires){if("function"!=typeof i.expires.toUTCString)throw TypeError("option expires is invalid");d+="; Expires="+i.expires.toUTCString()}if(i.httpOnly&&(d+="; HttpOnly"),i.secure&&(d+="; Secure"),i.sameSite)switch("string"==typeof i.sameSite?i.sameSite.toLowerCase():i.sameSite){case!0:case"strict":d+="; SameSite=Strict";break;case"lax":d+="; SameSite=Lax";break;case"none":d+="; SameSite=None";break;default:throw TypeError("option sameSite is invalid")}return d};var e=decodeURIComponent,r=encodeURIComponent,n=/; */,a=/^[\u0009\u0020-\u007e\u0080-\u00ff]+$/})(),e.exports=t})()},254:(e,t,r)=>{var n;(()=>{var a={226:function(a,i){!function(s,o){"use strict";var d="function",u="undefined",l="object",c="string",_="major",p="model",g="name",h="type",f="vendor",w="version",y="architecture",m="console",b="mobile",v="tablet",S="smarttv",x="wearable",C="embedded",T="Amazon",M="Apple",P="ASUS",O="BlackBerry",R="Browser",N="Chrome",E="Firefox",L="Google",A="Huawei",I="Microsoft",k="Motorola",D="Opera",q="Samsung",B="Sharp",G="Sony",j="Xiaomi",U="Zebra",V="Facebook",H="Chromium OS",K="Mac OS",F=function(e,t){var r={};for(var n in e)t[n]&&t[n].length%2==0?r[n]=t[n].concat(e[n]):r[n]=e[n];return r},$=function(e){for(var t={},r=0;r<e.length;r++)t[e[r].toUpperCase()]=e[r];return t},z=function(e,t){return typeof e===c&&-1!==W(t).indexOf(W(e))},W=function(e){return e.toLowerCase()},Z=function(e,t){if(typeof e===c)return e=e.replace(/^\s\s*/,""),typeof t===u?e:e.substring(0,350)},Y=function(e,t){for(var r,n,a,i,s,u,c=0;c<t.length&&!s;){var _=t[c],p=t[c+1];for(r=n=0;r<_.length&&!s&&_[r];)if(s=_[r++].exec(e))for(a=0;a<p.length;a++)u=s[++n],typeof(i=p[a])===l&&i.length>0?2===i.length?typeof i[1]==d?this[i[0]]=i[1].call(this,u):this[i[0]]=i[1]:3===i.length?typeof i[1]!==d||i[1].exec&&i[1].test?this[i[0]]=u?u.replace(i[1],i[2]):o:this[i[0]]=u?i[1].call(this,u,i[2]):o:4===i.length&&(this[i[0]]=u?i[3].call(this,u.replace(i[1],i[2])):o):this[i]=u||o;c+=2}},J=function(e,t){for(var r in t)if(typeof t[r]===l&&t[r].length>0){for(var n=0;n<t[r].length;n++)if(z(t[r][n],e))return"?"===r?o:r}else if(z(t[r],e))return"?"===r?o:r;return e},X={ME:"4.90","NT 3.11":"NT3.51","NT 4.0":"NT4.0",2e3:"NT 5.0",XP:["NT 5.1","NT 5.2"],Vista:"NT 6.0",7:"NT 6.1",8:"NT 6.2",8.1:"NT 6.3",10:["NT 6.4","NT 10.0"],RT:"ARM"},Q={browser:[[/\b(?:crmo|crios)\/([\w\.]+)/i],[w,[g,"Chrome"]],[/edg(?:e|ios|a)?\/([\w\.]+)/i],[w,[g,"Edge"]],[/(opera mini)\/([-\w\.]+)/i,/(opera [mobiletab]{3,6})\b.+version\/([-\w\.]+)/i,/(opera)(?:.+version\/|[\/ ]+)([\w\.]+)/i],[g,w],[/opios[\/ ]+([\w\.]+)/i],[w,[g,D+" Mini"]],[/\bopr\/([\w\.]+)/i],[w,[g,D]],[/(kindle)\/([\w\.]+)/i,/(lunascape|maxthon|netfront|jasmine|blazer)[\/ ]?([\w\.]*)/i,/(avant |iemobile|slim)(?:browser)?[\/ ]?([\w\.]*)/i,/(ba?idubrowser)[\/ ]?([\w\.]+)/i,/(?:ms|\()(ie) ([\w\.]+)/i,/(flock|rockmelt|midori|epiphany|silk|skyfire|bolt|iron|vivaldi|iridium|phantomjs|bowser|quark|qupzilla|falkon|rekonq|puffin|brave|whale(?!.+naver)|qqbrowserlite|qq|duckduckgo)\/([-\w\.]+)/i,/(heytap|ovi)browser\/([\d\.]+)/i,/(weibo)__([\d\.]+)/i],[g,w],[/(?:\buc? ?browser|(?:juc.+)ucweb)[\/ ]?([\w\.]+)/i],[w,[g,"UC"+R]],[/microm.+\bqbcore\/([\w\.]+)/i,/\bqbcore\/([\w\.]+).+microm/i],[w,[g,"WeChat(Win) Desktop"]],[/micromessenger\/([\w\.]+)/i],[w,[g,"WeChat"]],[/konqueror\/([\w\.]+)/i],[w,[g,"Konqueror"]],[/trident.+rv[: ]([\w\.]{1,9})\b.+like gecko/i],[w,[g,"IE"]],[/ya(?:search)?browser\/([\w\.]+)/i],[w,[g,"Yandex"]],[/(avast|avg)\/([\w\.]+)/i],[[g,/(.+)/,"$1 Secure "+R],w],[/\bfocus\/([\w\.]+)/i],[w,[g,E+" Focus"]],[/\bopt\/([\w\.]+)/i],[w,[g,D+" Touch"]],[/coc_coc\w+\/([\w\.]+)/i],[w,[g,"Coc Coc"]],[/dolfin\/([\w\.]+)/i],[w,[g,"Dolphin"]],[/coast\/([\w\.]+)/i],[w,[g,D+" Coast"]],[/miuibrowser\/([\w\.]+)/i],[w,[g,"MIUI "+R]],[/fxios\/([-\w\.]+)/i],[w,[g,E]],[/\bqihu|(qi?ho?o?|360)browser/i],[[g,"360 "+R]],[/(oculus|samsung|sailfish|huawei)browser\/([\w\.]+)/i],[[g,/(.+)/,"$1 "+R],w],[/(comodo_dragon)\/([\w\.]+)/i],[[g,/_/g," "],w],[/(electron)\/([\w\.]+) safari/i,/(tesla)(?: qtcarbrowser|\/(20\d\d\.[-\w\.]+))/i,/m?(qqbrowser|baiduboxapp|2345Explorer)[\/ ]?([\w\.]+)/i],[g,w],[/(metasr)[\/ ]?([\w\.]+)/i,/(lbbrowser)/i,/\[(linkedin)app\]/i],[g],[/((?:fban\/fbios|fb_iab\/fb4a)(?!.+fbav)|;fbav\/([\w\.]+);)/i],[[g,V],w],[/(kakao(?:talk|story))[\/ ]([\w\.]+)/i,/(naver)\(.*?(\d+\.[\w\.]+).*\)/i,/safari (line)\/([\w\.]+)/i,/\b(line)\/([\w\.]+)\/iab/i,/(chromium|instagram)[\/ ]([-\w\.]+)/i],[g,w],[/\bgsa\/([\w\.]+) .*safari\//i],[w,[g,"GSA"]],[/musical_ly(?:.+app_?version\/|_)([\w\.]+)/i],[w,[g,"TikTok"]],[/headlesschrome(?:\/([\w\.]+)| )/i],[w,[g,N+" Headless"]],[/ wv\).+(chrome)\/([\w\.]+)/i],[[g,N+" WebView"],w],[/droid.+ version\/([\w\.]+)\b.+(?:mobile safari|safari)/i],[w,[g,"Android "+R]],[/(chrome|omniweb|arora|[tizenoka]{5} ?browser)\/v?([\w\.]+)/i],[g,w],[/version\/([\w\.\,]+) .*mobile\/\w+ (safari)/i],[w,[g,"Mobile Safari"]],[/version\/([\w(\.|\,)]+) .*(mobile ?safari|safari)/i],[w,g],[/webkit.+?(mobile ?safari|safari)(\/[\w\.]+)/i],[g,[w,J,{"1.0":"/8",1.2:"/1",1.3:"/3","2.0":"/412","2.0.2":"/416","2.0.3":"/417","2.0.4":"/419","?":"/"}]],[/(webkit|khtml)\/([\w\.]+)/i],[g,w],[/(navigator|netscape\d?)\/([-\w\.]+)/i],[[g,"Netscape"],w],[/mobile vr; rv:([\w\.]+)\).+firefox/i],[w,[g,E+" Reality"]],[/ekiohf.+(flow)\/([\w\.]+)/i,/(swiftfox)/i,/(icedragon|iceweasel|camino|chimera|fennec|maemo browser|minimo|conkeror|klar)[\/ ]?([\w\.\+]+)/i,/(seamonkey|k-meleon|icecat|iceape|firebird|phoenix|palemoon|basilisk|waterfox)\/([-\w\.]+)$/i,/(firefox)\/([\w\.]+)/i,/(mozilla)\/([\w\.]+) .+rv\:.+gecko\/\d+/i,/(polaris|lynx|dillo|icab|doris|amaya|w3m|netsurf|sleipnir|obigo|mosaic|(?:go|ice|up)[\. ]?browser)[-\/ ]?v?([\w\.]+)/i,/(links) \(([\w\.]+)/i,/panasonic;(viera)/i],[g,w],[/(cobalt)\/([\w\.]+)/i],[g,[w,/master.|lts./,""]]],cpu:[[/(?:(amd|x(?:(?:86|64)[-_])?|wow|win)64)[;\)]/i],[[y,"amd64"]],[/(ia32(?=;))/i],[[y,W]],[/((?:i[346]|x)86)[;\)]/i],[[y,"ia32"]],[/\b(aarch64|arm(v?8e?l?|_?64))\b/i],[[y,"arm64"]],[/\b(arm(?:v[67])?ht?n?[fl]p?)\b/i],[[y,"armhf"]],[/windows (ce|mobile); ppc;/i],[[y,"arm"]],[/((?:ppc|powerpc)(?:64)?)(?: mac|;|\))/i],[[y,/ower/,"",W]],[/(sun4\w)[;\)]/i],[[y,"sparc"]],[/((?:avr32|ia64(?=;))|68k(?=\))|\barm(?=v(?:[1-7]|[5-7]1)l?|;|eabi)|(?=atmel )avr|(?:irix|mips|sparc)(?:64)?\b|pa-risc)/i],[[y,W]]],device:[[/\b(sch-i[89]0\d|shw-m380s|sm-[ptx]\w{2,4}|gt-[pn]\d{2,4}|sgh-t8[56]9|nexus 10)/i],[p,[f,q],[h,v]],[/\b((?:s[cgp]h|gt|sm)-\w+|sc[g-]?[\d]+a?|galaxy nexus)/i,/samsung[- ]([-\w]+)/i,/sec-(sgh\w+)/i],[p,[f,q],[h,b]],[/(?:\/|\()(ip(?:hone|od)[\w, ]*)(?:\/|;)/i],[p,[f,M],[h,b]],[/\((ipad);[-\w\),; ]+apple/i,/applecoremedia\/[\w\.]+ \((ipad)/i,/\b(ipad)\d\d?,\d\d?[;\]].+ios/i],[p,[f,M],[h,v]],[/(macintosh);/i],[p,[f,M]],[/\b(sh-?[altvz]?\d\d[a-ekm]?)/i],[p,[f,B],[h,b]],[/\b((?:ag[rs][23]?|bah2?|sht?|btv)-a?[lw]\d{2})\b(?!.+d\/s)/i],[p,[f,A],[h,v]],[/(?:huawei|honor)([-\w ]+)[;\)]/i,/\b(nexus 6p|\w{2,4}e?-[atu]?[ln][\dx][012359c][adn]?)\b(?!.+d\/s)/i],[p,[f,A],[h,b]],[/\b(poco[\w ]+)(?: bui|\))/i,/\b; (\w+) build\/hm\1/i,/\b(hm[-_ ]?note?[_ ]?(?:\d\w)?) bui/i,/\b(redmi[\-_ ]?(?:note|k)?[\w_ ]+)(?: bui|\))/i,/\b(mi[-_ ]?(?:a\d|one|one[_ ]plus|note lte|max|cc)?[_ ]?(?:\d?\w?)[_ ]?(?:plus|se|lite)?)(?: bui|\))/i],[[p,/_/g," "],[f,j],[h,b]],[/\b(mi[-_ ]?(?:pad)(?:[\w_ ]+))(?: bui|\))/i],[[p,/_/g," "],[f,j],[h,v]],[/; (\w+) bui.+ oppo/i,/\b(cph[12]\d{3}|p(?:af|c[al]|d\w|e[ar])[mt]\d0|x9007|a101op)\b/i],[p,[f,"OPPO"],[h,b]],[/vivo (\w+)(?: bui|\))/i,/\b(v[12]\d{3}\w?[at])(?: bui|;)/i],[p,[f,"Vivo"],[h,b]],[/\b(rmx[12]\d{3})(?: bui|;|\))/i],[p,[f,"Realme"],[h,b]],[/\b(milestone|droid(?:[2-4x]| (?:bionic|x2|pro|razr))?:?( 4g)?)\b[\w ]+build\//i,/\bmot(?:orola)?[- ](\w*)/i,/((?:moto[\w\(\) ]+|xt\d{3,4}|nexus 6)(?= bui|\)))/i],[p,[f,k],[h,b]],[/\b(mz60\d|xoom[2 ]{0,2}) build\//i],[p,[f,k],[h,v]],[/((?=lg)?[vl]k\-?\d{3}) bui| 3\.[-\w; ]{10}lg?-([06cv9]{3,4})/i],[p,[f,"LG"],[h,v]],[/(lm(?:-?f100[nv]?|-[\w\.]+)(?= bui|\))|nexus [45])/i,/\blg[-e;\/ ]+((?!browser|netcast|android tv)\w+)/i,/\blg-?([\d\w]+) bui/i],[p,[f,"LG"],[h,b]],[/(ideatab[-\w ]+)/i,/lenovo ?(s[56]000[-\w]+|tab(?:[\w ]+)|yt[-\d\w]{6}|tb[-\d\w]{6})/i],[p,[f,"Lenovo"],[h,v]],[/(?:maemo|nokia).*(n900|lumia \d+)/i,/nokia[-_ ]?([-\w\.]*)/i],[[p,/_/g," "],[f,"Nokia"],[h,b]],[/(pixel c)\b/i],[p,[f,L],[h,v]],[/droid.+; (pixel[\daxl ]{0,6})(?: bui|\))/i],[p,[f,L],[h,b]],[/droid.+ (a?\d[0-2]{2}so|[c-g]\d{4}|so[-gl]\w+|xq-a\w[4-7][12])(?= bui|\).+chrome\/(?![1-6]{0,1}\d\.))/i],[p,[f,G],[h,b]],[/sony tablet [ps]/i,/\b(?:sony)?sgp\w+(?: bui|\))/i],[[p,"Xperia Tablet"],[f,G],[h,v]],[/ (kb2005|in20[12]5|be20[12][59])\b/i,/(?:one)?(?:plus)? (a\d0\d\d)(?: b|\))/i],[p,[f,"OnePlus"],[h,b]],[/(alexa)webm/i,/(kf[a-z]{2}wi|aeo[c-r]{2})( bui|\))/i,/(kf[a-z]+)( bui|\)).+silk\//i],[p,[f,T],[h,v]],[/((?:sd|kf)[0349hijorstuw]+)( bui|\)).+silk\//i],[[p,/(.+)/g,"Fire Phone $1"],[f,T],[h,b]],[/(playbook);[-\w\),; ]+(rim)/i],[p,f,[h,v]],[/\b((?:bb[a-f]|st[hv])100-\d)/i,/\(bb10; (\w+)/i],[p,[f,O],[h,b]],[/(?:\b|asus_)(transfo[prime ]{4,10} \w+|eeepc|slider \w+|nexus 7|padfone|p00[cj])/i],[p,[f,P],[h,v]],[/ (z[bes]6[027][012][km][ls]|zenfone \d\w?)\b/i],[p,[f,P],[h,b]],[/(nexus 9)/i],[p,[f,"HTC"],[h,v]],[/(htc)[-;_ ]{1,2}([\w ]+(?=\)| bui)|\w+)/i,/(zte)[- ]([\w ]+?)(?: bui|\/|\))/i,/(alcatel|geeksphone|nexian|panasonic(?!(?:;|\.))|sony(?!-bra))[-_ ]?([-\w]*)/i],[f,[p,/_/g," "],[h,b]],[/droid.+; ([ab][1-7]-?[0178a]\d\d?)/i],[p,[f,"Acer"],[h,v]],[/droid.+; (m[1-5] note) bui/i,/\bmz-([-\w]{2,})/i],[p,[f,"Meizu"],[h,b]],[/(blackberry|benq|palm(?=\-)|sonyericsson|acer|asus|dell|meizu|motorola|polytron)[-_ ]?([-\w]*)/i,/(hp) ([\w ]+\w)/i,/(asus)-?(\w+)/i,/(microsoft); (lumia[\w ]+)/i,/(lenovo)[-_ ]?([-\w]+)/i,/(jolla)/i,/(oppo) ?([\w ]+) bui/i],[f,p,[h,b]],[/(kobo)\s(ereader|touch)/i,/(archos) (gamepad2?)/i,/(hp).+(touchpad(?!.+tablet)|tablet)/i,/(kindle)\/([\w\.]+)/i,/(nook)[\w ]+build\/(\w+)/i,/(dell) (strea[kpr\d ]*[\dko])/i,/(le[- ]+pan)[- ]+(\w{1,9}) bui/i,/(trinity)[- ]*(t\d{3}) bui/i,/(gigaset)[- ]+(q\w{1,9}) bui/i,/(vodafone) ([\w ]+)(?:\)| bui)/i],[f,p,[h,v]],[/(surface duo)/i],[p,[f,I],[h,v]],[/droid [\d\.]+; (fp\du?)(?: b|\))/i],[p,[f,"Fairphone"],[h,b]],[/(u304aa)/i],[p,[f,"AT&T"],[h,b]],[/\bsie-(\w*)/i],[p,[f,"Siemens"],[h,b]],[/\b(rct\w+) b/i],[p,[f,"RCA"],[h,v]],[/\b(venue[\d ]{2,7}) b/i],[p,[f,"Dell"],[h,v]],[/\b(q(?:mv|ta)\w+) b/i],[p,[f,"Verizon"],[h,v]],[/\b(?:barnes[& ]+noble |bn[rt])([\w\+ ]*) b/i],[p,[f,"Barnes & Noble"],[h,v]],[/\b(tm\d{3}\w+) b/i],[p,[f,"NuVision"],[h,v]],[/\b(k88) b/i],[p,[f,"ZTE"],[h,v]],[/\b(nx\d{3}j) b/i],[p,[f,"ZTE"],[h,b]],[/\b(gen\d{3}) b.+49h/i],[p,[f,"Swiss"],[h,b]],[/\b(zur\d{3}) b/i],[p,[f,"Swiss"],[h,v]],[/\b((zeki)?tb.*\b) b/i],[p,[f,"Zeki"],[h,v]],[/\b([yr]\d{2}) b/i,/\b(dragon[- ]+touch |dt)(\w{5}) b/i],[[f,"Dragon Touch"],p,[h,v]],[/\b(ns-?\w{0,9}) b/i],[p,[f,"Insignia"],[h,v]],[/\b((nxa|next)-?\w{0,9}) b/i],[p,[f,"NextBook"],[h,v]],[/\b(xtreme\_)?(v(1[045]|2[015]|[3469]0|7[05])) b/i],[[f,"Voice"],p,[h,b]],[/\b(lvtel\-)?(v1[12]) b/i],[[f,"LvTel"],p,[h,b]],[/\b(ph-1) /i],[p,[f,"Essential"],[h,b]],[/\b(v(100md|700na|7011|917g).*\b) b/i],[p,[f,"Envizen"],[h,v]],[/\b(trio[-\w\. ]+) b/i],[p,[f,"MachSpeed"],[h,v]],[/\btu_(1491) b/i],[p,[f,"Rotor"],[h,v]],[/(shield[\w ]+) b/i],[p,[f,"Nvidia"],[h,v]],[/(sprint) (\w+)/i],[f,p,[h,b]],[/(kin\.[onetw]{3})/i],[[p,/\./g," "],[f,I],[h,b]],[/droid.+; (cc6666?|et5[16]|mc[239][23]x?|vc8[03]x?)\)/i],[p,[f,U],[h,v]],[/droid.+; (ec30|ps20|tc[2-8]\d[kx])\)/i],[p,[f,U],[h,b]],[/smart-tv.+(samsung)/i],[f,[h,S]],[/hbbtv.+maple;(\d+)/i],[[p,/^/,"SmartTV"],[f,q],[h,S]],[/(nux; netcast.+smarttv|lg (netcast\.tv-201\d|android tv))/i],[[f,"LG"],[h,S]],[/(apple) ?tv/i],[f,[p,M+" TV"],[h,S]],[/crkey/i],[[p,N+"cast"],[f,L],[h,S]],[/droid.+aft(\w)( bui|\))/i],[p,[f,T],[h,S]],[/\(dtv[\);].+(aquos)/i,/(aquos-tv[\w ]+)\)/i],[p,[f,B],[h,S]],[/(bravia[\w ]+)( bui|\))/i],[p,[f,G],[h,S]],[/(mitv-\w{5}) bui/i],[p,[f,j],[h,S]],[/Hbbtv.*(technisat) (.*);/i],[f,p,[h,S]],[/\b(roku)[\dx]*[\)\/]((?:dvp-)?[\d\.]*)/i,/hbbtv\/\d+\.\d+\.\d+ +\([\w\+ ]*; *([\w\d][^;]*);([^;]*)/i],[[f,Z],[p,Z],[h,S]],[/\b(android tv|smart[- ]?tv|opera tv|tv; rv:)\b/i],[[h,S]],[/(ouya)/i,/(nintendo) ([wids3utch]+)/i],[f,p,[h,m]],[/droid.+; (shield) bui/i],[p,[f,"Nvidia"],[h,m]],[/(playstation [345portablevi]+)/i],[p,[f,G],[h,m]],[/\b(xbox(?: one)?(?!; xbox))[\); ]/i],[p,[f,I],[h,m]],[/((pebble))app/i],[f,p,[h,x]],[/(watch)(?: ?os[,\/]|\d,\d\/)[\d\.]+/i],[p,[f,M],[h,x]],[/droid.+; (glass) \d/i],[p,[f,L],[h,x]],[/droid.+; (wt63?0{2,3})\)/i],[p,[f,U],[h,x]],[/(quest( 2| pro)?)/i],[p,[f,V],[h,x]],[/(tesla)(?: qtcarbrowser|\/[-\w\.]+)/i],[f,[h,C]],[/(aeobc)\b/i],[p,[f,T],[h,C]],[/droid .+?; ([^;]+?)(?: bui|\) applew).+? mobile safari/i],[p,[h,b]],[/droid .+?; ([^;]+?)(?: bui|\) applew).+?(?! mobile) safari/i],[p,[h,v]],[/\b((tablet|tab)[;\/]|focus\/\d(?!.+mobile))/i],[[h,v]],[/(phone|mobile(?:[;\/]| [ \w\/\.]*safari)|pda(?=.+windows ce))/i],[[h,b]],[/(android[-\w\. ]{0,9});.+buil/i],[p,[f,"Generic"]]],engine:[[/windows.+ edge\/([\w\.]+)/i],[w,[g,"EdgeHTML"]],[/webkit\/537\.36.+chrome\/(?!27)([\w\.]+)/i],[w,[g,"Blink"]],[/(presto)\/([\w\.]+)/i,/(webkit|trident|netfront|netsurf|amaya|lynx|w3m|goanna)\/([\w\.]+)/i,/ekioh(flow)\/([\w\.]+)/i,/(khtml|tasman|links)[\/ ]\(?([\w\.]+)/i,/(icab)[\/ ]([23]\.[\d\.]+)/i,/\b(libweb)/i],[g,w],[/rv\:([\w\.]{1,9})\b.+(gecko)/i],[w,g]],os:[[/microsoft (windows) (vista|xp)/i],[g,w],[/(windows) nt 6\.2; (arm)/i,/(windows (?:phone(?: os)?|mobile))[\/ ]?([\d\.\w ]*)/i,/(windows)[\/ ]?([ntce\d\. ]+\w)(?!.+xbox)/i],[g,[w,J,X]],[/(win(?=3|9|n)|win 9x )([nt\d\.]+)/i],[[g,"Windows"],[w,J,X]],[/ip[honead]{2,4}\b(?:.*os ([\w]+) like mac|; opera)/i,/ios;fbsv\/([\d\.]+)/i,/cfnetwork\/.+darwin/i],[[w,/_/g,"."],[g,"iOS"]],[/(mac os x) ?([\w\. ]*)/i,/(macintosh|mac_powerpc\b)(?!.+haiku)/i],[[g,K],[w,/_/g,"."]],[/droid ([\w\.]+)\b.+(android[- ]x86|harmonyos)/i],[w,g],[/(android|webos|qnx|bada|rim tablet os|maemo|meego|sailfish)[-\/ ]?([\w\.]*)/i,/(blackberry)\w*\/([\w\.]*)/i,/(tizen|kaios)[\/ ]([\w\.]+)/i,/\((series40);/i],[g,w],[/\(bb(10);/i],[w,[g,O]],[/(?:symbian ?os|symbos|s60(?=;)|series60)[-\/ ]?([\w\.]*)/i],[w,[g,"Symbian"]],[/mozilla\/[\d\.]+ \((?:mobile|tablet|tv|mobile; [\w ]+); rv:.+ gecko\/([\w\.]+)/i],[w,[g,E+" OS"]],[/web0s;.+rt(tv)/i,/\b(?:hp)?wos(?:browser)?\/([\w\.]+)/i],[w,[g,"webOS"]],[/watch(?: ?os[,\/]|\d,\d\/)([\d\.]+)/i],[w,[g,"watchOS"]],[/crkey\/([\d\.]+)/i],[w,[g,N+"cast"]],[/(cros) [\w]+(?:\)| ([\w\.]+)\b)/i],[[g,H],w],[/panasonic;(viera)/i,/(netrange)mmh/i,/(nettv)\/(\d+\.[\w\.]+)/i,/(nintendo|playstation) ([wids345portablevuch]+)/i,/(xbox); +xbox ([^\);]+)/i,/\b(joli|palm)\b ?(?:os)?\/?([\w\.]*)/i,/(mint)[\/\(\) ]?(\w*)/i,/(mageia|vectorlinux)[; ]/i,/([kxln]?ubuntu|debian|suse|opensuse|gentoo|arch(?= linux)|slackware|fedora|mandriva|centos|pclinuxos|red ?hat|zenwalk|linpus|raspbian|plan 9|minix|risc os|contiki|deepin|manjaro|elementary os|sabayon|linspire)(?: gnu\/linux)?(?: enterprise)?(?:[- ]linux)?(?:-gnu)?[-\/ ]?(?!chrom|package)([-\w\.]*)/i,/(hurd|linux) ?([\w\.]*)/i,/(gnu) ?([\w\.]*)/i,/\b([-frentopcghs]{0,5}bsd|dragonfly)[\/ ]?(?!amd|[ix346]{1,2}86)([\w\.]*)/i,/(haiku) (\w+)/i],[g,w],[/(sunos) ?([\w\.\d]*)/i],[[g,"Solaris"],w],[/((?:open)?solaris)[-\/ ]?([\w\.]*)/i,/(aix) ((\d)(?=\.|\)| )[\w\.])*/i,/\b(beos|os\/2|amigaos|morphos|openvms|fuchsia|hp-ux|serenityos)/i,/(unix) ?([\w\.]*)/i],[g,w]]},ee=function(e,t){if(typeof e===l&&(t=e,e=o),!(this instanceof ee))return new ee(e,t).getResult();var r=typeof s!==u&&s.navigator?s.navigator:o,n=e||(r&&r.userAgent?r.userAgent:""),a=r&&r.userAgentData?r.userAgentData:o,i=t?F(Q,t):Q,m=r&&r.userAgent==n;return this.getBrowser=function(){var e,t={};return t[g]=o,t[w]=o,Y.call(t,n,i.browser),t[_]=typeof(e=t[w])===c?e.replace(/[^\d\.]/g,"").split(".")[0]:o,m&&r&&r.brave&&typeof r.brave.isBrave==d&&(t[g]="Brave"),t},this.getCPU=function(){var e={};return e[y]=o,Y.call(e,n,i.cpu),e},this.getDevice=function(){var e={};return e[f]=o,e[p]=o,e[h]=o,Y.call(e,n,i.device),m&&!e[h]&&a&&a.mobile&&(e[h]=b),m&&"Macintosh"==e[p]&&r&&typeof r.standalone!==u&&r.maxTouchPoints&&r.maxTouchPoints>2&&(e[p]="iPad",e[h]=v),e},this.getEngine=function(){var e={};return e[g]=o,e[w]=o,Y.call(e,n,i.engine),e},this.getOS=function(){var e={};return e[g]=o,e[w]=o,Y.call(e,n,i.os),m&&!e[g]&&a&&"Unknown"!=a.platform&&(e[g]=a.platform.replace(/chrome os/i,H).replace(/macos/i,K)),e},this.getResult=function(){return{ua:this.getUA(),browser:this.getBrowser(),engine:this.getEngine(),os:this.getOS(),device:this.getDevice(),cpu:this.getCPU()}},this.getUA=function(){return n},this.setUA=function(e){return n=typeof e===c&&e.length>350?Z(e,350):e,this},this.setUA(n),this};ee.VERSION="1.0.35",ee.BROWSER=$([g,w,_]),ee.CPU=$([y]),ee.DEVICE=$([p,f,h,m,b,S,v,x,C]),ee.ENGINE=ee.OS=$([g,w]),typeof i!==u?(a.exports&&(i=a.exports=ee),i.UAParser=ee):r.amdO?void 0!==(n=(function(){return ee}).call(t,r,t,e))&&(e.exports=n):typeof s!==u&&(s.UAParser=ee);var et=typeof s!==u&&(s.jQuery||s.Zepto);if(et&&!et.ua){var er=new ee;et.ua=er.getResult(),et.ua.get=function(){return er.getUA()},et.ua.set=function(e){er.setUA(e);var t=er.getResult();for(var r in t)et.ua[r]=t[r]}}}("object"==typeof window?window:this)}},i={};function s(e){var t=i[e];if(void 0!==t)return t.exports;var r=i[e]={exports:{}},n=!0;try{a[e].call(r.exports,r,r.exports,s),n=!1}finally{n&&delete i[e]}return r.exports}s.ab="//";var o=s(226);e.exports=o})()},253:e=>{"use strict";e.exports=["chrome 64","edge 79","firefox 67","opera 51","safari 12"]},122:(e,t,r)=>{"use strict";Object.defineProperty(t,"__esModule",{value:!0}),function(e,t){for(var r in t)Object.defineProperty(e,r,{enumerable:!0,get:t[r]})}(t,{withRequest:function(){return i},getTestReqInfo:function(){return s}});let n=new(r(67)).AsyncLocalStorage;function a(e,t){let r=t.header(e,"next-test-proxy-port");if(r)return{url:t.url(e),proxyPort:Number(r),testData:t.header(e,"next-test-data")||""}}function i(e,t,r){let i=a(e,t);return i?n.run(i,r):r()}function s(e,t){return n.getStore()||(e&&t?a(e,t):void 0)}},131:(e,t,r)=>{"use strict";var n=r(195).Buffer;Object.defineProperty(t,"__esModule",{value:!0}),function(e,t){for(var r in t)Object.defineProperty(e,r,{enumerable:!0,get:t[r]})}(t,{reader:function(){return i},handleFetch:function(){return o},interceptFetch:function(){return d}});let a=r(122),i={url:e=>e.url,header:(e,t)=>e.headers.get(t)};async function s(e,t){let{url:r,method:a,headers:i,body:s,cache:o,credentials:d,integrity:u,mode:l,redirect:c,referrer:_,referrerPolicy:p}=t;return{testData:e,api:"fetch",request:{url:r,method:a,headers:[...Array.from(i),["next-test-stack",function(){let e=(Error().stack??"").split("\n");for(let t=1;t<e.length;t++)if(e[t].length>0){e=e.slice(t);break}return(e=(e=(e=e.filter(e=>!e.includes("/next/dist/"))).slice(0,5)).map(e=>e.replace("webpack-internal:///(rsc)/","").trim())).join("    ")}()]],body:s?n.from(await t.arrayBuffer()).toString("base64"):null,cache:o,credentials:d,integrity:u,mode:l,redirect:c,referrer:_,referrerPolicy:p}}}async function o(e,t){let r=(0,a.getTestReqInfo)(t,i);if(!r)throw Error(`No test info for ${t.method} ${t.url}`);let{testData:o,proxyPort:d}=r,u=await s(o,t),l=await e(`http://localhost:${d}`,{method:"POST",body:JSON.stringify(u),next:{internal:!0}});if(!l.ok)throw Error(`Proxy request failed: ${l.status}`);let c=await l.json(),{api:_}=c;switch(_){case"continue":return e(t);case"abort":case"unhandled":throw Error(`Proxy request aborted [${t.method} ${t.url}]`)}return function(e){let{status:t,headers:r,body:a}=e.response;return new Response(a?n.from(a,"base64"):null,{status:t,headers:new Headers(r)})}(c)}function d(e){return r.g.fetch=function(t,r){var n;return(null==r?void 0:null==(n=r.next)?void 0:n.internal)?e(t,r):o(e,new Request(t,r))},()=>{r.g.fetch=e}}},895:(e,t,r)=>{"use strict";Object.defineProperty(t,"__esModule",{value:!0}),function(e,t){for(var r in t)Object.defineProperty(e,r,{enumerable:!0,get:t[r]})}(t,{interceptTestApis:function(){return i},wrapRequestHandler:function(){return s}});let n=r(122),a=r(131);function i(){return(0,a.interceptFetch)(r.g.fetch)}function s(e){return(t,r)=>(0,n.withRequest)(t,a.reader,()=>e(t,r))}}},e=>{var t=e(e.s=713);(_ENTRIES="undefined"==typeof _ENTRIES?{}:_ENTRIES)["middleware_src/middleware"]=t}]);
+ */ r.parse = parse;
+        r.serialize = serialize;
+        var i = decodeURIComponent;
+        var t = encodeURIComponent;
+        var a = /; */;
+        var n = /^[\u0009\u0020-\u007e\u0080-\u00ff]+$/;
+        function parse(e, r) {
+            if (typeof e !== "string") {
+                throw new TypeError("argument str must be a string");
+            }
+            var t = {};
+            var n = r || {};
+            var o = e.split(a);
+            var s = n.decode || i;
+            for(var p = 0; p < o.length; p++){
+                var f = o[p];
+                var u = f.indexOf("=");
+                if (u < 0) {
+                    continue;
+                }
+                var v = f.substr(0, u).trim();
+                var c = f.substr(++u, f.length).trim();
+                if ('"' == c[0]) {
+                    c = c.slice(1, -1);
+                }
+                if (undefined == t[v]) {
+                    t[v] = tryDecode(c, s);
+                }
+            }
+            return t;
+        }
+        function serialize(e, r, i) {
+            var a = i || {};
+            var o = a.encode || t;
+            if (typeof o !== "function") {
+                throw new TypeError("option encode is invalid");
+            }
+            if (!n.test(e)) {
+                throw new TypeError("argument name is invalid");
+            }
+            var s = o(r);
+            if (s && !n.test(s)) {
+                throw new TypeError("argument val is invalid");
+            }
+            var p = e + "=" + s;
+            if (null != a.maxAge) {
+                var f = a.maxAge - 0;
+                if (isNaN(f) || !isFinite(f)) {
+                    throw new TypeError("option maxAge is invalid");
+                }
+                p += "; Max-Age=" + Math.floor(f);
+            }
+            if (a.domain) {
+                if (!n.test(a.domain)) {
+                    throw new TypeError("option domain is invalid");
+                }
+                p += "; Domain=" + a.domain;
+            }
+            if (a.path) {
+                if (!n.test(a.path)) {
+                    throw new TypeError("option path is invalid");
+                }
+                p += "; Path=" + a.path;
+            }
+            if (a.expires) {
+                if (typeof a.expires.toUTCString !== "function") {
+                    throw new TypeError("option expires is invalid");
+                }
+                p += "; Expires=" + a.expires.toUTCString();
+            }
+            if (a.httpOnly) {
+                p += "; HttpOnly";
+            }
+            if (a.secure) {
+                p += "; Secure";
+            }
+            if (a.sameSite) {
+                var u = typeof a.sameSite === "string" ? a.sameSite.toLowerCase() : a.sameSite;
+                switch(u){
+                    case true:
+                        p += "; SameSite=Strict";
+                        break;
+                    case "lax":
+                        p += "; SameSite=Lax";
+                        break;
+                    case "strict":
+                        p += "; SameSite=Strict";
+                        break;
+                    case "none":
+                        p += "; SameSite=None";
+                        break;
+                    default:
+                        throw new TypeError("option sameSite is invalid");
+                }
+            }
+            return p;
+        }
+        function tryDecode(e, r) {
+            try {
+                return r(e);
+            } catch (r) {
+                return e;
+            }
+        }
+    })();
+    module.exports = e;
+})();
+
+
+/***/ })
+
+},
+/******/ __webpack_require__ => { // webpackRuntimeModules
+/******/ var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
+/******/ var __webpack_exports__ = (__webpack_exec__(64));
+/******/ (_ENTRIES = typeof _ENTRIES === "undefined" ? {} : _ENTRIES)["middleware_src/middleware"] = __webpack_exports__;
+/******/ }
+]);
 //# sourceMappingURL=middleware.js.map
