@@ -3,13 +3,13 @@ import "./globals.css";
 import { getStrapiMedia, getStrapiURL } from "./utils/api-helpers";
 import { fetchAPI } from "./utils/fetch-api";
 
-import { i18n } from "../../../i18n-config";
+import { i18n } from "../../i18n-config";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
-import {FALLBACK_SEO} from "@/app/[lang]/utils/constants";
+import {FALLBACK_SEO} from "@/app/utils/constants";
 
 
-async function getGlobal(lang: string): Promise<any> {
+async function getGlobal(lang?: string): Promise<any> {
   const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
 
   if (!token) throw new Error("The Strapi API Token environment variable is not set.");
@@ -78,7 +78,7 @@ export default async function RootLayout({
   );
 
   return (
-    <html lang={params.lang}>
+    <html lang={params.lang || 'id'}>
       <body>
         <Navbar
           button={navbar.button}
@@ -119,6 +119,7 @@ export default async function RootLayout({
   );
 }
 
-export async function generateStaticParams() {
-  return i18n.locales.map((locale) => ({ lang: locale }));
-}
+// Deprecated
+// export async function generateStaticParams() {
+//   return i18n.locales.map((locale) => ({ lang: locale }));
+// }
