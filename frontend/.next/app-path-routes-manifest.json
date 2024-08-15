@@ -1,1 +1,1 @@
-{"/_not-found":"/_not-found","/[lang]/[...slug]/page":"/[lang]/[...slug]","/[lang]/page":"/[lang]","/[lang]/hello/route":"/[lang]/hello","/[lang]/portofolio/page":"/[lang]/portofolio","/[lang]/service/page":"/[lang]/service","/[lang]/portofolio/[slug]/page":"/[lang]/portofolio/[slug]"}
+{"/_not-found":"/_not-found","/[...slug]/page":"/[...slug]","/hello/route":"/hello","/page":"/","/service/page":"/service","/portofolio/page":"/portofolio","/portofolio/[slug]/page":"/portofolio/[slug]"}
