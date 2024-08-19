@@ -1,5 +1,5 @@
 1:HL["/_next/static/css/8c8b87cf335182f4.css","style",{"crossOrigin":""}]
-0:["Hg8ARMgdbuZQINgCgIh1f",[[["",{"children":["portofolio",{"children":[["slug","gbi-rayon-7-3","d"],{"children":["__PAGE__?{\"slug\":\"gbi-rayon-7-3\"}",{}]}]}]},"$undefined","$undefined",true],"$L2",[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/8c8b87cf335182f4.css","precedence":"next","crossOrigin":""}]],"$L3"]]]]
+0:["22k8J8YyJ-hKks_RDrfZM",[[["",{"children":["portofolio",{"children":[["slug","gbi-rayon-7-3","d"],{"children":["__PAGE__?{\"slug\":\"gbi-rayon-7-3\"}",{}]}]}]},"$undefined","$undefined",true],"$L2",[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/8c8b87cf335182f4.css","precedence":"next","crossOrigin":""}]],"$L3"]]]]
 2:[null,"$L4",null]
 5:I[1694,["20","static/chunks/20-9032b5b5ab1e1dd7.js","185","static/chunks/app/layout-d8026768fba4c137.js"],""]
 6:I[6954,[],""]
