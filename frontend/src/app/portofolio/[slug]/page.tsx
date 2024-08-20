@@ -3,6 +3,7 @@ import Post from '@/app/views/post';
 import type { Metadata } from 'next';
 import { getPageBySlug } from '../../utils/get-page-by-slug';
 import { sectionRenderer } from '../../utils/section-renderer';
+import { FALLBACK_SEO } from '@/app/utils/constants';
 
 async function getPostBySlug(slug: string) {
   const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
@@ -48,6 +49,7 @@ async function getMetaData(slug: string) {
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const meta = await getMetaData(params.slug);
+  if (!meta[0]?.attributes?.seo) return FALLBACK_SEO;
   const metadata = meta[0].attributes.seo;
 
   return {

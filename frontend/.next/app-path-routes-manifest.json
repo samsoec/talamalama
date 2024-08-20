@@ -1,1 +1,1 @@
-{"/_not-found":"/_not-found","/hello/route":"/hello","/page":"/","/[...slug]/page":"/[...slug]","/portofolio/page":"/portofolio","/service/page":"/service","/portofolio/[slug]/page":"/portofolio/[slug]"}
+{"/_not-found":"/_not-found","/[...slug]/page":"/[...slug]","/hello/route":"/hello","/page":"/","/portofolio/page":"/portofolio","/service/page":"/service","/portofolio/[slug]/page":"/portofolio/[slug]"}
