@@ -9,7 +9,7 @@ export async function fetchAPI(
   try {
     // Merge default and user options
     const mergedOptions = {
-      next: { revalidate: 60 },
+      // next: { revalidate: 60 },
       headers: {
         "Content-Type": "application/json",
       },
@@ -25,7 +25,7 @@ export async function fetchAPI(
     console.log(`[${new Date().toISOString()}] API `, requestUrl);
 
     // Trigger API call
-    const response = await fetch(requestUrl, mergedOptions);
+    const response = await fetch(requestUrl, { cache: 'no-store', ...mergedOptions });
     const data = await response.json();
     return data;
     

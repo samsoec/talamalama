@@ -75,21 +75,3 @@ export default async function PortofolioRoute({ params }: { params: { slug: stri
   );
 }
 
-export async function generateStaticParams() {
-  const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
-  const path = `/portofolios`;
-  const options = { headers: { Authorization: `Bearer ${token}` } };
-  const response = await fetchAPI(
-    path,
-    {},
-    options
-  );
-
-  return response.data.map(
-    (portofolio: {
-      attributes: {
-        slug: string;
-      };
-    }) => ({ slug: portofolio.attributes.slug })
-  );
-}
