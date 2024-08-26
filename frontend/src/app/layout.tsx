@@ -117,8 +117,3 @@ export default async function RootLayout({
     </html>
   );
 }
-
-// Deprecated
-// export async function generateStaticParams() {
-//   return i18n.locales.map((locale) => ({ lang: locale }));
-// }
