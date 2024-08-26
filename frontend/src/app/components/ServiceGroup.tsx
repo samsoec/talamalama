@@ -26,24 +26,20 @@ export default function ServiceGroup({ data: {
 
   return (
     <div className="py-8 px-4 lg:px-0 bg-primary text-gray-100">
-      <div className="container mx-auto space-y-6 divide-y divide-gray-400 md:space-y-12 divide-opacity-50">
+      <div className="container mx-auto lg:max-w-[1000px] md:max-w-md sm:max-w-sm max-w-xs">
 
-        <div className="flex flex-row justify-center">
-          <div>
-            <p className="py-8 text-4xl md:text-6xl text-center font-semibold max-w-7xl">{heading}</p>
-            <div className="flex flex-col py-8 gap-4">
-              <ul className="flex justify-center text-sm font-medium text-center text-gray-100">
-                {categories.data.map((category) => (
-                  <li onClick={() => setSelectedCategory(category.attributes)} className={`me-2 rounded-full border cursor-pointer transition ease-in-out delay-50 ${isCategorySelected(category.attributes.slug) ? "bg-white text-gray-700" : "text-white border-gray-700 hover:border-gray-500 border-solid"}`} id={category.attributes.slug}>
-                    <span className="inline-block px-4 py-3 rounded-lg">{category.attributes.name}</span>
-                  </li>
-                ))}
-              </ul>
-              {selectedCategory && (
-                <CategoryView category={selectedCategory}/>
-              )}
-            </div>
-          </div>
+        <p className="py-8 text-4xl md:text-6xl text-center font-semibold max-w-7xl">{heading}</p>
+        <div className="flex flex-col py-8 gap-4">
+          <ul className="flex sm:justify-center text-sm font-medium text-center text-gray-100 overflow-auto">
+            {categories.data.map((category) => (
+              <li onClick={() => setSelectedCategory(category.attributes)} className={`me-2 rounded-full border cursor-pointer transition ease-in-out delay-50 ${isCategorySelected(category.attributes.slug) ? "bg-white text-gray-700" : "text-white border-gray-700 hover:border-gray-500 border-solid"}`} id={category.attributes.slug}>
+                <span className="inline-block px-4 py-3 rounded-lg">{category.attributes.name}</span>
+              </li>
+            ))}
+          </ul>
+          {selectedCategory && (
+            <CategoryView category={selectedCategory}/>
+          )}
         </div>
 
       </div>
